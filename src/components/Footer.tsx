@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <footer className="bg-steel-900 py-20">
       <div className="flex flex-col items-center gap-10 px-6 text-center">
-        <Logo size="xl" variant="dark" />
+        <Logo size="lg" variant="dark" />
 
         <div className="w-3/5 border-t border-steel-800" />
 

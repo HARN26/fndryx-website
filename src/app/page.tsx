@@ -22,7 +22,7 @@ function Hero() {
           The capital-readiness exchange — where every founder signal compounds over time.
         </p>
 
-        <h1 className="mx-auto mt-12 max-w-4xl font-display font-extrabold text-4xl md:text-6xl lg:text-7xl leading-tight text-steel-100">
+        <h1 className="mx-auto mt-12 max-w-5xl font-display font-extrabold text-3xl md:text-5xl lg:text-6xl leading-tight text-steel-100">
           The problem isn&apos;t a lack of <span className="text-fire-400">money.</span>{" "}
           It&apos;s a lack of <span className="text-fire-400">infrastructure.</span>
         </h1>
