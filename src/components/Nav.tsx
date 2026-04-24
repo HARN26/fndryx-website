@@ -26,7 +26,7 @@ export default function Nav() {
     <header
       className={`sticky top-0 z-50 transition-colors duration-200 ${
         scrolled
-          ? "bg-steel-900/80 backdrop-blur-md border-b border-steel-800"
+          ? "bg-steel-900/95 backdrop-blur-md border-b border-steel-800"
           : "bg-transparent border-b border-transparent"
       }`}
     >

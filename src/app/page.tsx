@@ -15,26 +15,26 @@ function Hero() {
         }}
       />
 
-      <div className="relative mx-auto flex max-w-5xl flex-col items-center px-6 pb-20 pt-32 text-center">
+      <div className="relative mx-auto flex max-w-5xl flex-col items-center px-6 pb-16 pt-28 text-center">
         <Logo size="xl" variant="dark" />
 
-        <p className="mx-auto mt-10 max-w-2xl font-body text-sm uppercase tracking-widest text-steel-400">
+        <p className="mx-auto mt-6 max-w-2xl font-body text-sm uppercase tracking-widest text-steel-400">
           The capital-readiness exchange — where every founder signal compounds over time.
         </p>
 
-        <h1 className="mt-20 font-display font-extrabold text-5xl md:text-7xl leading-tight text-steel-100">
+        <h1 className="mx-auto mt-12 max-w-4xl font-display font-extrabold text-4xl md:text-6xl lg:text-7xl leading-tight text-steel-100">
           The problem isn&apos;t a lack of <span className="text-fire-400">money.</span>{" "}
           It&apos;s a lack of <span className="text-fire-400">infrastructure.</span>
         </h1>
 
-        <p className="mx-auto mt-10 max-w-2xl font-body text-lg text-steel-400">
+        <p className="mx-auto mt-8 max-w-2xl font-body text-lg text-steel-400">
           FNDRYx is building the exchange layer that turns founder signals into{" "}
           <span className="text-fire-400">compounding capital-readiness records</span> —
           connecting <span className="text-fire-400">qualified founders</span> to{" "}
           <span className="text-fire-400">aligned capital</span>, systematically.
         </p>
 
-        <div className="mt-12">
+        <div className="mt-10">
           <Button variant="primary" className="px-10 py-4 text-base">
             Request Access
           </Button>
