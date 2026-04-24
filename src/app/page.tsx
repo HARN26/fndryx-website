@@ -2,6 +2,9 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import Logo from "@/components/Logo";
 import Button from "@/components/Button";
+import Problem from "@/components/Problem";
+import HowItWorks from "@/components/HowItWorks";
+import Audiences from "@/components/Audiences";
 
 function Hero() {
   return (
@@ -57,6 +60,9 @@ export default function Home() {
       <Nav />
       <main>
         <Hero />
+        <Problem />
+        <HowItWorks />
+        <Audiences />
       </main>
       <Footer />
     </>
