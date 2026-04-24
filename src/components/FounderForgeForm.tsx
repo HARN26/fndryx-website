@@ -56,17 +56,8 @@ export default function FounderForgeForm() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError(null);
-
-    const endpoint = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT;
-    if (!endpoint) {
-      console.error(
-        "NEXT_PUBLIC_FORMSPREE_ENDPOINT is not defined. Add it to .env.local."
-      );
-      setError("Form is not configured. Please try again later.");
-      return;
-    }
-
     setIsSubmitting(true);
+
     try {
       const payload: Record<string, string> = {
         role: formData.role,
@@ -77,7 +68,7 @@ export default function FounderForgeForm() {
       if (formData.role === "Founder") payload.stage = formData.stage;
       if (formData.role === "Capital Provider") payload.type = formData.type;
 
-      const res = await fetch(endpoint, {
+      const res = await fetch("/api/founder-forge", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -87,7 +78,14 @@ export default function FounderForgeForm() {
       });
 
       if (!res.ok) {
-        throw new Error(`Request failed (${res.status})`);
+        let message = `Request failed (${res.status})`;
+        try {
+          const data = (await res.json()) as { error?: string };
+          if (data?.error) message = data.error;
+        } catch {
+          // body wasn't JSON; keep the default message
+        }
+        throw new Error(message);
       }
 
       setFormData(initialData);
@@ -95,7 +93,7 @@ export default function FounderForgeForm() {
     } catch (err) {
       const message =
         err instanceof Error ? err.message : "Something went wrong.";
-      setError(`We couldn't submit your request. ${message}`);
+      setError(message);
     } finally {
       setIsSubmitting(false);
     }

@@ -7,7 +7,13 @@
       "Bash(curl -s http://localhost:3000/_next/static/css/_app_globals_*.css)",
       "Bash(curl -s 'http://localhost:3000/_next/static/chunks/%5Broot-of-the-server%5D__0nwefun._.css')",
       "Bash(powershell.exe -Command 'Get-NetTCPConnection -LocalPort 3000 -State Listen -ErrorAction SilentlyContinue | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force -ErrorAction SilentlyContinue }; '\\\\''done'\\\\''')",
-      "Bash(npm install *)"
+      "Bash(npm install *)",
+      "Bash(curl -s -o /tmp/page.html -w \"page HTTP %{http_code}\\\\n\" http://localhost:3000/ --max-time 60)",
+      "Bash(curl -s -o /tmp/r1.json -w \"HTTP %{http_code}\\\\n\" -X POST http://localhost:3000/api/founder-forge -H \"Content-Type: application/json\" -d '' --max-time 30)",
+      "Bash(curl -s -o /tmp/r2.json -w \"HTTP %{http_code}\\\\n\" -X POST http://localhost:3000/api/founder-forge -H \"Content-Type: application/json\" -d '{\"role\":\"Founder\"}' --max-time 30)",
+      "Bash(curl -s -o /tmp/r3.json -w \"HTTP %{http_code}\\\\n\" -X POST http://localhost:3000/api/founder-forge -H \"Content-Type: application/json\" -d '{\"role\":\"Founder\",\"fullName\":\"A\",\"email\":\"not-email\",\"company\":\"C\"}' --max-time 30)",
+      "Bash(curl -s -o /tmp/r4.json -w \"HTTP %{http_code}\\\\n\" -X POST http://localhost:3000/api/founder-forge -H \"Content-Type: application/json\" -d '{\"role\":\"Other\",\"fullName\":\"A\",\"email\":\"a@b.com\",\"company\":\"C\"}' --max-time 30)",
+      "Bash(curl -s -o /tmp/r5.json -w \"HTTP %{http_code}\\\\n\" -X POST http://localhost:3000/api/founder-forge -H \"Content-Type: application/json\" -d '{\"role\":\"Founder\",\"fullName\":\"Test User\",\"email\":\"delivered@resend.dev\",\"company\":\"Test Co\",\"stage\":\"Pre-Revenue\"}' --max-time 60)"
     ]
   }
 }
