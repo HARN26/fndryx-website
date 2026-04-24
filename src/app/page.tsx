@@ -5,6 +5,7 @@ import Button from "@/components/Button";
 import Problem from "@/components/Problem";
 import HowItWorks from "@/components/HowItWorks";
 import Audiences from "@/components/Audiences";
+import FounderForgeForm from "@/components/FounderForgeForm";
 
 function Hero() {
   return (
@@ -63,6 +64,7 @@ export default function Home() {
         <Problem />
         <HowItWorks />
         <Audiences />
+        <FounderForgeForm />
       </main>
       <Footer />
     </>
