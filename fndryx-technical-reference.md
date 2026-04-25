@@ -65,7 +65,7 @@ src/app/
 ├── blog/
 │   ├── page.tsx                          # Journal listing with cards + Subscribe via RSS link
 │   └── [slug]/
-│       ├── page.tsx                      # Individual post with brand-styled MDX prose
+│       ├── page.tsx                      # Individual post — coverImage as visual title (sr-only H1 fallback) when present, else accented text H1; brand-styled MDX prose
 │       └── opengraph-image.tsx           # Per-post OG image (1200×630)
 └── _fonts/                               # (Internal — fontsource WOFFs are in node_modules; this dir is reserved for any future bundled fonts)
 ```
@@ -92,6 +92,7 @@ src/content/
 ### Shared Libraries (src/lib/)
 - `design-tokens.ts` — Colors, fonts, spacing, type scales
 - `blog.ts` — MDX reading / parsing utilities
+- `title-utils.ts` — Parses and strips the orange italic accent syntax in post titles. Exports `parseTitleAccents(title)` (returns ordered segments with `accent` flags for rendering) and `stripTitleAccents(title)` (returns plain text for tab titles, RSS, OG metadata, sr-only H1, and image alt). Authors wrap accent words in single asterisks in the frontmatter `title` field — e.g., `"The Most *Inefficient* Market in America"`.
 
 ### Public Assets (public/)
 ```
@@ -219,7 +220,7 @@ If `delivered@resend.dev` is used as the test recipient, Resend treats it as a c
 **Posts:** `src/content/blog/[slug].mdx` with YAML frontmatter:
 ```yaml
 ---
-title: "Post Title"
+title: "Post Title with *Accent* Word"          # wrap word(s) in single asterisks for orange italic accent
 slug: "post-slug"          # must match filename
 date: "2026-04-25"
 author: "FNDRYx"
@@ -230,6 +231,10 @@ draft: false
 ---
 ```
 
+**Title accent convention:** Every post title should have at least one accent word wrapped in single asterisks (e.g., `"The Most *Inefficient* Market in America"`). The `parseTitleAccents` utility in `src/lib/title-utils.ts` renders wrapped segments in Playfair Display Italic 400 + `fire-400`, matching the FNDRYx brand "x" treatment. Asterisks are stripped from any plain-text context (browser tab title, RSS feed, OG metadata, image alt, sr-only H1) via `stripTitleAccents`. Wired into the post page H1, `/blog` listing cards, per-post OG image (Satori inline styles), `feed.xml`, and `generateMetadata`. Multi-word accents and multiple separate accents per title are both supported.
+
+**Cover-as-title convention:** When a post's frontmatter includes a `coverImage`, `src/app/blog/[slug]/page.tsx` renders that image as the visual title (with `next/image` priority, `border border-steel-700`, `rounded-lg`) and emits an `<h1 className="sr-only">{stripTitleAccents(title)}</h1>` for SEO and screen reader navigation. Posts without a `coverImage` (e.g., the Welcome post) fall back to a visible text H1 using the accent render. On the `/blog` listing, cards without a `coverImage` get `text-center` applied to their description paragraph; cards with one keep left-aligned descriptions.
+
 **Author convention:** All FNDRYx-authored posts use `author: "FNDRYx"` — the post template detects this exact string and renders the inline brand wordmark treatment in the byline. Any other author value falls back to plain text (reserved for future guest authors).
 
 **`src/lib/blog.ts`** exports three server-side functions, all wrapped in React's `cache()`:
@@ -237,7 +242,7 @@ draft: false
 - `getPostBySlug(slug)` — returns one post or null
 - `getAllSlugs()` — used by `generateStaticParams`
 
-**Per-post OG image:** `src/app/blog/[slug]/opengraph-image.tsx` generates a 1200×630 PNG per post at build time. Layout differs from the root OG: left-aligned vertical stack with "FNDRYx — Journal" wordmark up top, post title in Syne 800 (auto-shrinks from 64px → 48px when title > 60 chars), date at bottom in DM Sans tracked-wide.
+**Per-post OG image:** `src/app/blog/[slug]/opengraph-image.tsx` generates a 1200×630 PNG per post at build time. Layout differs from the root OG: left-aligned vertical stack with "FNDRYx — Journal" wordmark up top, post title in Syne 800 (auto-shrinks from 64px → 48px when title > 60 chars), date at bottom in DM Sans tracked-wide. Title segments wrapped in `*...*` render via `parseTitleAccents` with Satori-friendly inline styles (`fontFamily: 'Playfair Display', fontStyle: 'italic', fontWeight: 400, color: '#f97316'`); the italic Playfair WOFF is loaded explicitly via `@fontsource/playfair-display/files` using `new URL(..., import.meta.url)` for Turbopack-safe resolution.
 
 **Fonts in OG images:** loaded from `node_modules/@fontsource/{syne,playfair-display,dm-sans}/files/*.woff` via `new URL(..., import.meta.url)` so Turbopack can statically analyze the path (no `process.cwd()` NFT warning).
 

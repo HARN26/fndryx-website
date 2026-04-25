@@ -118,6 +118,43 @@
 
 _New entries added here as updates ship after migration, most recent first._
 
+### April 25, 2026 — First essay published + title accent system + cover-as-title layout
+
+**Published "The Most Inefficient Market in America."**
+- New post at `/blog/the-most-inefficient-market-in-america` — long-form essay on why startup capital is the most inefficient capital market in America, the four conditions for an efficient market, and how the FNDRYx exchange addresses the diagnosis.
+- Cover graphic: `public/images/blog/the-most-inefficient-market-in-america-cover.png` (2400×1260, brand-styled title card on steel-900 with italic-orange "Inefficient" treatment).
+- Tags: `markets`, `capital-readiness`, `exchange`, `capital`, `founders`, `efficiency`.
+- Internal cross-links to `/blog/the-cincinnati-blueprint` and `/blog/common-sense-for-founders` in the closing section.
+- Closing CTA links to `/` (homepage) — chose internal homepage link over self-referencing `[fndryx.io](http://fndryx.io)` URL since this is on the same domain.
+
+**Title accent system (reusable, all posts going forward).**
+- New utility at `src/lib/title-utils.ts` exports `parseTitleAccents(title)` and `stripTitleAccents(title)`.
+- Authors mark accent words by wrapping them in single asterisks in the frontmatter `title` field — e.g., `title: "The Most *Inefficient* Market in America"`.
+- Wrapped portions render in Playfair Display Italic 400 + `fire-400`, matching the FNDRYx brand accent treatment used for the logo "x". Plain segments stay in Syne 800.
+- Wired into 5 places so asterisks never leak as literal text: post page H1 (when visible), `/blog` listing cards, per-post OG image (Satori inline styles since Tailwind isn't supported), `feed.xml` RSS, and `generateMetadata` for browser tabs / social previews.
+- Convention: every post should have at least one accent word in its title. Multi-word accents (e.g., `*Capital Markets*`) and multiple separate accents in a single title both supported.
+
+**Cover-as-title layout for post pages.**
+- `src/app/blog/[slug]/page.tsx` now renders the `coverImage` as the visual title above byline + tags when one exists. Visible text H1 is replaced; an `<h1 className="sr-only">{stripTitleAccents(title)}</h1>` is retained for SEO + screen reader navigation.
+- Posts WITHOUT a `coverImage` fall back to the existing visible text H1 with the accent render (Welcome post uses this path).
+- Cover image rendered with `next/image` priority, `border border-steel-700`, `rounded-lg`.
+
+**Welcome card centering.**
+- `/blog` listing cards without a `coverImage` get `text-center` on their description paragraph.
+- Currently affects only the Welcome card. Future bare-cover posts inherit the same treatment automatically.
+
+**Retrofitted existing post titles to the accent convention.**
+- `welcome-to-the-fndryx-journal.mdx`: `"Welcome to the FNDRY*x* Journal"` (orange "x" matches the brand wordmark).
+- `the-cincinnati-blueprint.mdx`: `"The *Cincinnati* Blueprint: How a Regional Exchange Reinvented Capital Markets"`.
+- `common-sense-for-founders.mdx`: `"Common Sense for *Founders*"`.
+
+**Lessons / notes:**
+- Satori (used by `ImageResponse` for OG images) doesn't support Tailwind classes — accent segments in OG images need inline styles: `{ fontFamily: 'Playfair Display', fontStyle: 'italic', fontWeight: 400, color: '#f97316' }`. The italic Playfair WOFF must be loaded explicitly via `@fontsource/playfair-display/files` using the `new URL(..., import.meta.url)` pattern (Turbopack-safe).
+- Strip vs parse: `stripTitleAccents` is for any plain-text context (HTML tab title, OG metadata `title`, RSS `<title>`, image `alt`, sr-only H1). `parseTitleAccents` is for any rendered context (post H1, card titles, OG image render). Mixing these wrong leaks asterisks into browser tabs or social previews.
+- The `*x*` wrapping in card titles renders the "x" in Playfair italic + fire-400 but doesn't reproduce the tight-tucked spacing (`margin-left: -0.05em`, `top: 0.05em`) of the full brand wordmark treatment. At card-title scale the slight gap isn't visually jarring, but if it ever needs to match the brand mark exactly (e.g., on a future hero-scale render), the accent system would need a special case for single-character "x" preceded by "FNDRY".
+- Cover-as-title pattern reduces duplication (text title + identical title graphic was redundant) and lets the brand-styled cover graphic carry visual weight on the post page. SEO/a11y preserved via `sr-only` H1.
+- Editorial convention going forward: every post gets a cover graphic in the same brand template (steel-900 background, italic-orange accent on a single word, FNDRYx — Journal wordmark, essay number + category, date footer). The frontmatter `title` mirrors the accent word from the cover graphic so card and cover stay consistent.
+
 ### April 25, 2026 — Journal rebrand + LinkedIn integration
 
 **Journal rebranded to FNDRYx authorship.**
