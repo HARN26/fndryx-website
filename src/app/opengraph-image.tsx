@@ -1,49 +1,58 @@
 import { ImageResponse } from "next/og";
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 
 export const alt = "FNDRYx — The Capital-Readiness Exchange";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-async function loadGoogleFont(
-  family: string,
-  weight: number,
-  style: "normal" | "italic" = "normal",
+const FONT_PATHS = {
+  syne: "node_modules/@fontsource/syne/files/syne-latin-800-normal.woff",
+  playfairItalic:
+    "node_modules/@fontsource/playfair-display/files/playfair-display-latin-400-italic.woff",
+  dmSans:
+    "node_modules/@fontsource/dm-sans/files/dm-sans-latin-600-normal.woff",
+} as const;
+
+async function loadFont(
+  label: string,
+  relPath: string,
 ): Promise<ArrayBuffer | null> {
-  const familyParam = family.replace(/ /g, "+");
-  const axisPrefix = style === "italic" ? "ital,wght@1," : "wght@";
-  const url = `https://fonts.googleapis.com/css2?family=${familyParam}:${axisPrefix}${weight}&display=swap`;
+  const absPath = join(process.cwd(), relPath);
   try {
-    const css = await fetch(url, {
-      headers: {
-        "User-Agent":
-          "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.118 Safari/537.36",
-      },
-    }).then((r) => r.text());
-    const match = css.match(
-      /src:\s*url\(([^)]+)\)\s*format\(['"]?(truetype|opentype|woff)['"]?\)/,
+    const buffer = await readFile(absPath);
+    const arrayBuffer = buffer.buffer.slice(
+      buffer.byteOffset,
+      buffer.byteOffset + buffer.byteLength,
+    ) as ArrayBuffer;
+    console.log(
+      `[opengraph-image] Loaded ${label} (${arrayBuffer.byteLength} bytes)`,
     );
-    if (!match) return null;
-    return await fetch(match[1]).then((r) => r.arrayBuffer());
-  } catch {
+    return arrayBuffer;
+  } catch (err) {
+    console.error(
+      `[opengraph-image] Failed to read ${label} from ${absPath}:`,
+      err,
+    );
     return null;
   }
 }
 
 export default async function Image() {
-  const [syne800, playfairItalic, dmSans500] = await Promise.all([
-    loadGoogleFont("Syne", 800),
-    loadGoogleFont("Playfair Display", 400, "italic"),
-    loadGoogleFont("DM Sans", 500),
+  const [syne, playfairItalic, dmSans] = await Promise.all([
+    loadFont("Syne 800", FONT_PATHS.syne),
+    loadFont("Playfair Display Italic 400", FONT_PATHS.playfairItalic),
+    loadFont("DM Sans 600", FONT_PATHS.dmSans),
   ]);
 
   const fonts: {
     name: string;
     data: ArrayBuffer;
-    weight: 400 | 500 | 800;
+    weight: 400 | 600 | 800;
     style: "normal" | "italic";
   }[] = [];
-  if (syne800)
-    fonts.push({ name: "Syne", data: syne800, weight: 800, style: "normal" });
+  if (syne)
+    fonts.push({ name: "Syne", data: syne, weight: 800, style: "normal" });
   if (playfairItalic)
     fonts.push({
       name: "Playfair",
@@ -51,8 +60,8 @@ export default async function Image() {
       weight: 400,
       style: "italic",
     });
-  if (dmSans500)
-    fonts.push({ name: "DM Sans", data: dmSans500, weight: 500, style: "normal" });
+  if (dmSans)
+    fonts.push({ name: "DM Sans", data: dmSans, weight: 600, style: "normal" });
 
   return new ImageResponse(
     (
@@ -65,7 +74,6 @@ export default async function Image() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          padding: "80px",
           position: "relative",
         }}
       >
@@ -90,7 +98,7 @@ export default async function Image() {
             style={{
               fontFamily: "Syne",
               fontWeight: 800,
-              fontSize: 220,
+              fontSize: 160,
               color: "#f1f5f9",
               letterSpacing: "-0.04em",
               lineHeight: 1,
@@ -103,7 +111,7 @@ export default async function Image() {
               fontFamily: "Playfair",
               fontStyle: "italic",
               fontWeight: 400,
-              fontSize: 240,
+              fontSize: 180,
               color: "#f97316",
               marginLeft: "-0.05em",
               lineHeight: 1,
@@ -117,7 +125,7 @@ export default async function Image() {
             display: "flex",
             marginTop: "60px",
             fontFamily: "DM Sans",
-            fontWeight: 500,
+            fontWeight: 600,
             fontSize: 32,
             color: "#94a3b8",
             letterSpacing: "0.25em",

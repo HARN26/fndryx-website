@@ -14,7 +14,15 @@
       "Bash(curl -s -o /tmp/r3.json -w \"HTTP %{http_code}\\\\n\" -X POST http://localhost:3000/api/founder-forge -H \"Content-Type: application/json\" -d '{\"role\":\"Founder\",\"fullName\":\"A\",\"email\":\"not-email\",\"company\":\"C\"}' --max-time 30)",
       "Bash(curl -s -o /tmp/r4.json -w \"HTTP %{http_code}\\\\n\" -X POST http://localhost:3000/api/founder-forge -H \"Content-Type: application/json\" -d '{\"role\":\"Other\",\"fullName\":\"A\",\"email\":\"a@b.com\",\"company\":\"C\"}' --max-time 30)",
       "Bash(curl -s -o /tmp/r5.json -w \"HTTP %{http_code}\\\\n\" -X POST http://localhost:3000/api/founder-forge -H \"Content-Type: application/json\" -d '{\"role\":\"Founder\",\"fullName\":\"Test User\",\"email\":\"delivered@resend.dev\",\"company\":\"Test Co\",\"stage\":\"Pre-Revenue\"}' --max-time 60)",
-      "Bash(npx tsc *)"
+      "Bash(npx tsc *)",
+      "Bash(curl -sL \"https://api.github.com/repos/google/fonts/contents/ofl/syne\")",
+      "Bash(python -c \"import sys,json; data=json.load\\(sys.stdin\\); [print\\(d['name'], d['type']\\) for d in data]\")",
+      "Bash(curl -sL \"https://api.github.com/repos/google/fonts/contents/ofl/playfairdisplay\")",
+      "Bash(curl -sL \"https://api.github.com/repos/google/fonts/contents/ofl/dmsans\")",
+      "Bash(curl -sf http://localhost:3000/)",
+      "Bash(curl -sS -o /tmp/og.png -w \"status=%{http_code} bytes=%{size_download} type=%{content_type}\\\\n\" http://localhost:3000/opengraph-image)",
+      "Bash(curl -sS -o ./og-verify.png -w \"status=%{http_code} bytes=%{size_download} type=%{content_type}\\\\n\" http://localhost:3000/opengraph-image)",
+      "Bash(curl -sS -o ./og-verify.png -w \"status=%{http_code} bytes=%{size_download} type=%{content_type}\\\\n\" http://localhost:3001/opengraph-image)"
     ]
   }
 }

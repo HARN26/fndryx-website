@@ -27,7 +27,7 @@ const playfair = Playfair_Display({
 const SITE_URL = "https://fndryx.io";
 const SITE_TITLE = "FNDRYx — The Capital-Readiness Exchange";
 const SITE_DESCRIPTION =
-  "Exchange infrastructure for the startup ecosystem. Where every founder signal compounds over time. Connect qualified founders to aligned capital, systematically.";
+  "Exchange infrastructure where founder signals compound over time. We connect qualified founders to aligned capital, systematically.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
