@@ -86,7 +86,7 @@ const jsonLd = {
       },
       description:
         "Exchange infrastructure where founder signals compound over time. We connect qualified founders to aligned capital, systematically.",
-      sameAs: ["https://www.linkedin.com/company/fndryx"],
+      sameAs: ["https://www.linkedin.com/company/109594033"],
     },
     {
       "@type": "WebSite",

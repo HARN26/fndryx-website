@@ -26,14 +26,20 @@ export const mdxComponents: MDXComponents = {
       {children}
     </p>
   ),
-  a: ({ children, ...props }) => (
-    <a
-      className="text-fire-400 underline underline-offset-4 hover:text-fire-300 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fire-400 focus-visible:ring-offset-2 focus-visible:ring-offset-steel-900"
-      {...props}
-    >
-      {children}
-    </a>
-  ),
+  a: ({ children, href, ...props }) => {
+    const isExternal = typeof href === "string" && /^https?:\/\//i.test(href);
+    return (
+      <a
+        href={href}
+        target={isExternal ? "_blank" : undefined}
+        rel={isExternal ? "noopener noreferrer" : undefined}
+        className="text-fire-400 underline underline-offset-4 hover:text-fire-300 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fire-400 focus-visible:ring-offset-2 focus-visible:ring-offset-steel-900"
+        {...props}
+      >
+        {children}
+      </a>
+    );
+  },
   strong: ({ children, ...props }) => (
     <strong className="text-steel-100 font-semibold" {...props}>
       {children}

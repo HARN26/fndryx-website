@@ -65,7 +65,8 @@
       "Bash(curl -sS -o ./og-post-verify.png -w \"status=%{http_code} bytes=%{size_download} type=%{content_type}\\\\n\" http://localhost:3005/blog/welcome-to-the-fndryx-journal/opengraph-image)",
       "Bash(curl -sS -o ./feed-verify.xml -w \"status=%{http_code} bytes=%{size_download} type=%{content_type}\\\\n\" http://localhost:3005/feed.xml)",
       "Bash(curl -sS http://localhost:3005/blog)",
-      "Bash(curl -sS http://localhost:3005/)"
+      "Bash(curl -sS http://localhost:3005/)",
+      "Bash(grep -i \"linkedin\\\\|/li[\\\\\\\\.\\\\\\\\-]\\\\|linked.in\" C:/Users/Kevin/OneDrive/Desktop/fndryx-website/node_modules/lucide-react/dist/esm/lucide-react.mjs)"
     ]
   }
 }
