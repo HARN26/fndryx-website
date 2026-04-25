@@ -2,6 +2,7 @@ import { ImageResponse } from "next/og";
 import { readFile } from "node:fs/promises";
 import { notFound } from "next/navigation";
 import { getAllSlugs, getPostBySlug } from "@/lib/blog";
+import { parseTitleAccents, stripTitleAccents } from "@/lib/title-utils";
 
 export const alt = "FNDRYx Journal";
 export const size = { width: 1200, height: 630 };
@@ -19,6 +20,10 @@ const FONT_URLS = {
   ),
   dmSans: new URL(
     "../../../../node_modules/@fontsource/dm-sans/files/dm-sans-latin-600-normal.woff",
+    import.meta.url,
+  ),
+  playfairItalic: new URL(
+    "../../../../node_modules/@fontsource/playfair-display/files/playfair-display-latin-400-italic.woff",
     import.meta.url,
   ),
 } as const;
@@ -65,22 +70,32 @@ export default async function PostOgImage({
   const post = await getPostBySlug(slug);
   if (!post) notFound();
 
-  const [syne, dmSans] = await Promise.all([
+  const [syne, dmSans, playfairItalic] = await Promise.all([
     loadFont("Syne 800", FONT_URLS.syne),
     loadFont("DM Sans 600", FONT_URLS.dmSans),
+    loadFont("Playfair Display 400 Italic", FONT_URLS.playfairItalic),
   ]);
 
   const fonts: {
     name: string;
     data: ArrayBuffer;
-    weight: 600 | 800;
-    style: "normal";
+    weight: 400 | 600 | 800;
+    style: "normal" | "italic";
   }[] = [];
   if (syne) fonts.push({ name: "Syne", data: syne, weight: 800, style: "normal" });
   if (dmSans)
     fonts.push({ name: "DM Sans", data: dmSans, weight: 600, style: "normal" });
+  if (playfairItalic)
+    fonts.push({
+      name: "Playfair Display",
+      data: playfairItalic,
+      weight: 400,
+      style: "italic",
+    });
 
-  const titleSize = post.frontmatter.title.length > 60 ? 48 : 64;
+  const plainTitle = stripTitleAccents(post.frontmatter.title);
+  const titleSegments = parseTitleAccents(post.frontmatter.title);
+  const titleSize = plainTitle.length > 60 ? 48 : 64;
 
   return new ImageResponse(
     (
@@ -130,6 +145,7 @@ export default async function PostOgImage({
           <div
             style={{
               display: "flex",
+              flexWrap: "wrap",
               fontFamily: "Syne",
               fontWeight: 800,
               fontSize: titleSize,
@@ -139,7 +155,23 @@ export default async function PostOgImage({
               maxWidth: "1000px",
             }}
           >
-            {post.frontmatter.title}
+            {titleSegments.map((segment, i) =>
+              segment.accent ? (
+                <span
+                  key={i}
+                  style={{
+                    fontFamily: "Playfair Display",
+                    fontStyle: "italic",
+                    fontWeight: 400,
+                    color: "#f97316",
+                  }}
+                >
+                  {segment.text}
+                </span>
+              ) : (
+                <span key={i}>{segment.text}</span>
+              ),
+            )}
           </div>
         </div>
 

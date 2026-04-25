@@ -5,6 +5,7 @@ import { Rss } from "lucide-react";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { getAllPosts } from "@/lib/blog";
+import { parseTitleAccents } from "@/lib/title-utils";
 
 export const metadata: Metadata = {
   title: "Journal",
@@ -91,10 +92,24 @@ export default async function BlogIndexPage() {
                     </p>
 
                     <h2 className="mt-3 font-display font-bold text-xl text-steel-100 leading-tight">
-                      {post.frontmatter.title}
+                      {parseTitleAccents(post.frontmatter.title).map(
+                        (segment, i) =>
+                          segment.accent ? (
+                            <span
+                              key={i}
+                              className="font-serif italic font-normal text-fire-400"
+                            >
+                              {segment.text}
+                            </span>
+                          ) : (
+                            <span key={i}>{segment.text}</span>
+                          ),
+                      )}
                     </h2>
 
-                    <p className="mt-2 text-sm text-steel-300 line-clamp-3">
+                    <p
+                      className={`mt-2 text-sm text-steel-300 line-clamp-3 ${post.frontmatter.coverImage ? "" : "text-center"}`}
+                    >
                       {post.frontmatter.excerpt}
                     </p>
 

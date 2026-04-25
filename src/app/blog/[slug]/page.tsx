@@ -7,6 +7,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { getAllSlugs, getPostBySlug } from "@/lib/blog";
 import { mdxComponents } from "@/components/blog/MdxComponents";
+import { parseTitleAccents, stripTitleAccents } from "@/lib/title-utils";
 
 type RouteParams = { slug: string };
 
@@ -24,11 +25,13 @@ export async function generateMetadata({
   const post = await getPostBySlug(slug);
   if (!post) return {};
 
+  const plainTitle = stripTitleAccents(post.frontmatter.title);
+
   return {
-    title: post.frontmatter.title,
+    title: plainTitle,
     description: post.frontmatter.excerpt,
     openGraph: {
-      title: post.frontmatter.title,
+      title: plainTitle,
       description: post.frontmatter.excerpt,
       type: "article",
       publishedTime: post.frontmatter.date,
@@ -36,7 +39,7 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title: post.frontmatter.title,
+      title: plainTitle,
       description: post.frontmatter.excerpt,
     },
   };
@@ -78,9 +81,37 @@ export default async function BlogPostPage({
             <p className="font-body text-xs uppercase tracking-wider text-steel-400">
               {formatDate(post.frontmatter.date)}
             </p>
-            <h1 className="mt-4 font-display font-extrabold text-4xl md:text-5xl lg:text-6xl text-steel-100 leading-tight">
-              {post.frontmatter.title}
-            </h1>
+            {post.frontmatter.coverImage ? (
+              <>
+                <Image
+                  src={post.frontmatter.coverImage}
+                  alt={stripTitleAccents(post.frontmatter.title)}
+                  width={2400}
+                  height={1260}
+                  sizes="(min-width: 768px) 768px, 100vw"
+                  priority
+                  className="mt-4 w-full h-auto rounded-lg border border-steel-700"
+                />
+                <h1 className="sr-only">
+                  {stripTitleAccents(post.frontmatter.title)}
+                </h1>
+              </>
+            ) : (
+              <h1 className="mt-4 font-display font-extrabold text-4xl md:text-5xl lg:text-6xl text-steel-100 leading-tight">
+                {parseTitleAccents(post.frontmatter.title).map((segment, i) =>
+                  segment.accent ? (
+                    <span
+                      key={i}
+                      className="font-serif italic font-normal text-fire-400"
+                    >
+                      {segment.text}
+                    </span>
+                  ) : (
+                    <span key={i}>{segment.text}</span>
+                  ),
+                )}
+              </h1>
+            )}
             {post.frontmatter.author === "FNDRYx" ? (
               <p className="mt-6 text-sm text-steel-400">
                 by{" "}
@@ -112,18 +143,6 @@ export default async function BlogPostPage({
               </div>
             )}
 
-            {post.frontmatter.coverImage && (
-              <div className="relative mt-12 aspect-[16/9] w-full overflow-hidden rounded-2xl">
-                <Image
-                  src={post.frontmatter.coverImage}
-                  alt=""
-                  fill
-                  sizes="(min-width: 768px) 768px, 100vw"
-                  className="object-cover"
-                  priority
-                />
-              </div>
-            )}
           </header>
 
           <div className="mt-12">

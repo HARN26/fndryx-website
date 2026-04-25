@@ -1,4 +1,5 @@
 import { getAllPosts } from "@/lib/blog";
+import { stripTitleAccents } from "@/lib/title-utils";
 
 export const revalidate = 3600;
 
@@ -29,7 +30,7 @@ export async function GET() {
     .map((post) => {
       const url = `${SITE_URL}/blog/${post.slug}`;
       return `    <item>
-      <title>${escapeXml(post.frontmatter.title)}</title>
+      <title>${escapeXml(stripTitleAccents(post.frontmatter.title))}</title>
       <link>${url}</link>
       <guid isPermaLink="true">${url}</guid>
       <pubDate>${toRfc822(post.frontmatter.date)}</pubDate>
