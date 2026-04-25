@@ -67,6 +67,34 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://fndryx.io/#organization",
+      name: "FNDRYx",
+      url: "https://fndryx.io",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://fndryx.io/icon",
+      },
+      description:
+        "Exchange infrastructure where founder signals compound over time. We connect qualified founders to aligned capital, systematically.",
+      sameAs: ["https://www.linkedin.com/company/fndryx"],
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://fndryx.io/#website",
+      url: "https://fndryx.io",
+      name: "FNDRYx",
+      description: "The Capital-Readiness Exchange",
+      publisher: { "@id": "https://fndryx.io/#organization" },
+      inLanguage: "en-US",
+    },
+  ],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -77,7 +105,14 @@ export default function RootLayout({
       lang="en"
       className={`${syne.variable} ${dmSans.variable} ${playfair.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <script
+          key="ld-json-organization-website"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        {children}
+      </body>
     </html>
   );
 }
