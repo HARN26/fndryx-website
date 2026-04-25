@@ -45,9 +45,6 @@ export const metadata: Metadata = {
     "investor matching",
   ],
   authors: [{ name: "FNDRYx" }],
-  alternates: {
-    canonical: SITE_URL,
-  },
   openGraph: {
     type: "website",
     siteName: "FNDRYx",
@@ -64,6 +61,14 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
+  },
+  alternates: {
+    canonical: SITE_URL,
+    types: {
+      "application/rss+xml": [
+        { url: "https://fndryx.io/feed.xml", title: "FNDRYx Journal" },
+      ],
+    },
   },
 };
 

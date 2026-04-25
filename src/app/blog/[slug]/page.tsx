@@ -24,10 +24,6 @@ export async function generateMetadata({
   const post = await getPostBySlug(slug);
   if (!post) return {};
 
-  const images = post.frontmatter.coverImage
-    ? [{ url: post.frontmatter.coverImage }]
-    : undefined;
-
   return {
     title: post.frontmatter.title,
     description: post.frontmatter.excerpt,
@@ -37,13 +33,11 @@ export async function generateMetadata({
       type: "article",
       publishedTime: post.frontmatter.date,
       authors: [post.frontmatter.author],
-      ...(images ? { images } : {}),
     },
     twitter: {
       card: "summary_large_image",
       title: post.frontmatter.title,
       description: post.frontmatter.excerpt,
-      ...(images ? { images: images.map((i) => i.url) } : {}),
     },
   };
 }

@@ -61,7 +61,11 @@
       "Bash(curl -sS http://localhost:3005/robots.txt)",
       "Bash(curl -sS -o /dev/null -w \"status=%{http_code} bytes=%{size_download} type=%{content_type}\\\\n\" http://localhost:3005/opengraph-image)",
       "Bash(curl -sS -o /dev/null -w \"status=%{http_code}\\\\n\" http://localhost:3005/this-does-not-exist)",
-      "Bash(curl -sS -o /dev/null -w \"status=%{http_code}\\\\n\" http://localhost:3005/blog/this-does-not-exist)"
+      "Bash(curl -sS -o /dev/null -w \"status=%{http_code}\\\\n\" http://localhost:3005/blog/this-does-not-exist)",
+      "Bash(curl -sS -o ./og-post-verify.png -w \"status=%{http_code} bytes=%{size_download} type=%{content_type}\\\\n\" http://localhost:3005/blog/welcome-to-the-fndryx-journal/opengraph-image)",
+      "Bash(curl -sS -o ./feed-verify.xml -w \"status=%{http_code} bytes=%{size_download} type=%{content_type}\\\\n\" http://localhost:3005/feed.xml)",
+      "Bash(curl -sS http://localhost:3005/blog)",
+      "Bash(curl -sS http://localhost:3005/)"
     ]
   }
 }

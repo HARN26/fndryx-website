@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
+import { Rss } from "lucide-react";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { getAllPosts } from "@/lib/blog";
@@ -40,6 +41,14 @@ export default async function BlogIndexPage() {
             Short notes from the FNDRYx team on capital-readiness, founder
             signals, and exchange infrastructure.
           </p>
+
+          <a
+            href="/feed.xml"
+            className="mt-6 inline-flex items-center gap-2 text-sm text-fire-400 hover:text-fire-300 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fire-400 focus-visible:ring-offset-2 focus-visible:ring-offset-steel-900"
+          >
+            <Rss size={16} aria-hidden="true" />
+            Subscribe via RSS →
+          </a>
 
           {posts.length === 0 ? (
             <p className="mt-16 text-center text-steel-400">
