@@ -35,7 +35,28 @@
       "Bash(curl -sf http://localhost:__TRACKED_VAR__/)",
       "Bash(exit 0)",
       "Bash(exit 1)",
-      "mcp__Claude_Preview__preview_start"
+      "mcp__Claude_Preview__preview_start",
+      "Bash(awk '$1 > 51200')",
+      "Bash(grep -aoE \"[a-zA-Z0-9_./@-]{15,60}\" .next/static/chunks/0n~dq4kpx9xxx.js)",
+      "Bash(curl -sf \"http://localhost:3100/\")",
+      "Read(//c/Program Files/Google/Chrome/Application/**)",
+      "Read(//c/Program Files \\(x86\\)/Google/Chrome/Application/**)",
+      "Read(//c/Program Files \\(x86\\)/Microsoft/Edge/Application/**)",
+      "Bash(export CHROME_PATH=\"/c/Program Files/Google/Chrome/Application/chrome.exe\")",
+      "Bash(npx --yes lighthouse http://localhost:3100 --preset=desktop --output=json --output-path=./lighthouse-desktop.json '--chrome-flags=--headless=new --no-sandbox --disable-gpu' --only-categories=performance,accessibility,best-practices,seo --quiet)",
+      "Bash(npx --yes lighthouse http://localhost:3100 --form-factor=mobile --output=json --output-path=./lighthouse-mobile.json '--chrome-flags=--headless=new --no-sandbox --disable-gpu' --only-categories=performance,accessibility,best-practices,seo --quiet)",
+      "Bash(curl -sS -o /dev/null -w \"status=%{http_code} type=%{content_type}\\\\n\" http://localhost:3100/)",
+      "Bash(curl -sS http://localhost:3100/sitemap.xml)",
+      "Bash(curl -sS http://localhost:3100/robots.txt)",
+      "Bash(curl -sS -o /tmp/og-final.png -w \"status=%{http_code} bytes=%{size_download} type=%{content_type}\\\\n\" http://localhost:3100/opengraph-image)",
+      "Bash(curl -sS -o /dev/null -w \"status=%{http_code} bytes=%{size_download} type=%{content_type}\\\\n\" http://localhost:3100/icon)",
+      "Bash(curl -sS -o /dev/null -w \"status=%{http_code} bytes=%{size_download} type=%{content_type}\\\\n\" http://localhost:3100/apple-icon)",
+      "Bash(curl -sS -o /dev/null -w \"status=%{http_code}\\\\n\" http://localhost:3100/garbage-url-does-not-exist)",
+      "Bash(curl -sS http://localhost:3100/)",
+      "Bash(curl -sf http://localhost:3100/)",
+      "Bash(break)",
+      "Bash(netstat -ano)",
+      "Bash(powershell -c \"Get-NetTCPConnection -LocalPort 3100 -ErrorAction SilentlyContinue | Select-Object -First 1 -ExpandProperty OwningProcess\")"
     ]
   }
 }

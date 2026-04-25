@@ -1,26 +1,31 @@
 import { ImageResponse } from "next/og";
 import { readFile } from "node:fs/promises";
-import { join } from "node:path";
 
 export const alt = "FNDRYx — The Capital-Readiness Exchange";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-const FONT_PATHS = {
-  syne: "node_modules/@fontsource/syne/files/syne-latin-800-normal.woff",
-  playfairItalic:
-    "node_modules/@fontsource/playfair-display/files/playfair-display-latin-400-italic.woff",
-  dmSans:
-    "node_modules/@fontsource/dm-sans/files/dm-sans-latin-600-normal.woff",
+const FONT_URLS = {
+  syne: new URL(
+    "../../node_modules/@fontsource/syne/files/syne-latin-800-normal.woff",
+    import.meta.url,
+  ),
+  playfairItalic: new URL(
+    "../../node_modules/@fontsource/playfair-display/files/playfair-display-latin-400-italic.woff",
+    import.meta.url,
+  ),
+  dmSans: new URL(
+    "../../node_modules/@fontsource/dm-sans/files/dm-sans-latin-600-normal.woff",
+    import.meta.url,
+  ),
 } as const;
 
 async function loadFont(
   label: string,
-  relPath: string,
+  fileUrl: URL,
 ): Promise<ArrayBuffer | null> {
-  const absPath = join(process.cwd(), relPath);
   try {
-    const buffer = await readFile(absPath);
+    const buffer = await readFile(fileUrl);
     const arrayBuffer = buffer.buffer.slice(
       buffer.byteOffset,
       buffer.byteOffset + buffer.byteLength,
@@ -31,7 +36,7 @@ async function loadFont(
     return arrayBuffer;
   } catch (err) {
     console.error(
-      `[opengraph-image] Failed to read ${label} from ${absPath}:`,
+      `[opengraph-image] Failed to read ${label} from ${fileUrl}:`,
       err,
     );
     return null;
@@ -40,9 +45,9 @@ async function loadFont(
 
 export default async function Image() {
   const [syne, playfairItalic, dmSans] = await Promise.all([
-    loadFont("Syne 800", FONT_PATHS.syne),
-    loadFont("Playfair Display Italic 400", FONT_PATHS.playfairItalic),
-    loadFont("DM Sans 600", FONT_PATHS.dmSans),
+    loadFont("Syne 800", FONT_URLS.syne),
+    loadFont("Playfair Display Italic 400", FONT_URLS.playfairItalic),
+    loadFont("DM Sans 600", FONT_URLS.dmSans),
   ]);
 
   const fonts: {
