@@ -106,6 +106,12 @@ export default function RootLayout({
       className={`${syne.variable} ${dmSans.variable} ${playfair.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <a
+          href="#main-content"
+          className="sr-only focus-visible:not-sr-only focus-visible:fixed focus-visible:top-4 focus-visible:left-4 focus-visible:z-[100] focus-visible:bg-fire-400 focus-visible:text-steel-900 focus-visible:px-4 focus-visible:py-2 focus-visible:rounded-md focus-visible:font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fire-400 focus-visible:ring-offset-2 focus-visible:ring-offset-steel-900"
+        >
+          Skip to content
+        </a>
         <script
           key="ld-json-organization-website"
           type="application/ld+json"

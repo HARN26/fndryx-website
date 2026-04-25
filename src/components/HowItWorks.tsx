@@ -63,7 +63,10 @@ export default function HowItWorks() {
               key={step.number}
               className="relative flex min-h-[280px] flex-col rounded-2xl border border-steel-700 bg-steel-800 p-8 transition-all duration-300 hover:-translate-y-0.5 hover:border-fire-400"
             >
-              <div className="mb-6 font-display font-extrabold text-7xl leading-none text-steel-700">
+              <div
+                aria-hidden="true"
+                className="mb-6 font-display font-extrabold text-7xl leading-none text-steel-700"
+              >
                 {step.number}
               </div>
               <h3 className="mb-3 font-display font-bold text-xl text-fire-400">

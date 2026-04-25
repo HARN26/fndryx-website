@@ -22,12 +22,14 @@ const variants: Record<Variant, string> = {
 export default function Button({
   variant = "primary",
   className = "",
+  type = "button",
   children,
   ...props
 }: ButtonProps) {
   const padding = className.match(/(?:^|\s)(p[xy]?-)/) ? "" : "px-7 py-3.5";
   return (
     <button
+      type={type}
       className={`${base} ${variants[variant]} ${padding} ${className}`.trim()}
       {...props}
     >

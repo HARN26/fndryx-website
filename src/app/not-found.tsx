@@ -12,7 +12,7 @@ export default function NotFound() {
   return (
     <>
       <Nav />
-      <main>
+      <main id="main-content" tabIndex={-1}>
         <section className="relative overflow-hidden bg-steel-900">
           <div
             aria-hidden

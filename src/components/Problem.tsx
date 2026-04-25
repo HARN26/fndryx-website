@@ -30,7 +30,7 @@ export default function Problem() {
         <div className="mt-16">
           <a
             href="#how-it-works"
-            className="font-display font-semibold text-xs uppercase tracking-[0.2em] text-fire-400 hover:text-fire-300"
+            className="font-display font-semibold text-xs uppercase tracking-[0.2em] text-fire-400 hover:text-fire-300 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fire-400 focus-visible:ring-offset-2 focus-visible:ring-offset-steel-900"
           >
             See the Solution ↓
           </a>

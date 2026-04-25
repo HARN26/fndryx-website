@@ -40,7 +40,7 @@ const initialData: FormData = {
 };
 
 const inputClass =
-  "w-full bg-steel-900 border border-steel-700 rounded-lg px-4 py-3 text-steel-100 text-sm placeholder:text-steel-500 focus:outline-none focus:border-fire-400 transition-colors";
+  "w-full bg-steel-900 border border-steel-700 rounded-lg px-4 py-3 text-steel-100 text-sm placeholder:text-steel-500 focus:outline-none focus:border-fire-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fire-400 focus-visible:ring-offset-2 focus-visible:ring-offset-steel-800 transition-colors";
 
 const labelClass = "block text-sm font-body font-medium text-steel-200 mb-2";
 
@@ -108,7 +108,10 @@ export default function FounderForgeForm() {
 
         <div className="mx-auto max-w-2xl rounded-2xl border border-steel-700 bg-steel-800 p-8 md:p-12">
           {isSubmitted ? (
-            <div className="flex flex-col items-center text-center">
+            <div
+              className="flex flex-col items-center text-center"
+              aria-live="polite"
+            >
               <CheckCircle2 size={48} className="text-fire-400" />
               <h2 className="mt-6 font-display font-extrabold text-3xl text-fire-400">
                 Access Requested.
@@ -260,15 +263,18 @@ export default function FounderForgeForm() {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full rounded-lg bg-[linear-gradient(135deg,#ea580c_0%,#f97316_100%)] py-4 font-body font-semibold text-white shadow-[0_4px_14px_rgba(249,115,22,0.4)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(249,115,22,0.5)] disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0"
+                    className="w-full rounded-lg bg-[linear-gradient(135deg,#ea580c_0%,#f97316_100%)] py-4 font-body font-semibold text-white shadow-[0_4px_14px_rgba(249,115,22,0.4)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(249,115,22,0.5)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fire-400 focus-visible:ring-offset-2 focus-visible:ring-offset-steel-800 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0"
                   >
                     {isSubmitting ? "Sending..." : "Request Access"}
                   </button>
-                  <p className="mt-4 text-center text-xs text-steel-500">
+                  <p className="mt-4 text-center text-xs text-steel-400">
                     Free for founders. Our team will follow up within 48 hours.
                   </p>
                   {error && (
-                    <p className="mt-3 text-center text-sm text-red-400">
+                    <p
+                      role="alert"
+                      className="mt-3 text-center text-sm text-red-400"
+                    >
                       {error}
                     </p>
                   )}

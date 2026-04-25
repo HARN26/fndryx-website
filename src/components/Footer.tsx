@@ -14,12 +14,12 @@ export default function Footer() {
 
         <a
           href="https://fndryx.io"
-          className="text-sm text-steel-400 underline underline-offset-4 hover:text-steel-200"
+          className="text-sm text-steel-400 underline underline-offset-4 hover:text-steel-200 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fire-400 focus-visible:ring-offset-2 focus-visible:ring-offset-steel-900"
         >
           fndryx.io
         </a>
 
-        <p className="text-xs text-steel-600">
+        <p className="text-xs text-steel-400">
           © 2026 FNDRYx. All rights reserved.
         </p>
       </div>

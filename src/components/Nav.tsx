@@ -31,7 +31,11 @@ export default function Nav() {
       }`}
     >
       <div className="mx-auto flex h-20 max-w-[1400px] items-center justify-between px-6 md:px-10">
-        <Link href="/" className="inline-flex items-center" aria-label="FNDRYx home">
+        <Link
+          href="/"
+          className="inline-flex items-center rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fire-400 focus-visible:ring-offset-2 focus-visible:ring-offset-steel-900"
+          aria-label="FNDRYx home"
+        >
           <Logo size="sm" variant="dark" />
         </Link>
         <Button
