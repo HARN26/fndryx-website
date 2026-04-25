@@ -56,7 +56,12 @@
       "Bash(curl -sf http://localhost:3100/)",
       "Bash(break)",
       "Bash(netstat -ano)",
-      "Bash(powershell -c \"Get-NetTCPConnection -LocalPort 3100 -ErrorAction SilentlyContinue | Select-Object -First 1 -ExpandProperty OwningProcess\")"
+      "Bash(powershell -c \"Get-NetTCPConnection -LocalPort 3100 -ErrorAction SilentlyContinue | Select-Object -First 1 -ExpandProperty OwningProcess\")",
+      "Bash(curl -sS http://localhost:3005/sitemap.xml)",
+      "Bash(curl -sS http://localhost:3005/robots.txt)",
+      "Bash(curl -sS -o /dev/null -w \"status=%{http_code} bytes=%{size_download} type=%{content_type}\\\\n\" http://localhost:3005/opengraph-image)",
+      "Bash(curl -sS -o /dev/null -w \"status=%{http_code}\\\\n\" http://localhost:3005/this-does-not-exist)",
+      "Bash(curl -sS -o /dev/null -w \"status=%{http_code}\\\\n\" http://localhost:3005/blog/this-does-not-exist)"
     ]
   }
 }

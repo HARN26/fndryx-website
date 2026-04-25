@@ -38,7 +38,14 @@ export default function Nav() {
         >
           <Logo size="sm" variant="dark" />
         </Link>
-        <Button
+        <div className="flex items-center gap-6">
+          <Link
+            href="/blog"
+            className="hidden md:inline-block font-body font-medium text-sm text-steel-300 hover:text-fire-400 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fire-400 focus-visible:ring-offset-2 focus-visible:ring-offset-steel-900"
+          >
+            Journal
+          </Link>
+          <Button
           variant="primary"
           onClick={handleRequestAccess}
           className="uppercase tracking-wider text-xs"
@@ -46,6 +53,7 @@ export default function Nav() {
           <span className="md:hidden">Request Access</span>
           <span className="hidden md:inline">Request Access to Founder Forge</span>
         </Button>
+        </div>
       </div>
     </header>
   );

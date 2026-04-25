@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Logo from "./Logo";
 
 export default function Footer() {
@@ -11,6 +12,13 @@ export default function Footer() {
         <p className="max-w-2xl font-body text-xs uppercase tracking-widest text-steel-400">
           The capital-readiness exchange — where every founder signal compounds over time.
         </p>
+
+        <Link
+          href="/blog"
+          className="text-sm text-steel-400 underline underline-offset-4 hover:text-steel-200 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fire-400 focus-visible:ring-offset-2 focus-visible:ring-offset-steel-900"
+        >
+          Journal
+        </Link>
 
         <a
           href="https://fndryx.io"
