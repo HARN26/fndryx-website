@@ -17,7 +17,7 @@ const steps: Step[] = [
         and Investment Readiness across five dimensions.
       </>
     ),
-    badge: "~15 Minutes",
+    badge: "15 Minutes",
   },
   {
     number: "02",

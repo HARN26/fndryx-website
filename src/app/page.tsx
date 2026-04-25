@@ -20,7 +20,7 @@ function Hero() {
       />
 
       <div className="relative mx-auto flex max-w-5xl flex-col items-center px-6 pb-16 pt-28 text-center">
-        <Logo size="xl" variant="dark" />
+        <Logo size={{ base: "lg", md: "xl" }} variant="dark" />
 
         <p className="mx-auto mt-6 max-w-2xl font-body text-sm uppercase tracking-widest text-steel-400">
           The capital-readiness exchange — where every founder signal compounds over time.

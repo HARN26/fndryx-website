@@ -39,7 +39,8 @@ export default function Nav() {
           onClick={handleRequestAccess}
           className="uppercase tracking-wider text-xs"
         >
-          Request Access to Founder Forge
+          <span className="md:hidden">Request Access</span>
+          <span className="hidden md:inline">Request Access to Founder Forge</span>
         </Button>
       </div>
     </header>

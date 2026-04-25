@@ -6,7 +6,7 @@ export default function Problem() {
           The Problem
         </p>
 
-        <h2 className="mb-16 max-w-4xl font-display font-extrabold text-4xl md:text-5xl leading-tight text-steel-100">
+        <h2 className="mb-16 max-w-4xl font-display font-extrabold text-3xl md:text-5xl leading-tight text-steel-100">
           The system doesn&apos;t assess founders. It{" "}
           <span className="font-serif italic text-fire-400">filters</span> them.
         </h2>
