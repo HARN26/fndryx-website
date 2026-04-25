@@ -24,10 +24,47 @@ const playfair = Playfair_Display({
   variable: "--font-serif",
 });
 
+const SITE_URL = "https://fndryx.io";
+const SITE_TITLE = "FNDRYx — The Capital-Readiness Exchange";
+const SITE_DESCRIPTION =
+  "Exchange infrastructure for the startup ecosystem. Where every founder signal compounds over time. Connect qualified founders to aligned capital, systematically.";
+
 export const metadata: Metadata = {
-  title: "FNDRYx — The Capital-Readiness Exchange",
-  description:
-    "FNDRYx is the exchange layer that turns founder signals into compounding capital-readiness records — connecting qualified founders to aligned capital, systematically.",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: SITE_TITLE,
+    template: "%s — FNDRYx",
+  },
+  description: SITE_DESCRIPTION,
+  keywords: [
+    "capital-readiness",
+    "founder forge",
+    "venture capital",
+    "startup funding",
+    "capital exchange",
+    "investor matching",
+  ],
+  authors: [{ name: "FNDRYx" }],
+  alternates: {
+    canonical: SITE_URL,
+  },
+  openGraph: {
+    type: "website",
+    siteName: "FNDRYx",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    url: SITE_URL,
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({

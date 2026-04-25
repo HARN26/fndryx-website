@@ -13,7 +13,8 @@
       "Bash(curl -s -o /tmp/r2.json -w \"HTTP %{http_code}\\\\n\" -X POST http://localhost:3000/api/founder-forge -H \"Content-Type: application/json\" -d '{\"role\":\"Founder\"}' --max-time 30)",
       "Bash(curl -s -o /tmp/r3.json -w \"HTTP %{http_code}\\\\n\" -X POST http://localhost:3000/api/founder-forge -H \"Content-Type: application/json\" -d '{\"role\":\"Founder\",\"fullName\":\"A\",\"email\":\"not-email\",\"company\":\"C\"}' --max-time 30)",
       "Bash(curl -s -o /tmp/r4.json -w \"HTTP %{http_code}\\\\n\" -X POST http://localhost:3000/api/founder-forge -H \"Content-Type: application/json\" -d '{\"role\":\"Other\",\"fullName\":\"A\",\"email\":\"a@b.com\",\"company\":\"C\"}' --max-time 30)",
-      "Bash(curl -s -o /tmp/r5.json -w \"HTTP %{http_code}\\\\n\" -X POST http://localhost:3000/api/founder-forge -H \"Content-Type: application/json\" -d '{\"role\":\"Founder\",\"fullName\":\"Test User\",\"email\":\"delivered@resend.dev\",\"company\":\"Test Co\",\"stage\":\"Pre-Revenue\"}' --max-time 60)"
+      "Bash(curl -s -o /tmp/r5.json -w \"HTTP %{http_code}\\\\n\" -X POST http://localhost:3000/api/founder-forge -H \"Content-Type: application/json\" -d '{\"role\":\"Founder\",\"fullName\":\"Test User\",\"email\":\"delivered@resend.dev\",\"company\":\"Test Co\",\"stage\":\"Pre-Revenue\"}' --max-time 60)",
+      "Bash(npx tsc *)"
     ]
   }
 }
