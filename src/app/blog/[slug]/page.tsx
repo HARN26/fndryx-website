@@ -81,9 +81,23 @@ export default async function BlogPostPage({
             <h1 className="mt-4 font-display font-extrabold text-4xl md:text-5xl lg:text-6xl text-steel-100 leading-tight">
               {post.frontmatter.title}
             </h1>
-            <p className="mt-6 text-sm text-steel-400">
-              by {post.frontmatter.author}
-            </p>
+            {post.frontmatter.author === "FNDRYx" ? (
+              <p className="mt-6 text-sm text-steel-400">
+                by{" "}
+                <span className="inline-flex items-baseline">
+                  <span className="font-display font-extrabold tracking-[-0.03em]">
+                    FNDRY
+                  </span>
+                  <span className="font-serif italic font-normal text-fire-400 -ml-[0.05em] relative top-[0.05em] inline-block">
+                    x
+                  </span>
+                </span>
+              </p>
+            ) : (
+              <p className="mt-6 text-sm text-steel-400">
+                by {post.frontmatter.author}
+              </p>
+            )}
 
             {post.frontmatter.tags && post.frontmatter.tags.length > 0 && (
               <div className="mt-4 flex flex-wrap gap-2">

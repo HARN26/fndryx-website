@@ -35,11 +35,20 @@ export default async function BlogIndexPage() {
             Journal
           </p>
           <h1 className="font-display font-extrabold text-4xl md:text-6xl text-steel-100 leading-tight">
-            The FNDRYx Journal
+            The{" "}
+            <span className="inline-flex items-baseline">
+              <span className="font-display font-extrabold tracking-[-0.03em] text-steel-100">
+                FNDRY
+              </span>
+              <span className="font-serif italic font-normal text-fire-400 -ml-[0.05em] relative top-[0.05em] inline-block">
+                x
+              </span>
+            </span>{" "}
+            Journal
           </h1>
           <p className="mt-4 max-w-2xl text-lg text-steel-400">
-            Short notes from the FNDRYx team on capital-readiness, founder
-            signals, and exchange infrastructure.
+            Articles, announcements, and field notes from the FNDRYx team on
+            capital-readiness, founder signals, and exchange infrastructure.
           </p>
 
           <a
