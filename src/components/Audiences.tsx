@@ -20,9 +20,11 @@ export default function Audiences() {
             </p>
             <div
               aria-hidden
-              className="pointer-events-none mt-8 select-none font-display font-extrabold text-6xl leading-none text-steel-700"
+              className="pointer-events-none mt-8 select-none text-center"
             >
-              FNDRY
+              <span className="pointer-events-auto inline-block font-display font-extrabold text-6xl leading-none text-steel-700 transition-all duration-300 ease-in-out [paint-order:stroke] [-webkit-text-stroke-color:#f97316] [-webkit-text-stroke-width:0] hover:text-steel-800 hover:[-webkit-text-stroke-width:2px]">
+                FNDRY
+              </span>
             </div>
           </article>
 
@@ -43,9 +45,11 @@ export default function Audiences() {
             </p>
             <div
               aria-hidden
-              className="pointer-events-none mt-8 select-none font-serif italic text-7xl leading-none text-steel-700"
+              className="pointer-events-none mt-8 select-none text-center"
             >
-              x
+              <span className="pointer-events-auto inline-block font-serif italic text-7xl leading-none text-steel-700 transition-all duration-300 ease-in-out [paint-order:stroke] [-webkit-text-stroke-color:#f97316] [-webkit-text-stroke-width:0] hover:text-steel-800 hover:[-webkit-text-stroke-width:2px]">
+                x
+              </span>
             </div>
           </article>
         </div>
