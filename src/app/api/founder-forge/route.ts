@@ -53,12 +53,12 @@ function founderEmail(fullName: string) {
   const html = wrapHtml(`
     <p style="margin:0 0 20px 0;color:#f1f5f9;font-size:18px;">Hey ${escapeHtml(fullName)},</p>
     <p style="margin:0 0 20px 0;">Thanks for requesting access to the <strong style="color:#f1f5f9;">Capital Readiness Assessment</strong>.</p>
-    <p style="margin:0 0 20px 0;">Our team is reviewing your request. Within 48 hours, you'll receive a direct link to the Capital Readiness Assessment — a ~15 minute evaluation across the five dimensions that drive capital decisions.</p>
+    <p style="margin:0 0 20px 0;">Our team is reviewing your request. Within 48 hours, you'll receive a direct link to the assessment — twenty-six questions in roughly fifteen minutes. Deterministic scoring across five dimensions of capital readiness.</p>
     <p style="margin:0 0 12px 0;color:#f1f5f9;font-weight:600;">What happens next:</p>
     <ol style="margin:0 0 24px 0;padding-left:20px;">
-      <li style="margin-bottom:8px;">You complete the assessment (no warm intro required)</li>
-      <li style="margin-bottom:8px;">Your responses build a capital-readiness profile that compounds every time you update it</li>
-      <li style="margin-bottom:8px;">Qualified founders are routed directly to aligned capital sources via systematic matching</li>
+      <li style="margin-bottom:8px;">You complete the assessment and receive two scores: <strong style="color:#f1f5f9;">Building Readiness (BR)</strong> and <strong style="color:#f1f5f9;">Investor Readiness (IR)</strong>. The gap between them is its own signal.</li>
+      <li style="margin-bottom:8px;">A 14-day pulse keeps your readiness current; your score history compounds across reassessments.</li>
+      <li style="margin-bottom:8px;">When your score crosses the <strong style="color:#f1f5f9;">matching threshold</strong>, you surface to capital providers whose stated thesis fits — but the introduction is theirs to make, not ours to promise. FNDRYx is <strong style="color:#f1f5f9;">measurement infrastructure, not a placement service</strong>.</li>
     </ol>
     <p style="margin:0 0 20px 0;">Questions? Just reply to this email.</p>
     <p style="margin:0;color:#f97316;font-weight:600;">— The FNDRYx team</p>
@@ -67,12 +67,12 @@ function founderEmail(fullName: string) {
 
 Thanks for requesting access to the Capital Readiness Assessment.
 
-Our team is reviewing your request. Within 48 hours, you'll receive a direct link to the Capital Readiness Assessment — a ~15 minute evaluation across the five dimensions that drive capital decisions.
+Our team is reviewing your request. Within 48 hours, you'll receive a direct link to the assessment — twenty-six questions in roughly fifteen minutes. Deterministic scoring across five dimensions of capital readiness.
 
 What happens next:
-1. You complete the assessment (no warm intro required)
-2. Your responses build a capital-readiness profile that compounds every time you update it
-3. Qualified founders are routed directly to aligned capital sources via systematic matching
+1. You complete the assessment and receive two scores: Building Readiness (BR) and Investor Readiness (IR). The gap between them is its own signal.
+2. A 14-day pulse keeps your readiness current; your score history compounds across reassessments.
+3. When your score crosses the matching threshold, you surface to capital providers whose stated thesis fits — but the introduction is theirs to make, not ours to promise. FNDRYx is measurement infrastructure, not a placement service.
 
 Questions? Just reply to this email.
 
