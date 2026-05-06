@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { ChevronDown, CheckCircle2 } from "lucide-react";
 
 type Role = "Founder" | "Capital Provider";
@@ -44,11 +44,30 @@ const inputClass =
 
 const labelClass = "block text-sm font-body font-medium text-steel-200 mb-2";
 
+const ROLE_PARAM_TO_ROLE: Record<string, Role> = {
+  capital_provider: "Capital Provider",
+  founder: "Founder",
+};
+
 export default function FounderForgeForm() {
   const [formData, setFormData] = useState<FormData>(initialData);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const didApplyUrlRole = useRef(false);
+
+  useEffect(() => {
+    if (didApplyUrlRole.current) return;
+    didApplyUrlRole.current = true;
+
+    if (typeof window === "undefined") return;
+    const haystack = `${window.location.search}${window.location.hash}`;
+    const match = haystack.match(/[?&#]role=([^&#]+)/);
+    if (!match) return;
+    const mapped = ROLE_PARAM_TO_ROLE[decodeURIComponent(match[1])];
+    if (!mapped) return;
+    setFormData((prev) => ({ ...prev, role: mapped }));
+  }, []);
 
   const update = <K extends keyof FormData>(key: K, value: FormData[K]) =>
     setFormData((prev) => ({ ...prev, [key]: value }));

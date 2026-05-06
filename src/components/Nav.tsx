@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Logo from "./Logo";
-import Button from "./Button";
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -14,13 +13,6 @@ export default function Nav() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  const handleRequestAccess = () => {
-    const el = document.getElementById("founder-forge");
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
-    }
-  };
 
   return (
     <header
@@ -45,14 +37,19 @@ export default function Nav() {
           >
             Journal
           </Link>
-          <Button
-          variant="primary"
-          onClick={handleRequestAccess}
-          className="uppercase tracking-wider text-xs"
-        >
-          <span className="md:hidden">Request Access</span>
-          <span className="hidden md:inline">Request Access to Founder Forge</span>
-        </Button>
+          <Link
+            href="/capital-partners"
+            className="hidden md:inline-block font-body font-medium text-sm text-steel-300 hover:text-fire-400 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fire-400 focus-visible:ring-offset-2 focus-visible:ring-offset-steel-900"
+          >
+            For Capital Providers
+          </Link>
+          <Link
+            href="/#founder-forge"
+            className="inline-flex items-center justify-center rounded-lg font-body font-semibold text-xs uppercase tracking-wider text-white bg-[linear-gradient(135deg,#ea580c_0%,#f97316_100%)] shadow-[0_4px_14px_rgba(249,115,22,0.4)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(249,115,22,0.5)] focus:outline-none focus-visible:ring-2 focus-visible:ring-fire-400 focus-visible:ring-offset-2 focus-visible:ring-offset-steel-900 px-7 py-3.5"
+          >
+            <span className="md:hidden">Request Access</span>
+            <span className="hidden md:inline">Request Access to Founder Forge</span>
+          </Link>
         </div>
       </div>
     </header>

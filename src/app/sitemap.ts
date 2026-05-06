@@ -18,6 +18,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "weekly",
       priority: 0.8,
     },
+    {
+      url: "https://fndryx.io/capital-partners",
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
     ...slugs.map((slug) => ({
       url: `https://fndryx.io/blog/${slug}`,
       lastModified: now,

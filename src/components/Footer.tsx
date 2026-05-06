@@ -36,6 +36,13 @@ export default function Footer() {
             Journal
           </Link>
 
+          <Link
+            href="/capital-partners"
+            className="text-sm text-steel-400 underline underline-offset-4 hover:text-steel-200 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fire-400 focus-visible:ring-offset-2 focus-visible:ring-offset-steel-900"
+          >
+            For Capital Providers
+          </Link>
+
           <a
             href="https://fndryx.io"
             className="text-sm text-steel-400 underline underline-offset-4 hover:text-steel-200 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fire-400 focus-visible:ring-offset-2 focus-visible:ring-offset-steel-900"
