@@ -42,8 +42,8 @@ function wrapHtml(innerHtml: string) {
 function founderEmail(fullName: string) {
   const html = wrapHtml(`
     <p style="margin:0 0 20px 0;color:#f1f5f9;font-size:18px;">Hey ${escapeHtml(fullName)},</p>
-    <p style="margin:0 0 20px 0;">Thanks for requesting access to <strong style="color:#f1f5f9;">Founder Forge</strong>.</p>
-    <p style="margin:0 0 20px 0;">Our team is reviewing your request. Within 48 hours, you'll receive a direct link to the dual-track capital-readiness assessment — a ~15 minute evaluation across the five dimensions that drive capital decisions.</p>
+    <p style="margin:0 0 20px 0;">Thanks for requesting access to the <strong style="color:#f1f5f9;">Capital Readiness Assessment</strong>.</p>
+    <p style="margin:0 0 20px 0;">Our team is reviewing your request. Within 48 hours, you'll receive a direct link to the Capital Readiness Assessment — a ~15 minute evaluation across the five dimensions that drive capital decisions.</p>
     <p style="margin:0 0 12px 0;color:#f1f5f9;font-weight:600;">What happens next:</p>
     <ol style="margin:0 0 24px 0;padding-left:20px;">
       <li style="margin-bottom:8px;">You complete the assessment (no warm intro required)</li>
@@ -55,9 +55,9 @@ function founderEmail(fullName: string) {
   `);
   const text = `Hey ${fullName},
 
-Thanks for requesting access to Founder Forge.
+Thanks for requesting access to the Capital Readiness Assessment.
 
-Our team is reviewing your request. Within 48 hours, you'll receive a direct link to the dual-track capital-readiness assessment — a ~15 minute evaluation across the five dimensions that drive capital decisions.
+Our team is reviewing your request. Within 48 hours, you'll receive a direct link to the Capital Readiness Assessment — a ~15 minute evaluation across the five dimensions that drive capital decisions.
 
 What happens next:
 1. You complete the assessment (no warm intro required)
@@ -68,7 +68,7 @@ Questions? Just reply to this email.
 
 — The FNDRYx team`;
   return {
-    subject: "Your Founder Forge access request",
+    subject: "Your Capital Readiness Assessment access request",
     html,
     text,
   };
@@ -77,35 +77,33 @@ Questions? Just reply to this email.
 function capitalEmail(fullName: string) {
   const html = wrapHtml(`
     <p style="margin:0 0 20px 0;color:#f1f5f9;font-size:18px;">Hey ${escapeHtml(fullName)},</p>
-    <p style="margin:0 0 20px 0;">Thanks for your interest in the <strong style="color:#f1f5f9;">FNDRYx capital ecosystem</strong>.</p>
+    <p style="margin:0 0 20px 0;">Thanks for your interest in the <strong style="color:#f1f5f9;">FNDRYx platform</strong>.</p>
     <p style="margin:0 0 12px 0;">Our team will reach out within 48 hours with next steps, including:</p>
     <ul style="margin:0 0 24px 0;padding-left:20px;">
-      <li style="margin-bottom:8px;">Access to pre-qualified deal flow from founders with compounding readiness profiles</li>
-      <li style="margin-bottom:8px;">Structured founder data across the five capital-readiness dimensions</li>
-      <li style="margin-bottom:8px;">How to refer founders directly into the Founder Forge assessment</li>
-      <li style="margin-bottom:8px;">Capital member onboarding</li>
+      <li style="margin-bottom:8px;">Scored deal flow filtered against your stated thesis, with six-criterion match explanations and deterministic scoring</li>
+      <li style="margin-bottom:8px;">How to refer founders directly into the Capital Readiness Assessment</li>
+      <li style="margin-bottom:8px;">Capital provider onboarding</li>
     </ul>
-    <p style="margin:0 0 20px 0;">FNDRYx is the exchange infrastructure for the startup ecosystem — delivering <strong style="color:#f1f5f9;">better signal with less noise</strong>.</p>
+    <p style="margin:0 0 20px 0;">FNDRYx is the evaluation layer between founders and capital — <strong style="color:#f1f5f9;">structured signal, no black box</strong>.</p>
     <p style="margin:0 0 20px 0;">Questions? Just reply to this email.</p>
     <p style="margin:0;color:#f97316;font-weight:600;">— The FNDRYx team</p>
   `);
   const text = `Hey ${fullName},
 
-Thanks for your interest in the FNDRYx capital ecosystem.
+Thanks for your interest in the FNDRYx platform.
 
 Our team will reach out within 48 hours with next steps, including:
-- Access to pre-qualified deal flow from founders with compounding readiness profiles
-- Structured founder data across the five capital-readiness dimensions
-- How to refer founders directly into the Founder Forge assessment
-- Capital member onboarding
+- Scored deal flow filtered against your stated thesis, with six-criterion match explanations and deterministic scoring
+- How to refer founders directly into the Capital Readiness Assessment
+- Capital provider onboarding
 
-FNDRYx is the exchange infrastructure for the startup ecosystem — delivering better signal with less noise.
+FNDRYx is the evaluation layer between founders and capital — structured signal, no black box.
 
 Questions? Just reply to this email.
 
 — The FNDRYx team`;
   return {
-    subject: "Your FNDRYx capital ecosystem inquiry",
+    subject: "Your FNDRYx platform inquiry",
     html,
     text,
   };

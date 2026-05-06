@@ -9,14 +9,18 @@ export default function Audiences() {
               <span className="text-fire-400">Founders</span>
             </h3>
             <p className="flex-1 text-base leading-relaxed text-steel-300">
-              Request access to{" "}
-              <span className="text-fire-400">Founder Forge</span> — FNDRYx&apos;s
-              dual-track assessment that builds your capital-readiness profile
-              across the five dimensions that drive capital decisions.{" "}
-              <span className="text-fire-400">No warm intro required.</span> Your
-              profile compounds every time you update it, and qualified founders
-              are routed directly to aligned capital sources via{" "}
-              <span className="text-fire-400">systematic matching</span>.
+              Take the{" "}
+              <span className="text-fire-400">Capital Readiness Assessment</span>{" "}
+              — twenty-six questions across five dimensions, producing two
+              scores:{" "}
+              <span className="text-fire-400">Building Readiness</span> (what
+              you&apos;ve built) and{" "}
+              <span className="text-fire-400">Investor Readiness</span> (how you
+              tell it). The gap between them is its own signal.{" "}
+              <span className="text-fire-400">No warm intro required.</span> A
+              14-day pulse keeps your readiness current; when your score crosses
+              the <span className="text-fire-400">matching threshold</span>, you
+              surface to capital providers whose stated thesis fits.
             </p>
             <div
               aria-hidden
@@ -34,14 +38,19 @@ export default function Audiences() {
               <span className="text-fire-400">Capital Providers</span>
             </h3>
             <p className="flex-1 text-base leading-relaxed text-steel-300">
-              Join the{" "}
-              <span className="text-fire-400">FNDRYx capital ecosystem</span> and
-              access pre-qualified deal flow from founders with compounding
-              readiness profiles. As a capital member, you receive structured
-              founder data, systematic matching to aligned opportunities, and the
-              ability to refer founders directly into the Founder Forge assessment
-              — delivering <span className="text-fire-400">better signal</span>{" "}
-              with less noise.
+              Get{" "}
+              <span className="text-fire-400">scored deal flow</span> filtered
+              against your stated thesis — not curated lists, not warm intros,
+              not pattern-matching. Each match shows its full{" "}
+              <span className="text-fire-400">six-criterion breakdown</span>{" "}
+              (stage fit, industry, geography, business model, revenue model,
+              check size) with{" "}
+              <span className="text-fire-400">deterministic scoring</span>.
+              Refer founders directly into the{" "}
+              <span className="text-fire-400">Capital Readiness Assessment</span>;
+              those whose scores cross the threshold against your thesis surface
+              in your feed. Structured signal,{" "}
+              <span className="text-fire-400">no black box</span>.
             </p>
             <div
               aria-hidden

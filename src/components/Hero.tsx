@@ -34,10 +34,10 @@ export default function Hero() {
         </h1>
 
         <p className="mx-auto mt-8 max-w-2xl font-body text-lg text-steel-400">
-          FNDRYx is building the exchange layer that turns founder signals into{" "}
-          <span className="text-fire-400">compounding capital-readiness records</span> —
-          connecting <span className="text-fire-400">qualified founders</span> to{" "}
-          <span className="text-fire-400">aligned capital</span>, systematically.
+          FNDRYx is the exchange layer that turns founder signals into{" "}
+          <span className="text-fire-400">compounding capital-readiness records</span> —{" "}
+          <span className="text-fire-400">measurement infrastructure</span> between
+          founders and <span className="text-fire-400">capital</span>.
         </p>
 
         <div className="mt-10">

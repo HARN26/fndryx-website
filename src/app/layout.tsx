@@ -27,7 +27,7 @@ const playfair = Playfair_Display({
 const SITE_URL = "https://fndryx.io";
 const SITE_TITLE = "FNDRYx — The Capital-Readiness Exchange";
 const SITE_DESCRIPTION =
-  "Exchange infrastructure where founder signals compound over time. We connect qualified founders to aligned capital, systematically.";
+  "FNDRYx is the evaluation layer between founders and capital. Twenty-six questions, five dimensions, deterministic scoring. Free for founders.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -85,7 +85,7 @@ const jsonLd = {
         url: "https://fndryx.io/icon",
       },
       description:
-        "Exchange infrastructure where founder signals compound over time. We connect qualified founders to aligned capital, systematically.",
+        "FNDRYx is the evaluation layer between founders and capital — measurement infrastructure that makes founder readiness legible to the people writing checks and running programs.",
       sameAs: ["https://www.linkedin.com/company/109594033"],
     },
     {

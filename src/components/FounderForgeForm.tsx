@@ -122,7 +122,7 @@ export default function FounderForgeForm() {
     <section id="founder-forge" className="py-24 md:py-32">
       <div className="mx-auto max-w-6xl px-6">
         <p className="mb-4 text-center font-display font-semibold text-xs uppercase tracking-[0.2em] text-fire-400">
-          Founder Forge
+          Capital Readiness Assessment
         </p>
 
         <div className="mx-auto max-w-2xl rounded-2xl border border-steel-700 bg-steel-800 p-8 md:p-12">
@@ -142,13 +142,13 @@ export default function FounderForgeForm() {
           ) : (
             <>
               <h2 className="mb-6 font-display font-extrabold text-3xl md:text-4xl leading-tight">
-                <span className="block text-steel-100">Request Access to</span>
-                <span className="block text-fire-400">Founder Forge</span>
+                <span className="block text-steel-100">Request Access to the</span>
+                <span className="block text-fire-400">Capital Readiness Assessment</span>
               </h2>
               <p className="mb-10 text-sm leading-relaxed text-steel-400">
                 Founders receive a direct link to the assessment. Capital
-                providers receive information on joining the capital ecosystem
-                and referring founders.
+                providers receive details on platform access and founder
+                referrals.
               </p>
 
               <form onSubmit={handleSubmit} className="space-y-5" noValidate>

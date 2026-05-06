@@ -13,35 +13,38 @@ const steps: Step[] = [
     title: "Assess",
     body: (
       <>
-        Founders complete a free dual-track assessment measuring Business Readiness
-        and Investment Readiness across five dimensions.
+        Founders complete the Capital Readiness Assessment — twenty-six questions
+        across five dimensions in roughly fifteen minutes, producing two scores:
+        Building Readiness (BR) and Investor Readiness (IR).
       </>
     ),
-    badge: "15 Minutes",
+    badge: "Free for Founders",
   },
   {
     number: "02",
     title: "Profile",
     body: (
       <>
-        Your responses build a{" "}
-        <span className="text-fire-400">capital-readiness profile</span> across five
-        dimensions — a record that compounds every time you update it.
+        Deterministic scoring assigns a quadrant placement (Forged, Tempering,
+        Hot Iron, or Ore) and surfaces the gap between{" "}
+        <span className="text-fire-400">BR and IR</span> — itself a meaningful
+        signal. A 14-day pulse keeps your readiness current.
       </>
     ),
-    badge: "Instant Results",
+    badge: "Scored on Submission",
   },
   {
     number: "03",
     title: "Route",
     body: (
       <>
-        Qualified founders are connected to{" "}
-        <span className="text-fire-400">aligned capital sources</span> through
-        systematic matching infrastructure.
+        When a founder&apos;s score crosses the{" "}
+        <span className="text-fire-400">matching threshold</span>, scored matches
+        surface to capital providers whose thesis fits — with full six-criterion
+        breakdowns, not warm intros.
       </>
     ),
-    badge: "Systematic Routing",
+    badge: "Scored Matching",
   },
 ];
 
