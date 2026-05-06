@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
-type Role = "Founder" | "Capital Provider";
+type Role = "founder" | "capital_provider" | "operator";
 
 type SubmitBody = {
   role: Role;
@@ -10,9 +10,19 @@ type SubmitBody = {
   company: string;
   stage?: string;
   type?: string;
+  operatorType?: string;
 };
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+const VALID_OPERATOR_TYPES: ReadonlySet<string> = new Set([
+  "accelerator",
+  "incubator",
+  "venture_studio",
+  "university_program",
+  "corporate_program",
+  "other",
+]);
 
 const escapeHtml = (s: string) =>
   s
@@ -109,6 +119,43 @@ Questions? Just reply to this email.
   };
 }
 
+function operatorEmail(fullName: string) {
+  const html = wrapHtml(`
+    <p style="margin:0 0 20px 0;color:#f1f5f9;font-size:18px;">Hey ${escapeHtml(fullName)},</p>
+    <p style="margin:0 0 20px 0;">Thanks for your inquiry about <strong style="color:#f1f5f9;">FNDRYx for accelerator and program impact measurement</strong>.</p>
+    <p style="margin:0 0 12px 0;">FNDRYx gives program operators measurement infrastructure for cohort outcomes:</p>
+    <ul style="margin:0 0 24px 0;padding-left:20px;">
+      <li style="margin-bottom:8px;">Impact Dashboard for cohort impact measurement across pre/post readiness</li>
+      <li style="margin-bottom:8px;">Pre/post assessment instrument: 22 core questions plus 6 reflection questions</li>
+      <li style="margin-bottom:8px;">Normalized cohort impact score, comparable across cohorts and programs</li>
+      <li style="margin-bottom:8px;">Multi-organization tenancy with full data isolation per program</li>
+    </ul>
+    <p style="margin:0 0 20px 0;">Our team will follow up within 48 hours to discuss pilot engagement structure, cohort size, and program length.</p>
+    <p style="margin:0 0 20px 0;">Questions? Just reply to this email.</p>
+    <p style="margin:0;color:#f97316;font-weight:600;">— The FNDRYx team</p>
+  `);
+  const text = `Hey ${fullName},
+
+Thanks for your inquiry about FNDRYx for accelerator and program impact measurement.
+
+FNDRYx gives program operators measurement infrastructure for cohort outcomes:
+- Impact Dashboard for cohort impact measurement across pre/post readiness
+- Pre/post assessment instrument: 22 core questions plus 6 reflection questions
+- Normalized cohort impact score, comparable across cohorts and programs
+- Multi-organization tenancy with full data isolation per program
+
+Our team will follow up within 48 hours to discuss pilot engagement structure, cohort size, and program length.
+
+Questions? Just reply to this email.
+
+— The FNDRYx team`;
+  return {
+    subject: "Your FNDRYx accelerator inquiry",
+    html,
+    text,
+  };
+}
+
 export async function POST(request: Request) {
   const formspreeEndpoint = process.env.FORMSPREE_ENDPOINT;
   const resendApiKey = process.env.RESEND_API_KEY;
@@ -133,7 +180,8 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid JSON body." }, { status: 400 });
   }
 
-  const { role, fullName, email, company, stage, type } = body ?? {};
+  const { role, fullName, email, company, stage, type, operatorType } =
+    body ?? {};
 
   if (!role || !fullName || !email || !company) {
     return NextResponse.json(
@@ -142,7 +190,11 @@ export async function POST(request: Request) {
     );
   }
 
-  if (role !== "Founder" && role !== "Capital Provider") {
+  if (
+    role !== "founder" &&
+    role !== "capital_provider" &&
+    role !== "operator"
+  ) {
     return NextResponse.json({ error: "Invalid role." }, { status: 400 });
   }
 
@@ -153,6 +205,21 @@ export async function POST(request: Request) {
     );
   }
 
+  if (role === "operator") {
+    if (!operatorType) {
+      return NextResponse.json(
+        { error: "Organization type is required." },
+        { status: 400 }
+      );
+    }
+    if (!VALID_OPERATOR_TYPES.has(operatorType)) {
+      return NextResponse.json(
+        { error: "Invalid organization type." },
+        { status: 400 }
+      );
+    }
+  }
+
   try {
     const formspreePayload: Record<string, string> = {
       role,
@@ -160,8 +227,10 @@ export async function POST(request: Request) {
       email,
       company,
     };
-    if (role === "Founder" && stage) formspreePayload.stage = stage;
-    if (role === "Capital Provider" && type) formspreePayload.type = type;
+    if (role === "founder" && stage) formspreePayload.stage = stage;
+    if (role === "capital_provider" && type) formspreePayload.type = type;
+    if (role === "operator" && operatorType)
+      formspreePayload.operatorType = operatorType;
 
     try {
       const fsRes = await fetch(formspreeEndpoint, {
@@ -183,7 +252,12 @@ export async function POST(request: Request) {
     }
 
     const resend = new Resend(resendApiKey);
-    const tmpl = role === "Founder" ? founderEmail(fullName) : capitalEmail(fullName);
+    const tmpl =
+      role === "founder"
+        ? founderEmail(fullName)
+        : role === "capital_provider"
+          ? capitalEmail(fullName)
+          : operatorEmail(fullName);
 
     const { error: sendError } = await resend.emails.send({
       from: "FNDRYx <forge@fndryx.io>",

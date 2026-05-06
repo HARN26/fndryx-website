@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { ChevronDown, CheckCircle2 } from "lucide-react";
 
-type Role = "Founder" | "Capital Provider";
+type Role = "founder" | "capital_provider" | "operator";
 
 type FormData = {
   role: Role;
@@ -12,7 +12,20 @@ type FormData = {
   company: string;
   stage: string;
   type: string;
+  operatorType: string;
 };
+
+const ROLE_OPTIONS: { value: Role; label: string }[] = [
+  { value: "founder", label: "Founder" },
+  { value: "capital_provider", label: "Capital Provider" },
+  { value: "operator", label: "Accelerator / Program Operator" },
+];
+
+const VALID_ROLES: ReadonlySet<string> = new Set<Role>([
+  "founder",
+  "capital_provider",
+  "operator",
+]);
 
 const FOUNDER_STAGES = [
   "Pre-Revenue",
@@ -25,29 +38,33 @@ const CAPITAL_TYPES = [
   "Angel Investor",
   "Venture Capital",
   "Family Office",
-  "Accelerator / Incubator",
   "Lender",
   "Other",
 ];
 
+const OPERATOR_TYPES: { value: string; label: string }[] = [
+  { value: "accelerator", label: "Accelerator" },
+  { value: "incubator", label: "Incubator" },
+  { value: "venture_studio", label: "Venture Studio" },
+  { value: "university_program", label: "University Program" },
+  { value: "corporate_program", label: "Corporate Innovation Program" },
+  { value: "other", label: "Other" },
+];
+
 const initialData: FormData = {
-  role: "Founder",
+  role: "founder",
   fullName: "",
   email: "",
   company: "",
   stage: "",
   type: "",
+  operatorType: "",
 };
 
 const inputClass =
   "w-full bg-steel-900 border border-steel-700 rounded-lg px-4 py-3 text-steel-100 text-sm placeholder:text-steel-500 focus:outline-none focus:border-fire-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fire-400 focus-visible:ring-offset-2 focus-visible:ring-offset-steel-800 transition-colors";
 
 const labelClass = "block text-sm font-body font-medium text-steel-200 mb-2";
-
-const ROLE_PARAM_TO_ROLE: Record<string, Role> = {
-  capital_provider: "Capital Provider",
-  founder: "Founder",
-};
 
 export default function FounderForgeForm() {
   const [formData, setFormData] = useState<FormData>(initialData);
@@ -64,13 +81,22 @@ export default function FounderForgeForm() {
     const haystack = `${window.location.search}${window.location.hash}`;
     const match = haystack.match(/[?&#]role=([^&#]+)/);
     if (!match) return;
-    const mapped = ROLE_PARAM_TO_ROLE[decodeURIComponent(match[1])];
-    if (!mapped) return;
-    setFormData((prev) => ({ ...prev, role: mapped }));
+    const candidate = decodeURIComponent(match[1]);
+    if (!VALID_ROLES.has(candidate)) return;
+    setFormData((prev) => ({ ...prev, role: candidate as Role }));
   }, []);
 
   const update = <K extends keyof FormData>(key: K, value: FormData[K]) =>
     setFormData((prev) => ({ ...prev, [key]: value }));
+
+  const changeRole = (role: Role) =>
+    setFormData((prev) => ({
+      ...prev,
+      role,
+      stage: "",
+      type: "",
+      operatorType: "",
+    }));
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -84,8 +110,9 @@ export default function FounderForgeForm() {
         email: formData.email,
         company: formData.company,
       };
-      if (formData.role === "Founder") payload.stage = formData.stage;
-      if (formData.role === "Capital Provider") payload.type = formData.type;
+      if (formData.role === "founder") payload.stage = formData.stage;
+      if (formData.role === "capital_provider") payload.type = formData.type;
+      if (formData.role === "operator") payload.operatorType = formData.operatorType;
 
       const res = await fetch("/api/founder-forge", {
         method: "POST",
@@ -160,11 +187,14 @@ export default function FounderForgeForm() {
                     <select
                       id="ff-role"
                       value={formData.role}
-                      onChange={(e) => update("role", e.target.value as Role)}
+                      onChange={(e) => changeRole(e.target.value as Role)}
                       className={`${inputClass} appearance-none pr-10`}
                     >
-                      <option value="Founder">Founder</option>
-                      <option value="Capital Provider">Capital Provider</option>
+                      {ROLE_OPTIONS.map((r) => (
+                        <option key={r.value} value={r.value}>
+                          {r.label}
+                        </option>
+                      ))}
                     </select>
                     <ChevronDown
                       size={18}
@@ -218,7 +248,7 @@ export default function FounderForgeForm() {
                   />
                 </div>
 
-                {formData.role === "Founder" && (
+                {formData.role === "founder" && (
                   <div>
                     <label htmlFor="ff-stage" className={labelClass}>
                       Stage
@@ -248,7 +278,7 @@ export default function FounderForgeForm() {
                   </div>
                 )}
 
-                {formData.role === "Capital Provider" && (
+                {formData.role === "capital_provider" && (
                   <div>
                     <label htmlFor="ff-type" className={labelClass}>
                       Capital type
@@ -267,6 +297,38 @@ export default function FounderForgeForm() {
                         {CAPITAL_TYPES.map((t) => (
                           <option key={t} value={t}>
                             {t}
+                          </option>
+                        ))}
+                      </select>
+                      <ChevronDown
+                        size={18}
+                        className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-steel-500"
+                      />
+                    </div>
+                  </div>
+                )}
+
+                {formData.role === "operator" && (
+                  <div>
+                    <label htmlFor="ff-operator-type" className={labelClass}>
+                      Organization Type
+                    </label>
+                    <div className="relative">
+                      <select
+                        id="ff-operator-type"
+                        required
+                        value={formData.operatorType}
+                        onChange={(e) =>
+                          update("operatorType", e.target.value)
+                        }
+                        className={`${inputClass} appearance-none pr-10`}
+                      >
+                        <option value="" disabled>
+                          Select your organization type
+                        </option>
+                        {OPERATOR_TYPES.map((o) => (
+                          <option key={o.value} value={o.value}>
+                            {o.label}
                           </option>
                         ))}
                       </select>
