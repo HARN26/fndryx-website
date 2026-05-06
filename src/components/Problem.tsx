@@ -12,8 +12,8 @@ export default function Problem() {
         </h2>
 
         <p className="max-w-3xl text-lg leading-relaxed text-steel-300">
-          More than 70% of venture capital flows to four states. Warm introductions
-          open gates that cold outreach cannot. The result isn&apos;t a market failure.
+          The vast majority of venture capital flows to a handful of states.
+          Warm introductions open gates that cold outreach cannot. The result isn&apos;t a market failure.
           It&apos;s an <span className="text-fire-400">infrastructure failure</span>.
           Founders don&apos;t lose the race —{" "}
           <span className="text-fire-400">they never reach the starting line</span>.

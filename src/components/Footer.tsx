@@ -25,7 +25,7 @@ export default function Footer() {
         <div className="w-3/5 border-t border-steel-800" />
 
         <p className="max-w-2xl font-body text-xs uppercase tracking-widest text-steel-400">
-          The capital-readiness exchange — where every founder signal compounds over time.
+          Measurement infrastructure between founders and capital.
         </p>
 
         <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4">

@@ -70,6 +70,7 @@ export default function FounderForgeForm() {
   const [formData, setFormData] = useState<FormData>(initialData);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submittedRole, setSubmittedRole] = useState<Role | null>(null);
   const [error, setError] = useState<string | null>(null);
   const didApplyUrlRole = useRef(false);
 
@@ -134,6 +135,7 @@ export default function FounderForgeForm() {
         throw new Error(message);
       }
 
+      setSubmittedRole(formData.role);
       setFormData(initialData);
       setIsSubmitted(true);
     } catch (err) {
@@ -160,10 +162,43 @@ export default function FounderForgeForm() {
             >
               <CheckCircle2 size={48} className="text-fire-400" />
               <h2 className="mt-6 font-display font-extrabold text-3xl text-fire-400">
-                Access Requested.
+                {submittedRole === "founder" && "Access requested."}
+                {submittedRole === "capital_provider" && "Inquiry received."}
+                {submittedRole === "operator" && "Conversation started."}
+                {!submittedRole && "Access Requested."}
               </h2>
-              <p className="mt-4 text-steel-300">
-                Our team will reach out with next steps.
+              <p className="mt-4 max-w-md text-steel-300">
+                {submittedRole === "founder" && (
+                  <>
+                    Check your inbox — we&apos;ve sent a confirmation email
+                    with your assessment access. The{" "}
+                    <span className="text-fire-400">
+                      Capital Readiness Assessment
+                    </span>{" "}
+                    takes about fifteen minutes; complete it whenever you&apos;re
+                    ready.
+                  </>
+                )}
+                {submittedRole === "capital_provider" && (
+                  <>
+                    Check your inbox — we&apos;ve sent a confirmation. Our team
+                    will reach out within 48 hours to discuss platform access
+                    and the{" "}
+                    <span className="text-fire-400">
+                      Founding Cohort program
+                    </span>
+                    .
+                  </>
+                )}
+                {submittedRole === "operator" && (
+                  <>
+                    Check your inbox — we&apos;ve sent a confirmation. Our team
+                    will reach out within 48 hours to scope a{" "}
+                    <span className="text-fire-400">pilot engagement</span>{" "}
+                    around your cohort size and program length.
+                  </>
+                )}
+                {!submittedRole && "Our team will reach out with next steps."}
               </p>
             </div>
           ) : (
