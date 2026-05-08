@@ -66,7 +66,9 @@
       "Bash(curl -sS -o ./feed-verify.xml -w \"status=%{http_code} bytes=%{size_download} type=%{content_type}\\\\n\" http://localhost:3005/feed.xml)",
       "Bash(curl -sS http://localhost:3005/blog)",
       "Bash(curl -sS http://localhost:3005/)",
-      "Bash(grep -i \"linkedin\\\\|/li[\\\\\\\\.\\\\\\\\-]\\\\|linked.in\" C:/Users/Kevin/OneDrive/Desktop/fndryx-website/node_modules/lucide-react/dist/esm/lucide-react.mjs)"
+      "Bash(grep -i \"linkedin\\\\|/li[\\\\\\\\.\\\\\\\\-]\\\\|linked.in\" C:/Users/Kevin/OneDrive/Desktop/fndryx-website/node_modules/lucide-react/dist/esm/lucide-react.mjs)",
+      "Bash(ls \"C:\\\\Users\\\\Kevin\\\\OneDrive\\\\Desktop\\\\FNDRYx\\\\\" 2>&1 | head -50)",
+      "Bash(cp 'C:\\\\Users\\\\Kevin\\\\OneDrive\\\\Desktop\\\\FNDRYx\\\\Graphic_ReadinessQuadrants_2026-05-08.svg' 'C:\\\\Users\\\\Kevin\\\\OneDrive\\\\Desktop\\\\fndryx-website\\\\public\\\\images\\\\blog\\\\readiness-quadrants-2026-05-08.svg' && ls -la 'C:\\\\Users\\\\Kevin\\\\OneDrive\\\\Desktop\\\\fndryx-website\\\\public\\\\images\\\\blog\\\\readiness-quadrants-2026-05-08.svg')"
     ]
   }
 }
