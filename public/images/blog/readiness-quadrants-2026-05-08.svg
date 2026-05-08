@@ -80,6 +80,4 @@
     <text x="0" y="0" class="display" font-weight="800" font-size="22" fill="#94a3b8">FNDRY<tspan class="italic-x" font-weight="400" fill="#f97316">x</tspan></text>
   </g>
 
-  <!-- Tagline bottom-right -->
-  <text x="1480" y="968" text-anchor="end" class="body" font-weight="400" font-size="13" fill="#475569" letter-spacing="2">MEASUREMENT INFRASTRUCTURE BETWEEN FOUNDERS AND CAPITAL</text>
 </svg>
