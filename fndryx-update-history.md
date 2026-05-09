@@ -85,6 +85,7 @@
 - [ ] **Per-post analytics** (Plausible/Umami, not GA) — punted until launch dust settles
 - [ ] **Draft preview route** for sharing in-progress posts with reviewers
 - [ ] **`lucide-react` version pin** — currently on unusual `^1.x` line (historical packages live on `0.x`). Worth pinning to a known-good version at next dep audit.
+- [ ] **Per-post OG image ≠ glyph fallback** — the per-post OG image route at `src/app/blog/[slug]/opengraph-image.tsx` loads only Syne via `@fontsource`, which lacks U+2260 (≠). Posts with ≠ in their titles (currently just `building-ready-vs-investor-ready`) render the glyph as a tofu box on social-share previews. Fix: load DejaVu Sans or another fallback font with broad Unicode coverage in the OG route, ordered after Syne. ~10 lines of change.
 
 ---
 
@@ -117,6 +118,45 @@
 ## Ongoing Updates
 
 _New entries added here as updates ship after migration, most recent first._
+
+### May 8, 2026 — Essay #03 published + full-bleed figure utility + cover render script
+
+**Published "Build Ready ≠ Investor Ready."**
+- New post at `/blog/building-ready-vs-investor-ready` — essay distinguishing build readiness from investor readiness, introducing the four-quadrant Forged / Tempering / Hot Iron / Ore framework. Author: FNDRYx.
+- Cover graphic: `public/images/blog/building-ready-vs-investor-ready-cover.png` (2400×1260, brand-styled following the Common Sense for Founders editorial template — left-aligned title, top-left FNDRYx + "AN ESSAY" subtitle, decorative italic Playfair "x" watermark on the right, italic description + orange separator + fire-400 italic pull-quote, bottom-right FNDRYX.IO).
+- Inline figure: `public/images/blog/readiness-quadrants-2026-05-08.svg` — four-quadrant 2×2 matrix with brand-styled labels, axes, and quadrant cards. Rendered full-bleed inside the post body.
+- Tags: `readiness`, `capital-readiness`, `founders`, `build-readiness`.
+- Closing CTA: "Take the Capital Readiness Assessment →" links to `https://assess.fndryx.io/` (external, new tab), brand-styled with fire-400 text and a border-bottom underline.
+
+**Body terminology canonicalization: "Building Readiness" → "Build Readiness."**
+- Original draft used "Building Readiness" throughout; title rendered as "Build Ready ≠ Investor Ready" for editorial punch.
+- Resolved by canonicalizing body on "Build Readiness" — full sweep of `Building Readiness`, `Building-readiness`, `Building Ready`, `building readiness`, `building-ready` across the MDX post and the inline SVG labels (subtitle, y-axis label, quadrant card titles).
+- Slug retained as `building-ready-vs-investor-ready` — deliberate accept, slugs are forever and the URL stem isn't surfaced in any UI.
+
+**New CSS utility: `.full-bleed-figure`.**
+- Added to `src/app/globals.css` inside `@layer utilities`. Lets inline figures escape the `max-w-3xl` post container constraint and render up to 1400px wide on desktop, viewport-wide on mobile, centered relative to the article.
+- Pattern: `width: min(1400px, calc(100vw - 2rem)); position: relative; left: 50%; transform: translateX(-50%)`. The transform-based centering anchors to the parent container's center (correct for prose) rather than viewport center (which would shift on layouts with scrollbars).
+- Reusable for any future post that needs a wide visual. Apply via `<img className="full-bleed-figure rounded-xl" />` (the `rounded-xl` must be re-included since `MdxComponents.tsx` `<img>` props spread order means MDX className REPLACES the component default rather than merging).
+
+**Cover render script.**
+- Python + Pillow script produces the brand-styled 2400×1260 PNG cover from a configurable template. Pulls Syne 800, DM Sans 400, and Playfair Italic 400 fonts via `@fontsource/*` npm packages, converts WOFF→TTF for Pillow compatibility, and renders all editorial elements (wordmark, subtitle, multi-line title with orange-Syne or italic-Playfair accents, description, pull-quote, footer URL).
+- `≠` (U+2260) is drawn as primitive shapes (rounded rectangles + rotated slash) because none of the brand fonts include the glyph. The `draw_neq_block(cx, cy, scale, color)` helper renders a typographic-quality ≠ at any scale.
+- Future journal cover graphics can reuse this script as a template. Kept on disk locally; not in the repo.
+
+**Polish passes during publish:**
+- Removed decorative tagline "MEASUREMENT INFRASTRUCTURE BETWEEN FOUNDERS AND CAPITAL" from the quadrant SVG (was competing visually with the `INVESTOR READINESS →` axis label).
+- Recolored both axis labels (`BUILD READINESS ↑`, `INVESTOR READINESS →`) from steel-500 to fire-400.
+- Standardized all four quadrant title labels (TEMPERING, FORGED, ORE, HOT IRON) to fire-400 — were previously inconsistent (amber, orange, grey, dark amber).
+- Inline-styled the four bucket names in the numbered list (Forged, Tempering, Hot Iron, Ore) to fire-400 via `<span className="text-fire-400">`, matching the SVG.
+- Closing italic outro paragraph rewritten as raw `<p>` JSX so the leading "FNDRYx" wordmark renders with proper logo treatment (FNDRY in Syne 800, x in Playfair italic fire-400). Markdown `*...*` italic wraps the entire paragraph in `<em>`, which prevents granular per-word styling — the JSX `<p>` with conditional `not-italic` inner spans is the workaround.
+
+**Lessons / notes:**
+- **MDX inline `style={{...}}` doesn't reliably reach the rendered element when used inside post content.** Three iterations of an inline-style breakout pattern silently failed — DevTools showed `element.style { }` empty on the rendered `<img>`. The component override at `src/components/blog/MdxComponents.tsx:99` does spread `{...props}` to the underlying `<img>` correctly, but `next-mdx-remote/rsc` parses JSX-style style objects differently than standard React JSX, and the attribute is dropped or stringified somewhere in the pipeline. Working pattern: define styles as a CSS class in `globals.css` and apply via `className`. `className` passes through reliably; `style` does not.
+- **Tailwind v4 strips custom CSS rules emitted outside any `@layer` directive.** The `.full-bleed-figure` rule appended to the end of `globals.css` was syntactically valid but didn't appear in DevTools at all — the rule was being tree-shaken by the v4 build pipeline. Wrapping in `@layer utilities { ... }` made it emit. v4 docs reference this as an escape hatch for custom CSS; in practice it's a hard requirement, not a stylistic choice.
+- **Full-bleed inside `mx-auto max-w-3xl` works with transform-based centering, not negative-margin viewport math.** First attempt used `margin-left: calc(50% - 50vw + 1rem)` (canonical CSS-Tricks pattern), which centers on the viewport. The article is `mx-auto`, so its center follows the viewport on a normal page — but viewport center shifts when scrollbars appear, and the figure offsets relative to the prose. `transform: translateX(-50%)` anchored to the parent stays aligned with the article regardless.
+- **`{...props}` spread order replaces, doesn't merge, the className.** `<img className="rounded-xl my-8" {...props} />` means `props.className` REPLACES the literal "rounded-xl my-8" — adjacent JSX className attributes with the same name aren't merged by React. To preserve component defaults when supplying a custom className from MDX, include them explicitly (e.g., `className="full-bleed-figure rounded-xl"`).
+- **None of the brand fonts include `≠` (U+2260).** Syne, DM Sans, and Playfair Display Italic all lack the glyph. Browser HTML rendering substitutes from system fonts automatically (fine for post H1, listing card, RSS title, browser tab title), but Satori (used by `ImageResponse` for OG images) has no system font fallback — the auto-generated 1200×630 social-share preview for this post likely renders ≠ as a tofu box. Added to deferred list.
+- **Two valid cover-graphic accent treatments coexist in the journal.** "The Most Inefficient Market in America" uses Playfair italic for accents (matches the asterisk-accent system in `title-utils.ts`). "Common Sense for Founders" and this post use orange Syne. The asterisk system always renders Playfair italic — so the post-page H1, listing card, RSS title, and OG image render "Build" and "Investor" in Playfair italic, while the cover graphic shows them in orange Syne. Known design-system fork; not blocking. Future cleanup: pick one convention and standardize across covers.
 
 ### April 25, 2026 — First essay published + title accent system + cover-as-title layout
 
