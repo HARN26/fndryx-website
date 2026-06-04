@@ -13,6 +13,9 @@
 # testing
 /coverage
 
+# QA pass (throwaway)
+/qa
+
 # next.js
 /.next/
 /out/

@@ -69,7 +69,26 @@
       "Bash(grep -i \"linkedin\\\\|/li[\\\\\\\\.\\\\\\\\-]\\\\|linked.in\" C:/Users/Kevin/OneDrive/Desktop/fndryx-website/node_modules/lucide-react/dist/esm/lucide-react.mjs)",
       "Bash(ls \"C:\\\\Users\\\\Kevin\\\\OneDrive\\\\Desktop\\\\FNDRYx\\\\\" 2>&1 | head -50)",
       "Bash(cp 'C:\\\\Users\\\\Kevin\\\\OneDrive\\\\Desktop\\\\FNDRYx\\\\Graphic_ReadinessQuadrants_2026-05-08.svg' 'C:\\\\Users\\\\Kevin\\\\OneDrive\\\\Desktop\\\\fndryx-website\\\\public\\\\images\\\\blog\\\\readiness-quadrants-2026-05-08.svg' && ls -la 'C:\\\\Users\\\\Kevin\\\\OneDrive\\\\Desktop\\\\fndryx-website\\\\public\\\\images\\\\blog\\\\readiness-quadrants-2026-05-08.svg')",
-      "Bash(python -c \"from PIL import Image; img = Image.open\\('public/images/blog/building-ready-vs-investor-ready-cover.png'\\); print\\(f'Dimensions: {img.size[0]}x{img.size[1]}'\\)\")"
+      "Bash(python -c \"from PIL import Image; img = Image.open\\('public/images/blog/building-ready-vs-investor-ready-cover.png'\\); print\\(f'Dimensions: {img.size[0]}x{img.size[1]}'\\)\")",
+      "Bash(python -c \"from PIL import Image; im=Image.open\\('RAISE_RIGHT_transparent.png'\\); print\\(im.size\\)\")",
+      "Bash(node -e \"console.log\\(require\\('image-size'\\)\\('RAISE_RIGHT_transparent.png'\\)\\)\")",
+      "Bash(python -c \"from PIL import Image; im=Image.open\\('RR_post_-_ecosystem_panel_v2.png'\\); print\\(im.size\\)\")",
+      "Bash(python -c ' *)",
+      "Bash(rm -rf .next)",
+      "Bash(echo \"exit: $?\")",
+      "Bash(echo \"cleared: $?\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/raise-right)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3005/raise-right)",
+      "Bash(ls node_modules/@playwright)",
+      "Bash(ls node_modules/playwright)",
+      "Bash(ls node_modules/puppeteer)",
+      "Bash(ls node_modules/puppeteer-core)",
+      "Bash(mkdir -p qa)",
+      "Bash(grep -n \"qa\" .gitignore)",
+      "Bash(npx playwright *)",
+      "Bash(QA_URL=http://localhost:3005 node qa/qa.mjs)",
+      "Bash(awk '{print $5\"\\\\t\"$9}')",
+      "Bash(git check-ignore *)"
     ]
   }
 }
