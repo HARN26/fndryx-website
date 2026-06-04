@@ -191,22 +191,48 @@ export default function RaiseRightPage() {
             Powered by
           </p>
 
-          {/* g. powered-by logo row — same visual family, a step smaller; Yorktown renders taller in px to optically balance FNDRYx */}
-          <div className="mt-5 flex items-center justify-center gap-4 sm:gap-12 md:mt-6 md:gap-16">
-            <Image
-              src="/images/raise-right/Yorktown_Logo_Horizontal_White.png"
-              alt="Yorktown Essex Fund"
-              width={320}
-              height={132}
-              className="h-[3.25rem] w-auto sm:h-[4.75rem] md:h-[6.5rem]"
-            />
-            <Image
-              src="/images/raise-right/FNDRYx_logo_transparent.png"
-              alt="FNDRYx"
-              width={4094}
-              height={472}
-              className="h-5 w-auto sm:h-8 md:h-[2.625rem]"
-            />
+          {/* g. powered-by triangle — Data317 apex (lead position), Yorktown base-left + FNDRYx base-right.
+                Matched optical weight: each logo gets its own px height to feel equal in presence.
+                Data317 ships black-on-transparent, so it's forced white to match the white logo family. */}
+          <div className="mt-5 flex flex-col items-center gap-4 sm:gap-5 md:mt-6 md:gap-6">
+            {/* Data317 ships as one black-on-transparent lockup; split into green leaf
+                + wordmark so only the wordmark is forced white (leaf keeps its brand color) */}
+            <span className="flex items-center">
+              <Image
+                src="/images/raise-right/Data317_mark.png"
+                alt=""
+                aria-hidden="true"
+                width={1158}
+                height={1100}
+                priority
+                className="h-7 w-auto sm:h-[2.625rem] md:h-[3.5rem]"
+              />
+              <Image
+                src="/images/raise-right/Data317_wordmark.png"
+                alt="Data317"
+                width={3442}
+                height={1100}
+                priority
+                className="h-7 w-auto sm:h-[2.625rem] md:h-[3.5rem]"
+                style={{ filter: "brightness(0) invert(1)" }}
+              />
+            </span>
+            <div className="flex items-center justify-center gap-4 sm:gap-12 md:gap-16">
+              <Image
+                src="/images/raise-right/Yorktown_Logo_Horizontal_White.png"
+                alt="Yorktown Essex Fund"
+                width={320}
+                height={132}
+                className="h-[3.25rem] w-auto sm:h-[4.75rem] md:h-[6.5rem]"
+              />
+              <Image
+                src="/images/raise-right/FNDRYx_logo_transparent.png"
+                alt="FNDRYx"
+                width={4094}
+                height={472}
+                className="h-5 w-auto sm:h-8 md:h-[2.625rem]"
+              />
+            </div>
           </div>
 
           {/* below hero */}
@@ -356,21 +382,42 @@ export default function RaiseRightPage() {
           <p className="mt-12 font-body text-xs uppercase tracking-[0.2em] text-steel-400">
             Powered by
           </p>
-          <div className="mt-5 flex items-center justify-center gap-4 sm:gap-12">
-            <Image
-              src="/images/raise-right/Yorktown_Logo_Horizontal_White.png"
-              alt="Yorktown Essex Fund"
-              width={320}
-              height={132}
-              className="h-12 w-auto md:h-[4.25rem]"
-            />
-            <Image
-              src="/images/raise-right/FNDRYx_logo_transparent.png"
-              alt="FNDRYx"
-              width={4094}
-              height={472}
-              className="h-5 w-auto md:h-7"
-            />
+          <div className="mt-5 flex flex-col items-center gap-3 sm:gap-4">
+            {/* split logo — green leaf + white wordmark (see hero note) */}
+            <span className="flex items-center">
+              <Image
+                src="/images/raise-right/Data317_mark.png"
+                alt=""
+                aria-hidden="true"
+                width={1158}
+                height={1100}
+                className="h-7 w-auto md:h-9"
+              />
+              <Image
+                src="/images/raise-right/Data317_wordmark.png"
+                alt="Data317"
+                width={3442}
+                height={1100}
+                className="h-7 w-auto md:h-9"
+                style={{ filter: "brightness(0) invert(1)" }}
+              />
+            </span>
+            <div className="flex items-center justify-center gap-4 sm:gap-12">
+              <Image
+                src="/images/raise-right/Yorktown_Logo_Horizontal_White.png"
+                alt="Yorktown Essex Fund"
+                width={320}
+                height={132}
+                className="h-12 w-auto md:h-[4.25rem]"
+              />
+              <Image
+                src="/images/raise-right/FNDRYx_logo_transparent.png"
+                alt="FNDRYx"
+                width={4094}
+                height={472}
+                className="h-5 w-auto md:h-7"
+              />
+            </div>
           </div>
 
           <p className="mt-12 font-body text-sm text-steel-400">
