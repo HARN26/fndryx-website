@@ -276,19 +276,19 @@ export default function RaiseRightPage() {
                   <Image
                     src={s.headshot}
                     alt={s.name}
-                    width={80}
-                    height={80}
-                    className="h-20 w-20 rounded-full border border-steel-600 object-cover"
+                    width={128}
+                    height={128}
+                    className="h-32 w-32 rounded-full border border-steel-600 object-cover"
                   />
                 ) : (
                   <span
                     aria-hidden="true"
-                    className="flex h-20 w-20 items-center justify-center rounded-full border border-steel-600 bg-steel-900 font-display text-2xl font-bold text-fire-400"
+                    className="flex h-32 w-32 items-center justify-center rounded-full border border-steel-600 bg-steel-900 font-display text-4xl font-bold text-fire-400"
                   >
                     {s.initials}
                   </span>
                 )}
-                <h3 className="mt-5 font-display text-xl font-semibold text-steel-100">
+                <h3 className="mt-7 font-display text-xl font-semibold text-steel-100">
                   {s.name}
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-steel-300">
