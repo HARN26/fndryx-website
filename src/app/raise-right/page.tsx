@@ -22,6 +22,7 @@ type Speaker = {
   role: string;
   topic?: string;
   initials: string;
+  headshot?: string;
 };
 
 const speakers: Speaker[] = [
@@ -29,18 +30,21 @@ const speakers: Speaker[] = [
     name: "Chris Heivly",
     role: "Keynote — Co-founder, MapQuest · Author, Build the Fort",
     initials: "CH",
+    headshot: "/images/raise-right/c_heivly.jpg",
   },
   {
     name: "Mayor Scott Fadness",
     role: "City of Fishers",
     topic: "Indiana's Innovation Infrastructure",
     initials: "SF",
+    headshot: "/images/raise-right/s_fadness.jpg",
   },
   {
     name: "Steve Iskander",
     role: "Intrepid Finance",
     topic: "The New Cap Stack: The Right Investment at the Right Time",
     initials: "SI",
+    headshot: "/images/raise-right/s_iskander.jpg",
   },
 ];
 
@@ -268,12 +272,22 @@ export default function RaiseRightPage() {
                 key={s.name}
                 className="flex flex-col items-center rounded-2xl border border-steel-700 bg-steel-800 p-8 text-center transition-all duration-300 hover:-translate-y-0.5 hover:border-fire-400"
               >
-                <span
-                  aria-hidden="true"
-                  className="flex h-20 w-20 items-center justify-center rounded-full border border-steel-600 bg-steel-900 font-display text-2xl font-bold text-fire-400"
-                >
-                  {s.initials}
-                </span>
+                {s.headshot ? (
+                  <Image
+                    src={s.headshot}
+                    alt={s.name}
+                    width={80}
+                    height={80}
+                    className="h-20 w-20 rounded-full border border-steel-600 object-cover"
+                  />
+                ) : (
+                  <span
+                    aria-hidden="true"
+                    className="flex h-20 w-20 items-center justify-center rounded-full border border-steel-600 bg-steel-900 font-display text-2xl font-bold text-fire-400"
+                  >
+                    {s.initials}
+                  </span>
+                )}
                 <h3 className="mt-5 font-display text-xl font-semibold text-steel-100">
                   {s.name}
                 </h3>

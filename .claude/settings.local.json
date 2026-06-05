@@ -88,7 +88,13 @@
       "Bash(npx playwright *)",
       "Bash(QA_URL=http://localhost:3005 node qa/qa.mjs)",
       "Bash(awk '{print $5\"\\\\t\"$9}')",
-      "Bash(git check-ignore *)"
+      "Bash(git check-ignore *)",
+      "Bash(node -e ' *)",
+      "PowerShell(npm run build 2>&1)",
+      "Bash(node -e \"try{require.resolve\\('sharp'\\);console.log\\('sharp: available'\\)}catch\\(e\\){console.log\\('sharp: NOT available'\\)}\")",
+      "Bash(git add *)",
+      "Bash(git commit -m 'Add Data317 as powered-by partner on /raise-right *)",
+      "Bash(git push *)"
     ]
   }
 }
