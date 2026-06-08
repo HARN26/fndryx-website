@@ -52,6 +52,7 @@ type FirmCard = {
   firm: string;
   person?: string;
   role?: string;
+  headshot?: string;
 };
 
 type Panel = {
@@ -67,24 +68,60 @@ const panels: Panel[] = [
     title: "How to Build an Ecosystem that Attracts Capital",
     moderator: "John Wechsler, CEO, SpokeNote",
     firms: [
-      { firm: "Elevate Ventures", person: 'Christopher "Toph" Day', role: "CEO" },
-      { firm: "Nashville Entrepreneur Center", person: "Sam Davidson", role: "CEO" },
-      { firm: "mHUB", person: "Ryan Fant", role: "Executive Director" },
+      {
+        firm: "Elevate Ventures",
+        person: 'Christopher "Toph" Day',
+        role: "CEO",
+        headshot: "/images/raise-right/c_toph.jpg",
+      },
+      {
+        firm: "Nashville Entrepreneur Center",
+        person: "Sam Davidson",
+        role: "CEO",
+        headshot: "/images/raise-right/s_davidson.jpg",
+      },
+      {
+        firm: "mHUB",
+        person: "Ryan Fant",
+        role: "Executive Director",
+        headshot: "/images/raise-right/r_fant.jpg",
+      },
     ],
   },
   {
     number: "Panel 2",
     title: "Navigating the Capital Stack: Finding the Right Funding",
     firms: [
-      { firm: "Start Something Ventures", person: "Bob Carlson", role: "Partner" },
-      { firm: "Orange.fund", person: "Joe Watkins", role: "Partner" },
-      { firm: "JP Morgan", person: "Sadiki McCalla", role: "Commercial Banker" },
+      {
+        firm: "Start Something Ventures",
+        person: "Bob Carlson",
+        role: "Partner",
+        headshot: "/images/raise-right/b_carlson.jpg",
+      },
+      {
+        firm: "Orange.fund",
+        person: "Joe Watkins",
+        role: "Partner",
+        headshot: "/images/raise-right/j_watkins.jpg",
+      },
+      {
+        firm: "JP Morgan",
+        person: "Sadiki McCalla",
+        role: "Commercial Banker",
+        headshot: "/images/raise-right/s_mccalla.jpg",
+      },
       {
         firm: "Generations Community Bank",
         person: "Kyle Middleton",
         role: "Chief Credit Officer",
+        headshot: "/images/raise-right/k_middleton.jpg",
       },
-      { firm: "Yorktown Fund", person: "Casey Bolsega", role: "Sr. Manager" },
+      {
+        firm: "Yorktown Fund",
+        person: "Casey Bolsega",
+        role: "Sr. Manager",
+        headshot: "/images/raise-right/c_bolsega.jpg",
+      },
     ],
   },
 ];
@@ -177,22 +214,42 @@ const breakouts: Breakout[] = [
 function FirmGrid({ items }: { items: FirmCard[] }) {
   return (
     <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-      {items.map((item, i) => (
-        <article
-          key={`${item.firm}-${i}`}
-          className="flex flex-col rounded-2xl border border-steel-700 bg-steel-800 p-6"
-        >
-          <h3 className="font-display text-lg font-semibold text-steel-100">
-            {item.firm}
-          </h3>
-          {item.person && (
-            <p className="mt-2 text-base text-steel-200">{item.person}</p>
-          )}
-          {item.role && (
-            <p className="mt-0.5 text-sm text-steel-400">{item.role}</p>
-          )}
-        </article>
-      ))}
+      {items.map((item, i) => {
+        const text = (
+          <div className="min-w-0">
+            <h3 className="font-display text-lg font-semibold text-steel-100">
+              {item.firm}
+            </h3>
+            {item.person && (
+              <p className="mt-2 text-base text-steel-200">{item.person}</p>
+            )}
+            {item.role && (
+              <p className="mt-0.5 text-sm text-steel-400">{item.role}</p>
+            )}
+          </div>
+        );
+        return (
+          <article
+            key={`${item.firm}-${i}`}
+            className="flex h-full rounded-2xl border border-steel-700 bg-steel-800 p-6"
+          >
+            {item.headshot ? (
+              <div className="flex items-center gap-3 sm:gap-4">
+                <Image
+                  src={item.headshot}
+                  alt={item.person ?? item.firm}
+                  width={80}
+                  height={80}
+                  className="h-20 w-20 flex-shrink-0 rounded-full object-cover ring-2 ring-steel-600"
+                />
+                {text}
+              </div>
+            ) : (
+              <div className="flex flex-col">{text}</div>
+            )}
+          </article>
+        );
+      })}
     </div>
   );
 }
