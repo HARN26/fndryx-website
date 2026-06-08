@@ -102,7 +102,12 @@
       "Bash(python -c \"import numpy, PIL; print\\('numpy', numpy.__version__, 'PIL', PIL.__version__\\)\")",
       "Bash(python scripts/key_out_white.py)",
       "Bash(grep -oE '<meta \\(property|name\\)=\"\\(og:image[^\"]*|twitter:card|twitter:image\\)\"[^>]*>' .next/server/app/raise-right.html)",
-      "Bash(find .next/server/app -name 'raise-right*.html')"
+      "Bash(find .next/server/app -name 'raise-right*.html')",
+      "Bash(git checkout *)",
+      "Bash(python -c \"import PIL; print\\('PIL', PIL.__version__\\)\")",
+      "Bash(node -e \"try{require\\('sharp'\\);console.log\\('sharp ok'\\)}catch\\(e\\){console.log\\('no sharp'\\)}\")",
+      "PowerShell(Get-CimInstance Win32_Process -Filter \"Name='node.exe'\")",
+      "PowerShell($p=\"C:\\\\Users\\\\Kevin\\\\OneDrive\\\\Desktop\\\\fndryx-website\\\\.next\"; if\\(Test-Path $p\\){ try{ Remove-Item -Recurse -Force $p -ErrorAction Stop; \"removed\" }catch{ \"retry: $\\($_.Exception.Message\\)\"; Start-Sleep 2; Remove-Item -Recurse -Force $p -ErrorAction SilentlyContinue; if\\(Test-Path $p\\){\"still present\"}else{\"removed on retry\"} } } else { \"no .next\" })"
     ]
   }
 }

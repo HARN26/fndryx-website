@@ -161,15 +161,18 @@ const reversePitch: FirmCard[] = [
     logo: "/images/raise-right/crossroads_health_ventures_logo.png",
   },
   { firm: "Plug and Play", logo: "/images/raise-right/pnp-logo.svg" },
-  { firm: "Orange.fund", logo: "/images/raise-right/orangefund_logo.png" },
+  {
+    firm: "Roll Tack Ventures",
+    logo: "/images/raise-right/roll_tack_ventures_logo.png",
+  },
   {
     firm: "Generations Community Bank",
     logo: "/images/raise-right/generationscommunitybank_logo.png",
   },
   { firm: "Endeavor", logo: "/images/raise-right/endeavorglobal_logo.png" },
   {
-    firm: "Old National",
-    logo: "/images/raise-right/old_national_bank_logo.png",
+    firm: "VisionTech",
+    logo: "/images/raise-right/visiontech-logo-two-color.png",
   },
   { firm: "JP Morgan", logo: "/images/raise-right/jpmorganchase_logo.png" },
   {
