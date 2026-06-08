@@ -53,6 +53,7 @@ const speakers: Speaker[] = [
   {
     name: "Chris Heivly",
     role: "Keynote — Co-founder, MapQuest · Author, Build the Fort",
+    topic: "Today's Startup Community Leadership",
     initials: "CH",
     headshot: "/images/raise-right/c_heivly.jpg",
   },
@@ -512,7 +513,7 @@ export default function RaiseRightPage() {
             Today&apos;s Schedule · Launch Fishers
           </p>
           <p className="mt-2 font-body text-sm text-steel-400">
-            9:00 AM – 4:30 PM
+            9:00 AM – 5:00 PM
           </p>
         </div>
       </section>
