@@ -6,9 +6,33 @@ import { AgendaSection } from "./AgendaSection";
 const DIRECTIONS_URL = "https://maps.google.com?daddr=39.9665981,-86.0080016";
 
 export const metadata: Metadata = {
-  title: "Raise Right — Today's Schedule · June 10, 2026",
+  title: "Raise Right: The Founder-Capital Ecosystem Summit",
   description:
-    "Day-of event schedule for Raise Right: The Founder-Capital Ecosystem Summit at Launch Fishers, June 10, 2026.",
+    "June 10, 2026 · Launch Fishers, IN — A one-day summit bridging founders and capital partners across the Midwest.",
+  openGraph: {
+    title: "Raise Right: The Founder-Capital Ecosystem Summit",
+    description:
+      "June 10, 2026 · Launch Fishers, IN — A one-day summit bridging founders and capital partners across the Midwest.",
+    url: "https://fndryx.io/raise-right",
+    siteName: "FNDRYx",
+    images: [
+      {
+        url: "https://fndryx.io/images/raise-right/raise_right_og.png",
+        width: 1200,
+        height: 630,
+        alt: "Raise Right: The Founder-Capital Ecosystem Summit · June 10, 2026 · Launch Fishers, IN",
+      },
+    ],
+    type: "website",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Raise Right: The Founder-Capital Ecosystem Summit",
+    description:
+      "June 10, 2026 · Launch Fishers, IN — A one-day summit bridging founders and capital partners across the Midwest.",
+    images: ["https://fndryx.io/images/raise-right/raise_right_og.png"],
+  },
 };
 
 const secondaryCta =
