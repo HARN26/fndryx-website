@@ -186,7 +186,7 @@ const agenda: AgendaSession[] = [
 ];
 
 const roomPill =
-  "inline-flex items-center rounded-full bg-fire-500 px-2.5 py-1 font-display text-[0.65rem] font-semibold uppercase tracking-wider text-steel-900";
+  "inline-flex items-center rounded-full bg-fire-700 px-2.5 py-1 font-display text-[0.65rem] font-semibold uppercase tracking-wider text-white";
 
 function RoomPill({ room }: { room: string }) {
   return <span className={roomPill}>{room}</span>;
