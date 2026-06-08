@@ -2,13 +2,6 @@
 
 import { useEffect, useState } from "react";
 
-type Track = {
-  room: string;
-  label: string;
-  title: string;
-  note?: string;
-};
-
 type AgendaRow = {
   time: string;
   /** 24h "HH:MM" wall-clock in Eastern Time on the event date. */
@@ -16,8 +9,9 @@ type AgendaRow = {
   end: string;
   room?: string;
   title: string;
+  /** When set, the title renders as an in-page anchor link (e.g. "#breakouts"). */
+  titleHref?: string;
   body?: string;
-  tracks?: Track[];
 };
 
 type AgendaSession = {
@@ -161,25 +155,16 @@ const agenda: AgendaSession[] = [
         start: "13:45",
         end: "14:00",
         room: "Theater",
-        title: "DreamFuel: Mindfulness for Founders",
-        body: "Quick, high-impact tactical wellness strategies for entrepreneurs.",
+        title: "Dreamfuel: Mental Performance for Founders",
+        body: "Quick, high-impact tactical wellness workshop for entrepreneurs.",
       },
       {
         time: "2:00–3:15 PM",
         start: "14:00",
         end: "15:15",
         title: "Breakout Sessions & Roundtables",
-        tracks: [
-          { room: "Bistro", label: "Track A", title: "Pre-Seed Funding" },
-          { room: "South Room", label: "Track B", title: "Seed Funding" },
-          { room: "Offprem Area", label: "Track C", title: "Growth & SMBs" },
-          {
-            room: "15-Person Room",
-            label: "Track D",
-            title: "Roundtable: Building the Ecosystem",
-            note: "Moderator: Chris Heivly · Invite-Only, 15-person cap",
-          },
-        ],
+        titleHref: "#breakouts",
+        body: "Five tracks across five rooms — see Breakouts section below for details and moderators.",
       },
       {
         time: "3:20–4:00 PM",
@@ -245,47 +230,22 @@ function AgendaRowItem({ row, state }: { row: AgendaRow; state: RowState }) {
       <h4
         className={`mt-2 font-display text-xl font-semibold leading-snug ${titleColor}`}
       >
-        {row.title}
+        {row.titleHref ? (
+          <a
+            href={row.titleHref}
+            className="underline decoration-fire-400/50 decoration-1 underline-offset-4 transition-colors hover:text-fire-400 hover:decoration-fire-400 focus:outline-none focus-visible:text-fire-400"
+          >
+            {row.title}
+          </a>
+        ) : (
+          row.title
+        )}
       </h4>
 
       {row.body && (
         <p className={`mt-2 text-base leading-relaxed ${bodyColor}`}>
           {row.body}
         </p>
-      )}
-
-      {row.tracks && (
-        <ul className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
-          {row.tracks.map((track) => (
-            <li
-              key={track.label}
-              className="rounded-lg border border-steel-700 bg-steel-900/60 p-4"
-            >
-              <div className="flex flex-wrap items-center gap-2">
-                <RoomPill room={track.room} />
-                <span className="font-display text-xs font-semibold uppercase tracking-[0.18em] text-fire-400">
-                  {track.label}
-                </span>
-              </div>
-              <p
-                className={`mt-2 font-display text-base font-semibold ${
-                  isPast ? "text-steel-400" : "text-steel-100"
-                }`}
-              >
-                {track.title}
-              </p>
-              {track.note && (
-                <p
-                  className={`mt-1 text-sm leading-relaxed ${
-                    isPast ? "text-steel-400" : "text-steel-300"
-                  }`}
-                >
-                  {track.note}
-                </p>
-              )}
-            </li>
-          ))}
-        </ul>
       )}
     </li>
   );

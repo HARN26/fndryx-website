@@ -94,7 +94,9 @@
       "Bash(node -e \"try{require.resolve\\('sharp'\\);console.log\\('sharp: available'\\)}catch\\(e\\){console.log\\('sharp: NOT available'\\)}\")",
       "Bash(git add *)",
       "Bash(git commit -m 'Add Data317 as powered-by partner on /raise-right *)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "PowerShell(npm run build)",
+      "PowerShell(Get-CimInstance Win32_Process -Filter \"Name = 'node.exe'\" | Where-Object { $_.CommandLine -match 'next|fndryx' } | Select-Object ProcessId, CommandLine | Format-List)"
     ]
   }
 }

@@ -84,7 +84,7 @@ const panels: Panel[] = [
         person: "Kyle Middleton",
         role: "Chief Credit Officer",
       },
-      { firm: "Yorktown Essex Fund", person: "Casey Bolsega", role: "Sr. Manager" },
+      { firm: "Yorktown Fund", person: "Casey Bolsega", role: "Sr. Manager" },
     ],
   },
 ];
@@ -98,8 +98,80 @@ const reversePitch: FirmCard[] = [
   { firm: "Endeavor" },
   { firm: "Old National" },
   { firm: "JP Morgan" },
-  { firm: "Yorktown Essex Fund" },
+  { firm: "Yorktown Fund" },
   { firm: "Rams Head Funding" },
+];
+
+type Moderator = {
+  name: string;
+  headshot: string;
+};
+
+type Breakout = {
+  track: string;
+  room: string;
+  name: string;
+  description: string;
+  moderators: Moderator[];
+  inviteOnly?: boolean;
+};
+
+const breakouts: Breakout[] = [
+  {
+    track: "Track 1",
+    room: "Green Room",
+    name: "Fund Right",
+    description:
+      "For early-stage founders still building their funding strategy. Learn how to map the full capital landscape, structure your ask, and approach investors before you need them.",
+    moderators: [
+      { name: "Jessica O'Leary", headshot: "/images/raise-right/j_o_leary.jpg" },
+    ],
+  },
+  {
+    track: "Track 2",
+    room: "South Room",
+    name: "Market Right",
+    description:
+      "For mid-stage founders refining their market strategy and business model. Where you're going, how you'll get there, and whether the model holds up.",
+    moderators: [
+      {
+        name: "Patrick Tiettmeyer",
+        headshot: "/images/raise-right/p_tiettmeyer.jpg",
+      },
+    ],
+  },
+  {
+    track: "Track 3",
+    room: "15-Person Room",
+    name: "Scale Right",
+    description:
+      "For growth-stage founders focused on sustaining revenue. Move beyond founder-led sales and build the systems, team, and habits that turn early wins into durable, compounding growth.",
+    moderators: [
+      { name: "Ian Illig", headshot: "/images/raise-right/i_illig.jpg" },
+    ],
+  },
+  {
+    track: "Track 4",
+    room: "Theater",
+    name: "Partner Right",
+    description:
+      "For ecosystem partners, service providers, and community builders. How to show up, add value, and build relationships that move the needle for founders and the broader ecosystem.",
+    moderators: [
+      { name: "Casey Bolsega", headshot: "/images/raise-right/c_bolsega.jpg" },
+    ],
+  },
+  {
+    track: "Track 5",
+    room: "Bistro",
+    name: "Build Right",
+    description:
+      "An invitation-only session for ecosystem builders on both the industry and capital sides. Honest conversation, no decks. Just the people in the room and what it actually takes to build and fund companies in the region.",
+    inviteOnly: true,
+    moderators: [
+      { name: "Chris Heivly", headshot: "/images/raise-right/c_heivly.jpg" },
+      { name: "Ashley Bryan", headshot: "/images/raise-right/a_bryan.jpg" },
+    ],
+  },
 ];
 
 function FirmGrid({ items }: { items: FirmCard[] }) {
@@ -122,6 +194,73 @@ function FirmGrid({ items }: { items: FirmCard[] }) {
         </article>
       ))}
     </div>
+  );
+}
+
+// Mirrors the agenda room pill exactly: fire-500 fill, steel-900 text.
+const roomPill =
+  "inline-flex items-center rounded-full bg-fire-500 px-2.5 py-1 font-display text-[0.65rem] font-semibold uppercase tracking-wider text-steel-900";
+
+function ModeratorBlock({ moderators }: { moderators: Moderator[] }) {
+  const plural = moderators.length > 1;
+  return (
+    <div className="mt-2.5 flex items-center gap-4 border-t border-steel-700 pt-3">
+      <div className="flex flex-shrink-0 items-center gap-2">
+        {moderators.map((m) => (
+          <Image
+            key={m.name}
+            src={m.headshot}
+            alt={m.name}
+            width={80}
+            height={80}
+            className={`rounded-full object-cover ring-2 ring-steel-600 ${
+              plural ? "h-16 w-16 sm:h-20 sm:w-20" : "h-20 w-20"
+            }`}
+          />
+        ))}
+      </div>
+      <div className="min-w-0">
+        <p className="font-display text-xs font-semibold uppercase tracking-wider text-steel-400">
+          {plural ? "Moderators" : "Moderator"}
+        </p>
+        <p className="mt-0.5 text-lg font-semibold leading-snug text-steel-100">
+          {moderators.map((m) => m.name).join(", ")}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function BreakoutCard({ breakout }: { breakout: Breakout }) {
+  return (
+    <article className="flex flex-col rounded-2xl border border-steel-700 bg-steel-800 px-6 py-5">
+      <div className="flex items-start justify-between gap-2">
+        <p className="font-display text-xs font-semibold uppercase tracking-[0.18em] text-fire-400">
+          {breakout.track}
+        </p>
+        {breakout.inviteOnly && (
+          <span className="inline-flex items-center rounded-full border border-fire-400 px-2.5 py-0.5 font-display text-[0.6rem] font-semibold uppercase tracking-wider text-fire-400">
+            Invite-Only · 15 Seats
+          </span>
+        )}
+      </div>
+
+      <div className="mt-3">
+        <span className={roomPill}>{breakout.room}</span>
+      </div>
+
+      <h3 className="mt-3 font-display text-xl font-bold leading-snug text-steel-100">
+        {breakout.name}
+      </h3>
+
+      <p className="mt-3 text-sm leading-relaxed text-steel-200">
+        {breakout.description}
+      </p>
+
+      <div className="mt-auto">
+        <ModeratorBlock moderators={breakout.moderators} />
+      </div>
+    </article>
   );
 }
 
@@ -300,6 +439,32 @@ export default function RaiseRightPage() {
                   </p>
                 )}
               </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* BREAKOUTS */}
+      <section
+        id="breakouts"
+        aria-labelledby="rr-breakouts-heading"
+        className="scroll-mt-20 bg-steel-900 py-10 md:py-14"
+      >
+        <div className="mx-auto max-w-6xl px-6">
+          <p className={eyebrow}>Breakouts</p>
+          <h2
+            id="rr-breakouts-heading"
+            className="mt-4 font-display text-3xl font-extrabold leading-tight text-steel-100 md:text-4xl"
+          >
+            Five tracks. <span className="text-fire-400">One room each.</span>
+          </h2>
+          <p className="mt-4 font-body text-base text-steel-300">
+            2:00–3:15 PM · Attendees are placed in advance by track.
+          </p>
+
+          <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {breakouts.map((breakout) => (
+              <BreakoutCard key={breakout.track} breakout={breakout} />
             ))}
           </div>
         </div>
