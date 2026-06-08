@@ -9,6 +9,8 @@ type AgendaRow = {
   end: string;
   room?: string;
   title: string;
+  /** Secondary title line rendered just beneath the title (e.g. a keynote sub-theme). */
+  subtitle?: string;
   /** When set, the title renders as an in-page anchor link (e.g. "#breakouts"). */
   titleHref?: string;
   body?: string;
@@ -119,7 +121,8 @@ const agenda: AgendaSession[] = [
         start: "11:30",
         end: "12:10",
         room: "Theater",
-        title: 'Keynote: "Building the Fort"',
+        title: 'Keynote: "Today\'s Startup Community Leadership"',
+        subtitle: "Founders, Startups & Ecosystems",
         body: "Chris Heivly",
       },
       {
@@ -241,6 +244,14 @@ function AgendaRowItem({ row, state }: { row: AgendaRow; state: RowState }) {
           row.title
         )}
       </h4>
+
+      {row.subtitle && (
+        <p
+          className={`mt-1 font-display text-base font-medium leading-snug ${titleColor}`}
+        >
+          {row.subtitle}
+        </p>
+      )}
 
       {row.body && (
         <p className={`mt-2 text-base leading-relaxed ${bodyColor}`}>
