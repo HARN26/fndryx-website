@@ -53,6 +53,7 @@ type FirmCard = {
   person?: string;
   role?: string;
   headshot?: string;
+  logo?: string;
 };
 
 type Panel = {
@@ -127,16 +128,34 @@ const panels: Panel[] = [
 ];
 
 const reversePitch: FirmCard[] = [
-  { firm: "Elevate Ventures" },
-  { firm: "Crossroads Health Ventures" },
-  { firm: "Plug and Play" },
-  { firm: "Orange.fund" },
-  { firm: "Generations Community Bank" },
-  { firm: "Endeavor" },
-  { firm: "Old National" },
-  { firm: "JP Morgan" },
-  { firm: "Yorktown Fund" },
-  { firm: "Rams Head Funding" },
+  {
+    firm: "Elevate Ventures",
+    logo: "/images/raise-right/elevate_ventures_inc_logo.png",
+  },
+  {
+    firm: "Crossroads Health Ventures",
+    logo: "/images/raise-right/crossroads_health_ventures_logo.png",
+  },
+  { firm: "Plug and Play", logo: "/images/raise-right/pnp-logo.svg" },
+  { firm: "Orange.fund", logo: "/images/raise-right/orangefund_logo.png" },
+  {
+    firm: "Generations Community Bank",
+    logo: "/images/raise-right/generationscommunitybank_logo.png",
+  },
+  { firm: "Endeavor", logo: "/images/raise-right/endeavorglobal_logo.png" },
+  {
+    firm: "Old National",
+    logo: "/images/raise-right/old_national_bank_logo.png",
+  },
+  { firm: "JP Morgan", logo: "/images/raise-right/jpmorganchase_logo.png" },
+  {
+    firm: "Yorktown Fund",
+    logo: "/images/raise-right/yorktown_fund_logo.png",
+  },
+  {
+    firm: "Rams Head Funding",
+    logo: "/images/raise-right/rams_head_funding_logo.png",
+  },
 ];
 
 type Moderator = {
@@ -228,25 +247,51 @@ function FirmGrid({ items }: { items: FirmCard[] }) {
             )}
           </div>
         );
+        let body;
+        if (item.headshot) {
+          body = (
+            <div className="flex items-center gap-3 sm:gap-4">
+              <Image
+                src={item.headshot}
+                alt={item.person ?? item.firm}
+                width={80}
+                height={80}
+                className="h-20 w-20 flex-shrink-0 rounded-full object-cover ring-2 ring-steel-600"
+              />
+              {text}
+            </div>
+          );
+        } else if (item.logo) {
+          body = (
+            <div className="flex w-full flex-col">
+              {/* White pill frames every logo on a consistent base. Keyed
+                  logos melt in; colored brand tiles sit centered with
+                  breathing room (px-4 py-3 ≈ 12–16px) inside object-contain. */}
+              <div className="flex h-16 w-full items-center justify-center rounded-lg bg-white px-4 py-3">
+                <Image
+                  src={item.logo}
+                  alt={item.firm}
+                  width={200}
+                  height={200}
+                  // SVG bypasses the image optimizer (which blocks SVG by
+                  // default); served straight from /public. PNGs optimize.
+                  unoptimized={item.logo.endsWith(".svg")}
+                  className="h-full w-full object-contain"
+                />
+              </div>
+              <div className="mt-4 text-center">{text}</div>
+            </div>
+          );
+        } else {
+          body = <div className="flex flex-col">{text}</div>;
+        }
+
         return (
           <article
             key={`${item.firm}-${i}`}
             className="flex h-full rounded-2xl border border-steel-700 bg-steel-800 p-6"
           >
-            {item.headshot ? (
-              <div className="flex items-center gap-3 sm:gap-4">
-                <Image
-                  src={item.headshot}
-                  alt={item.person ?? item.firm}
-                  width={80}
-                  height={80}
-                  className="h-20 w-20 flex-shrink-0 rounded-full object-cover ring-2 ring-steel-600"
-                />
-                {text}
-              </div>
-            ) : (
-              <div className="flex flex-col">{text}</div>
-            )}
+            {body}
           </article>
         );
       })}
