@@ -175,7 +175,7 @@ const agenda: AgendaSession[] = [
         end: "16:00",
         room: "Theater",
         title: "Fast-Track Reverse Pitches",
-        body: "10 capital investors. Strict 3-minute pitch + 1-minute transition.",
+        body: "11 capital investors. Strict 3-minute pitch + 1-minute transition.",
       },
       {
         time: "4:00–5:00 PM",

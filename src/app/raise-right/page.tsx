@@ -184,6 +184,10 @@ const reversePitch: FirmCard[] = [
     firm: "Rams Head Funding",
     logo: "/images/raise-right/rams_head_funding_logo.png",
   },
+  {
+    firm: "Old National",
+    logo: "/images/raise-right/old_national_bank_logo.png",
+  },
 ];
 
 type Moderator = {
@@ -653,7 +657,7 @@ export default function RaiseRightPage() {
             </span>
           </h2>
           <p className="mt-4 max-w-3xl font-body text-lg leading-relaxed text-steel-200">
-            Fast-Track Reverse Pitches — 10 capital investors. Strict 3-minute
+            Fast-Track Reverse Pitches — 11 capital investors. Strict 3-minute
             pitch + 1-minute transition.
           </p>
           <FirmGrid items={reversePitch} />
