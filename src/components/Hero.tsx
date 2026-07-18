@@ -25,7 +25,7 @@ export default function Hero() {
         <Logo size={{ base: "lg", md: "xl" }} variant="dark" />
 
         <p className="mx-auto mt-6 max-w-2xl font-body text-sm uppercase tracking-widest text-steel-400">
-          The capital-readiness exchange — where every founder signal compounds over time.
+          Capital-readiness infrastructure — every founder signal, compounding over time.
         </p>
 
         <h1 className="mx-auto mt-12 max-w-5xl font-display font-extrabold text-3xl md:text-4xl lg:text-5xl leading-tight text-steel-100">
@@ -34,10 +34,10 @@ export default function Hero() {
         </h1>
 
         <p className="mx-auto mt-8 max-w-2xl font-body text-lg text-steel-400">
-          FNDRYx is the exchange layer that turns founder signals into{" "}
-          <span className="text-fire-400">compounding capital-readiness records</span> —{" "}
-          <span className="text-fire-400">measurement infrastructure</span> between
-          founders and <span className="text-fire-400">capital</span>.
+          FNDRYx is{" "}
+          <span className="text-fire-400">the evaluation layer between founders and capital</span>{" "}
+          — turning founder signals into a{" "}
+          <span className="text-fire-400">compounding capital-readiness record</span>.
         </p>
 
         <div className="mt-10">

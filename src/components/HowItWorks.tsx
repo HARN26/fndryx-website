@@ -15,7 +15,7 @@ const steps: Step[] = [
       <>
         Founders complete the Capital Readiness Assessment — twenty-six questions
         across five dimensions in roughly fifteen minutes, producing two scores:
-        Building Readiness (BR) and Investor Readiness (IR).
+        Business Readiness (BR) and Investment Readiness (IR).
       </>
     ),
     badge: "Free for Founders",

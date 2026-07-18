@@ -38,9 +38,9 @@ export default function Audiences() {
               <span className="text-fire-400">Capital Readiness Assessment</span>{" "}
               — twenty-six questions across five dimensions, producing two
               scores:{" "}
-              <span className="text-fire-400">Building Readiness</span> (what
+              <span className="text-fire-400">Business Readiness</span> (what
               you&apos;ve built) and{" "}
-              <span className="text-fire-400">Investor Readiness</span> (how you
+              <span className="text-fire-400">Investment Readiness</span> (how you
               tell it). The gap between them is its own signal.{" "}
               <span className="text-fire-400">No warm intro required.</span> A
               14-day pulse keeps your readiness current; when your score crosses

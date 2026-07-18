@@ -10,7 +10,7 @@ import { parseTitleAccents } from "@/lib/title-utils";
 export const metadata: Metadata = {
   title: "Journal",
   description:
-    "Short notes from the FNDRYx team on capital-readiness, founder signals, and exchange infrastructure.",
+    "Short notes from the FNDRYx team on capital-readiness, founder signals, and capital-readiness infrastructure.",
 };
 
 function formatDate(iso: string): string {
@@ -49,7 +49,7 @@ export default async function BlogIndexPage() {
           </h1>
           <p className="mt-4 max-w-2xl text-lg text-steel-400">
             Articles, announcements, and field notes from the FNDRYx team on
-            capital-readiness, founder signals, and exchange infrastructure.
+            capital-readiness, founder signals, and capital-readiness infrastructure.
           </p>
 
           <a

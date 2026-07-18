@@ -25,7 +25,7 @@ const playfair = Playfair_Display({
 });
 
 const SITE_URL = "https://fndryx.io";
-const SITE_TITLE = "FNDRYx — The Capital-Readiness Exchange";
+const SITE_TITLE = "FNDRYx — Capital-Readiness Infrastructure";
 const SITE_DESCRIPTION =
   "FNDRYx is the evaluation layer between founders and capital. Twenty-six questions, five dimensions, deterministic scoring. Free for founders.";
 
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     "founder forge",
     "venture capital",
     "startup funding",
-    "capital exchange",
+    "capital readiness infrastructure",
     "investor matching",
   ],
   authors: [{ name: "FNDRYx" }],
@@ -93,7 +93,7 @@ const jsonLd = {
       "@id": "https://fndryx.io/#website",
       url: "https://fndryx.io",
       name: "FNDRYx",
-      description: "The Capital-Readiness Exchange",
+      description: "Capital-readiness infrastructure — the evaluation layer between founders and capital",
       publisher: { "@id": "https://fndryx.io/#organization" },
       inLanguage: "en-US",
     },

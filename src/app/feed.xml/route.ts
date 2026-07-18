@@ -45,7 +45,7 @@ export async function GET() {
   <channel>
     <title>FNDRYx Journal</title>
     <link>${BLOG_URL}</link>
-    <description>Short notes from the FNDRYx team on capital-readiness, founder signals, and exchange infrastructure.</description>
+    <description>Short notes from the FNDRYx team on capital-readiness, founder signals, and capital-readiness infrastructure.</description>
     <language>en-US</language>
     <lastBuildDate>${lastBuildDate}</lastBuildDate>
     <atom:link href="${FEED_URL}" rel="self" type="application/rss+xml" />

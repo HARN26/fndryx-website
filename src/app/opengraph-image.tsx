@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 import { readFile } from "node:fs/promises";
 
-export const alt = "FNDRYx — The Capital-Readiness Exchange";
+export const alt = "FNDRYx — Capital-Readiness Infrastructure";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -137,7 +137,7 @@ export default async function Image() {
             textTransform: "uppercase",
           }}
         >
-          The Capital-Readiness Exchange
+          Capital-Readiness Infrastructure
         </div>
       </div>
     ),
