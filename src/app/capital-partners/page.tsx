@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   title: "For Capital Providers",
   description:
-    "Scored deal flow filtered against your stated thesis. Six-criterion match explanations. Deterministic scoring, no black box.",
+    "Founder readiness verified against source documents — financials analyzed at the source, deterministic scoring. Thesis-matched deal flow opening to a founding cohort.",
 };
 
 const ctaLinkClass =
@@ -63,19 +63,19 @@ type Capability = {
 
 const capabilities: Capability[] = [
   {
-    title: "Deal Flow Feed",
+    title: "Secure Data Room",
     body:
-      "Scored matches against your stated thesis, ranked. Stage, industry, geography, business model, revenue model, and check-size filtering. Sort by score, by stage, by recency.",
+      "Founders deposit bank statements, financials, and business documents into an encrypted data room. The readiness record is built on primary evidence — not a deck's summary of it.",
   },
   {
-    title: "Match Explanations",
+    title: "Source-Document Verification",
     body:
-      "Every match exposes its six-criterion breakdown. See exactly why a founder appears in your feed — and why the score is what it is. No opaque ranking, no proprietary recommendation engine to take on faith.",
+      "The financial-analysis engine checks each founder's stated numbers against their uploaded documents — a revenue or retention claim confirmed against the actual statements before it ever reaches your thesis. For a lean firm, a solo angel, or a syndicate running an SPV, it's institutional-grade diligence without an institutional diligence team.",
   },
   {
-    title: "Direct Meeting Requests",
+    title: "Diligence-Grade KPIs",
     body:
-      "Inline meeting request from each match card. Status tracking when founders accept, decline, or counter. Activity log of your own engagement. Thesis updates recompute matches.",
+      "Calculated, verified metrics drawn straight from the source financials — the revenue, retention, and unit-economics numbers your underwriting turns on, validated at deposit rather than taken on trust.",
   },
 ];
 
@@ -106,27 +106,25 @@ export default function CapitalPartnersPage() {
               className="max-w-4xl font-display font-extrabold text-3xl md:text-4xl lg:text-5xl leading-tight text-steel-100"
             >
               <span className="font-serif italic font-normal text-fire-400">
-                Scored deal flow
+                The readiness record
               </span>{" "}
-              filtered against{" "}
+              —{" "}
               <span className="font-serif italic font-normal text-fire-400">
-                your stated thesis
+                verified against source documents
               </span>
-              .
+              , not self-reported.
             </h1>
             <p className="mt-8 max-w-3xl font-body text-lg leading-relaxed text-steel-200">
-              Each match shows its full{" "}
-              <span className="text-fire-400">six-criterion breakdown</span>.
-              Scoring is{" "}
-              <span className="text-fire-400">deterministic</span> — no{" "}
-              <span className="text-fire-400">black box</span>, no
-              pattern-matching, no warm-intro dependency. The platform is
-              infrastructure for capital providers who want to operate on
-              signal, not noise.
+              When a founder reports a number, it&apos;s checked against their
+              actual financials — bank statements and business documents in a{" "}
+              <span className="text-fire-400">secure data room</span>, analyzed
+              at the source. Deterministic scoring, verified inputs,{" "}
+              <span className="text-fire-400">no figures taken on faith</span>.
+              Thesis-matched deal flow opens to a founding cohort next.
             </p>
             <div className="mt-10">
               <Link href={FORM_HREF} className={ctaLinkClass}>
-                Request Access
+                Request Founding Access
               </Link>
             </div>
           </div>
@@ -153,13 +151,13 @@ export default function CapitalPartnersPage() {
             <p className="max-w-3xl text-lg leading-relaxed text-steel-200">
               When a founder completes the{" "}
               <span className="text-fire-400">Capital Readiness Assessment</span>
-              , <span className="text-fire-400">deterministic scoring</span>{" "}
-              places them on the readiness map. The matching engine then
-              compares each founder against your stated thesis along six
-              criteria. When the composite match score crosses the threshold,
-              that founder surfaces in your feed — with the full{" "}
-              <span className="text-fire-400">criterion-level breakdown</span>{" "}
-              attached, not buried.
+              , deterministic scoring places them on the readiness map. The
+              matching engine compares each founder against a stated thesis
+              along six criteria, and when the composite score crosses the
+              threshold, that founder is a match — carrying the full{" "}
+              <span className="text-fire-400">criterion-level breakdown</span>,
+              not a bare rank. As the founding cohort opens, those matches
+              surface in your feed.
             </p>
 
             <div className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -186,14 +184,14 @@ export default function CapitalPartnersPage() {
           </div>
         </section>
 
-        {/* SECTION C — What you get */}
+        {/* SECTION C — Live Now */}
         <section
           aria-labelledby="cp-platform-heading"
           className="bg-steel-900 py-24 md:py-32"
         >
           <div className="mx-auto max-w-6xl px-6">
             <p className="mb-4 font-display text-xs uppercase tracking-[0.2em] text-fire-400">
-              What You Get
+              Live Now
             </p>
             <h2
               id="cp-platform-heading"
@@ -274,6 +272,15 @@ export default function CapitalPartnersPage() {
                 will be published when the cohort opens. To be notified at
                 launch, request access below.
               </p>
+              <p>
+                At launch, the founding cohort gets the delivery layer: a
+                thesis-filtered deal-flow feed you can sort by score, stage, and
+                recency; the six-criterion breakdown behind every match; and
+                inline meeting requests with status tracking. Thesis updates
+                recompute your matches. Founders who fund route their outcomes
+                back into the record — closing the loop between who you backed
+                and how they scored.
+              </p>
             </div>
 
             <div className="mt-10">
@@ -314,7 +321,7 @@ export default function CapitalPartnersPage() {
               (Forged, Tempering, Hot Iron, Ore) maps the founder onto the
               BR/IR plane. Reports are anchored to the same underlying score
               data — narrative generation runs separately from scoring, and
-              that distinction is structural. What you see in your feed is{" "}
+              that distinction is structural. The record is{" "}
               <span className="text-fire-400">signal, not interpretation</span>.
             </p>
           </div>
