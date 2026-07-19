@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: "For Capital Providers",
   description:
     "Founder readiness verified against source documents — financials analyzed at the source, deterministic scoring. Thesis-matched deal flow opening to a founding cohort.",
+  robots: { index: false, follow: false },
 };
 
 const ctaLinkClass =
