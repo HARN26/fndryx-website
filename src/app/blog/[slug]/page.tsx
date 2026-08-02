@@ -26,6 +26,13 @@ export async function generateMetadata({
   if (!post) return {};
 
   const plainTitle = stripTitleAccents(post.frontmatter.title);
+  const { coverImage, coverAlt } = post.frontmatter;
+
+  // Relative paths resolve against `metadataBase` in the root layout, which
+  // emits the fully qualified https://fndryx.io/... URL social crawlers need.
+  const socialImages = coverImage
+    ? [{ url: coverImage, width: 1200, height: 630, alt: coverAlt ?? plainTitle }]
+    : undefined;
 
   return {
     title: plainTitle,
@@ -36,11 +43,13 @@ export async function generateMetadata({
       type: "article",
       publishedTime: post.frontmatter.date,
       authors: [post.frontmatter.author],
+      ...(socialImages ? { images: socialImages } : {}),
     },
     twitter: {
       card: "summary_large_image",
       title: plainTitle,
       description: post.frontmatter.excerpt,
+      ...(socialImages ? { images: socialImages } : {}),
     },
   };
 }
@@ -85,7 +94,10 @@ export default async function BlogPostPage({
               <>
                 <Image
                   src={post.frontmatter.coverImage}
-                  alt={stripTitleAccents(post.frontmatter.title)}
+                  alt={
+                    post.frontmatter.coverAlt ??
+                    stripTitleAccents(post.frontmatter.title)
+                  }
                   width={2400}
                   height={1260}
                   sizes="(min-width: 768px) 768px, 100vw"

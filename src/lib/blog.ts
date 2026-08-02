@@ -12,6 +12,7 @@ export type PostFrontmatter = {
   author: string;
   excerpt: string;
   coverImage?: string;
+  coverAlt?: string;
   tags?: string[];
   draft?: boolean;
 };
