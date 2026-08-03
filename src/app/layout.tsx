@@ -37,12 +37,14 @@ export const metadata: Metadata = {
   },
   description: SITE_DESCRIPTION,
   keywords: [
-    "capital-readiness",
-    "founder forge",
+    "capital readiness",
     "venture capital",
     "startup funding",
     "capital readiness infrastructure",
-    "investor matching",
+    "investment readiness",
+    "business readiness",
+    "startup readiness assessment",
+    "founder readiness record",
   ],
   authors: [{ name: "FNDRYx" }],
   openGraph: {

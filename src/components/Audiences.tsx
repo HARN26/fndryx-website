@@ -35,9 +35,10 @@ export default function Audiences() {
               <span className="text-fire-400">Investment Readiness</span> (how you
               tell it). The gap between them is its own signal.{" "}
               <span className="text-fire-400">No warm intro required.</span> A
-              14-day pulse keeps your readiness current; when your score crosses
-              the <span className="text-fire-400">matching threshold</span>, you
-              surface to capital providers whose stated thesis fits.
+              recurring pulse keeps your readiness current; as your record
+              builds, it becomes{" "}
+              <span className="text-fire-400">visible to capital partners</span>{" "}
+              evaluating founders at your stage.
             </p>
             <div aria-hidden className={decoWrapperClass}>
               <span

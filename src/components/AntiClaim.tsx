@@ -29,12 +29,13 @@ export default function AntiClaim() {
           <span className="text-fire-400">Capital Readiness Assessment</span>{" "}
           scores your readiness across{" "}
           <span className="text-fire-400">five dimensions of capital readiness</span>
-          ; a 14-day pulse keeps that score current. When you cross the{" "}
-          <span className="text-fire-400">matching threshold</span>, you surface
-          to capital providers whose stated thesis fits — but the introduction
-          is theirs to make, not ours to promise. And the assessment is{" "}
+          ; a recurring pulse keeps that score current. As your record builds,
+          it becomes{" "}
+          <span className="text-fire-400">visible to capital partners</span>{" "}
+          evaluating founders at your stage — but the introduction is theirs to
+          make, not ours to promise. And the assessment is{" "}
           <span className="text-fire-400">free for founders</span> — structural
-          to how the exchange works, not a promotion.
+          to how the evaluation layer works, not a promotion.
         </p>
       </div>
     </section>

@@ -28,23 +28,23 @@ const steps: Step[] = [
         Deterministic scoring assigns a quadrant placement (Forged, Tempering,
         Hot Iron, or Ore) and surfaces the gap between{" "}
         <span className="text-fire-400">BR and IR</span> — itself a meaningful
-        signal. A 14-day pulse keeps your readiness current.
+        signal. A recurring pulse keeps your readiness current.
       </>
     ),
     badge: "Scored on Submission",
   },
   {
     number: "03",
-    title: "Route",
+    title: "Surface",
     body: (
       <>
-        When a founder&apos;s score crosses the{" "}
-        <span className="text-fire-400">matching threshold</span>, scored matches
-        surface to capital providers whose thesis fits — with full six-criterion
-        breakdowns, not warm intros.
+        Your readiness record becomes{" "}
+        <span className="text-fire-400">visible to capital partners</span> — the
+        full picture across five dimensions, updated as you progress, not a
+        snapshot from the day you filled out a form.
       </>
     ),
-    badge: "Scored Matching",
+    badge: "Capital Access",
   },
 ];
 

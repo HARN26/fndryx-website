@@ -57,8 +57,8 @@ function founderEmail(fullName: string) {
     <p style="margin:0 0 12px 0;color:#f1f5f9;font-weight:600;">What happens next:</p>
     <ol style="margin:0 0 24px 0;padding-left:20px;">
       <li style="margin-bottom:8px;">You complete the assessment and receive two scores: <strong style="color:#f1f5f9;">Business Readiness (BR)</strong> and <strong style="color:#f1f5f9;">Investment Readiness (IR)</strong>. The gap between them is its own signal.</li>
-      <li style="margin-bottom:8px;">A 14-day pulse keeps your readiness current; your score history compounds across reassessments.</li>
-      <li style="margin-bottom:8px;">When your score crosses the <strong style="color:#f1f5f9;">matching threshold</strong>, you surface to capital providers whose stated thesis fits — but the introduction is theirs to make, not ours to promise. FNDRYx is <strong style="color:#f1f5f9;">measurement infrastructure, not a placement service</strong>.</li>
+      <li style="margin-bottom:8px;">A recurring pulse keeps your readiness current; your score history compounds across reassessments.</li>
+      <li style="margin-bottom:8px;">As your record builds, it becomes <strong style="color:#f1f5f9;">visible to capital partners</strong> evaluating founders at your stage — but the introduction is theirs to make, not ours to promise. FNDRYx is <strong style="color:#f1f5f9;">measurement infrastructure, not a placement service</strong>.</li>
     </ol>
     <p style="margin:0 0 20px 0;">Questions? Just reply to this email.</p>
     <p style="margin:0;color:#f97316;font-weight:600;">— The FNDRYx team</p>
@@ -71,8 +71,8 @@ Our team is reviewing your request. Within 48 hours, you'll receive a direct lin
 
 What happens next:
 1. You complete the assessment and receive two scores: Business Readiness (BR) and Investment Readiness (IR). The gap between them is its own signal.
-2. A 14-day pulse keeps your readiness current; your score history compounds across reassessments.
-3. When your score crosses the matching threshold, you surface to capital providers whose stated thesis fits — but the introduction is theirs to make, not ours to promise. FNDRYx is measurement infrastructure, not a placement service.
+2. A recurring pulse keeps your readiness current; your score history compounds across reassessments.
+3. As your record builds, it becomes visible to capital partners evaluating founders at your stage — but the introduction is theirs to make, not ours to promise. FNDRYx is measurement infrastructure, not a placement service.
 
 Questions? Just reply to this email.
 
@@ -90,7 +90,7 @@ function capitalEmail(fullName: string) {
     <p style="margin:0 0 20px 0;">Thanks for your interest in the <strong style="color:#f1f5f9;">FNDRYx platform</strong>.</p>
     <p style="margin:0 0 12px 0;">Our team will reach out within 48 hours with next steps, including:</p>
     <ul style="margin:0 0 24px 0;padding-left:20px;">
-      <li style="margin-bottom:8px;">Scored deal flow filtered against your stated thesis, with six-criterion match explanations and deterministic scoring</li>
+      <li style="margin-bottom:8px;">Founder readiness records — five dimensions, deterministic scoring, with the full breakdown behind every score rather than a bare rank</li>
       <li style="margin-bottom:8px;">How to refer founders directly into the Capital Readiness Assessment</li>
       <li style="margin-bottom:8px;">Capital provider onboarding</li>
     </ul>
@@ -103,7 +103,7 @@ function capitalEmail(fullName: string) {
 Thanks for your interest in the FNDRYx platform.
 
 Our team will reach out within 48 hours with next steps, including:
-- Scored deal flow filtered against your stated thesis, with six-criterion match explanations and deterministic scoring
+- Founder readiness records — five dimensions, deterministic scoring, with the full breakdown behind every score rather than a bare rank
 - How to refer founders directly into the Capital Readiness Assessment
 - Capital provider onboarding
 
