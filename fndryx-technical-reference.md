@@ -10,7 +10,7 @@ Next.js marketing site for FNDRYx.io — "The capital-readiness exchange" for fo
 - **Hosting:** Vercel (auto-deploys on git push to main)
 - **Production URL:** https://fndryx.io (canonical)
 - **Vercel preview:** https://fndryx-website-brpv.vercel.app
-- **Vercel project name:** `fndryx-website-brpv` (the `fndryx-website` project in Vercel is empty/unused — safe to delete)
+- **Vercel project name:** `fndryx-website-brpv` — the only Vercel project deploying this repo; serves fndryx.io and www.fndryx.io. A duplicate `fndryx-website` project (also git-connected, building every push to `.vercel.app` only) was deleted 2026-10-07. Do not rename `-brpv`: renaming changes its `.vercel.app` URL.
 - **Node version:** 20+
 - **Package manager:** npm
 

@@ -72,7 +72,7 @@
 - [ ] Submit `https://fndryx.io/sitemap.xml` to Google Search Console (verify ownership via DNS TXT record at Squarespace)
 - [ ] Update LinkedIn FNDRYx company page → website URL = `https://fndryx.io`
 - [ ] After 24–48hrs of stability, cancel Squarespace **hosting** subscription (registration stays — Squarespace remains the registrar)
-- [ ] Delete the lingering empty `fndryx-website` (non-brpv) Vercel project to avoid future confusion
+- [x] Delete the lingering `fndryx-website` (non-brpv) Vercel project — deleted 2026-10-07. It was not empty: it was git-connected and built every push to its `.vercel.app` URL only. `fndryx-website-brpv` is now the only project deploying this repo and serves fndryx.io / www.fndryx.io.
 
 ## Deferred Items (intentional)
 
