@@ -8,7 +8,11 @@ import Footer from "@/components/Footer";
 import { getAllSlugs, getPostBySlug } from "@/lib/blog";
 import { mdxComponents } from "@/components/blog/MdxComponents";
 import { parseTitleAccents, stripTitleAccents } from "@/lib/title-utils";
-import { baseOpenGraph, rssAlternateTypes } from "@/lib/shared-metadata";
+import {
+  baseOpenGraph,
+  baseTwitter,
+  rssAlternateTypes,
+} from "@/lib/shared-metadata";
 
 type RouteParams = { slug: string };
 
@@ -53,7 +57,7 @@ export async function generateMetadata({
       ...(socialImages ? { images: socialImages } : {}),
     },
     twitter: {
-      card: "summary_large_image",
+      ...baseTwitter,
       title: plainTitle,
       description: post.frontmatter.excerpt,
       ...(socialImages ? { images: socialImages } : {}),

@@ -11,6 +11,13 @@ export const baseOpenGraph = {
   locale: "en_US",
 };
 
+// Same rules for `twitter`: site-wide fields only, and never `images`.
+// twitter:title/description fall back to og:title/description, then to the
+// page's own title/description.
+export const baseTwitter = {
+  card: "summary_large_image" as const,
+};
+
 export const rssAlternateTypes = {
   "application/rss+xml": [
     { url: "https://fndryx.io/feed.xml", title: "FNDRYx Journal" },

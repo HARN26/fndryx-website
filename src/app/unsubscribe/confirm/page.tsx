@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import UnsubscribeForm from "@/components/UnsubscribeForm";
 
 export const metadata: Metadata = {
-  title: "Unsubscribe · FNDRYx",
+  title: "Unsubscribe",
   robots: { index: false, follow: false },
 };
 

@@ -119,6 +119,23 @@
 
 _New entries added here as updates ship after migration, most recent first._
 
+### October 22, 2026 — Shared Twitter base + doubled title suffix fixed
+
+**Twitter metadata.**
+- The root layout's `twitter` carried the homepage title and description, so every page that didn't set its own `twitter` (including `/blog` and `/privacy`) emitted the homepage's `twitter:title`/`twitter:description`.
+- `src/lib/shared-metadata.ts` now also exports `baseTwitter` (`card: "summary_large_image"`, the only site-wide twitter field the site sets; no `site`/`creator` handle exists). The layout's `twitter` is now just `baseTwitter`. Blog posts spread it into their own `twitter`. No `images` in the base, for the same reason as `baseOpenGraph`.
+- With nothing page-specific in the layout, Next fills `twitter:title`/`twitter:description` from the page's og:title/description, falling back to its own `title`/`description`. `/blog` now shows "Journal — FNDRYx" and its own description, and `/privacy` shows "Privacy Policy — FNDRYx" and its own description.
+- **No twitter-image re-exports were needed.** `/blog` and `/privacy` don't set their own `twitter`, so they still inherit the root `twitter-image` route (verified in the build: `https://fndryx.io/twitter-image?…`, a 1200×630 PNG). Blog posts keep their cover image as `twitter:image`. A page that *does* set its own `twitter` without `images` gets its og:image instead (Next's autofill), not the root twitter-image.
+
+**Doubled title suffix.**
+- `/accelerators` (`"For Accelerators — FNDRYx"`) and `/unsubscribe/confirm` (`"Unsubscribe · FNDRYx"`) hard-coded the suffix, and the root `%s — FNDRYx` template added it again. Titles are now `"For Accelerators"` and `"Unsubscribe"`, rendering "For Accelerators — FNDRYx" and "Unsubscribe — FNDRYx".
+- `/privacy` moved off `title.absolute` "Privacy Policy | FNDRYx" to plain `"Privacy Policy"`, so the template renders "Privacy Policy — FNDRYx" like every other page. Its og:title and twitter:title aren't set explicitly and follow the page title, so all three now read "Privacy Policy — FNDRYx".
+- Audited every built route's `<title>`: each carries the suffix once, in the same "— FNDRYx" form.
+
+**Lessons / notes:**
+- Page `title` strings never include "FNDRYx"; the root template adds it. No page uses `title.absolute` any more; it bypasses the template, so reach for it only when a title must differ from the house form.
+- `/unsubscribe/confirm` and the 404 page set no `description`, so they still inherit the homepage description, including in `twitter:description`. Both are `noindex`.
+
 ### October 22, 2026 — Per-page og:url + shared Open Graph base; /unsubscribe/confirm noindexed
 
 **The problem.** Same shallow-merge shape as the canonical fix below. The root layout's `openGraph` carried the homepage's `url`, `title`, and `description`, so `/blog` and `/privacy` emitted `og:url` = `https://fndryx.io` and the homepage's og:title/description. Blog posts set their own `openGraph`, which replaced the layout's whole object, so they had no `og:url`, `og:site_name`, or `og:locale`.

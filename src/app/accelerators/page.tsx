@@ -4,7 +4,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "For Accelerators — FNDRYx",
+  title: "For Accelerators",
   description:
     "Cohort-level impact measurement that holds up to LP scrutiny. Pre/post assessment with normalized delta scoring, multi-organization tenancy, and a defensible numerical answer to what the program did.",
   robots: { index: false, follow: false },

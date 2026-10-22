@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import { baseOpenGraph } from "@/lib/shared-metadata";
 
 export const metadata: Metadata = {
-  title: { absolute: "Privacy Policy | FNDRYx" },
+  title: "Privacy Policy",
   description:
     "How FNDRYx collects, uses, shares, and protects personal information.",
   alternates: {
