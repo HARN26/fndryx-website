@@ -1,0 +1,159 @@
+---
+title: "A Fact About a *Place*"
+slug: "a-fact-about-a-place"
+date: "2026-08-14"
+author: "Kevin Harnist"
+excerpt: "M25's 2026 Midwest city rankings are the best instrument the region has for the question they ask. Read the published scores closely and you can see exactly where a place-level instrument reaches its resolution limit — a measurement floor, a state-level lever, and a ceiling. None of those are flaws. They are the boundary of the unit of observation. Capital allocating against a founder needs a different one."
+tags: ["capital", "measurement", "midwest", "ecosystem-data", "data-layer"]
+draft: true
+---
+
+In June 2026, a state board in Indiana voted to wind down a fund.
+
+By the time the Midwest's best-known startup city rankings published two months later, Evansville had fallen 17 places — the largest drop anywhere in the rankings. Bloomington fell 11. Fort Wayne 8. South Bend 6. Lafayette 3. Indianapolis moved from #3 to a tied #5. Every Indiana city tracked moved down or was flat, and four of the eight largest fallers region-wide were Indiana cities.
+
+No founder in any of those cities did anything differently.
+
+That sentence is not a criticism of the rankings. It is a description of what a place-level instrument is *for*, and it is the most useful thing a capital allocator can take from this year's edition.
+
+---
+
+## The instrument
+
+Midwest Startups, presented by M25, published its **2026 Best of the Midwest: Startup City Rankings** on 2026-08-11, written by Victor Gutwein of M25. It is the tenth annual edition. It scores 64 cities at the core-based statistical area level, with a data cutoff of 2026-06-30. The footprint spans 15 states — Iowa, Illinois, Indiana, Kansas, Kentucky, Michigan, Minnesota, Missouri, Nebraska, North Dakota, Ohio, Pennsylvania, South Dakota, West Virginia and Wisconsin — which is why Pittsburgh and Wheeling sit inside M25's Midwest. *(FNDRYx computation: distinct states in the published file.)*
+
+The structure is 23 underlying weighted variables drawn from more than a dozen sources, pooled into three weighted categories: Startup Activity at 45.5%, Access to Resources at 37%, and Business Climate at 17.5%. Startup and investor data comes from PitchBook, and has since 2018. The rest is assembled from the US Census, USPTO, the SBA, BLS, BEA, the Tax Foundation, the National Digital Inclusion Alliance, individual state websites, and others.
+
+Two things about the methodology matter before any number in it can be read correctly.
+
+The first is that M25 states plainly the rankings are **relative**: a city can improve in absolute terms and still fall in rank, because its peers improved faster. The second is that the scores are **absolute-anchored and comparable year over year**, not normalized within the ranking year. M25's own evidence for this is Ann Arbor, whose Startup Density score fell from 64 last year to 37 this year and whose Startup Momentum fell from 46.7 to 17.1 — while Ann Arbor remains the region's top density city.
+
+That second property has a consequence M25 does not need to spell out but which changes how the file reads. If the scale is absolute rather than rank-normalized, then a cell value of `0.0` is not a bottom-place finish. It is a **measured absence** — for the PitchBook-sourced variables, an event count of zero.
+
+Everything below follows from that.
+
+I want to be exact about provenance, because this is the kind of analysis that goes wrong when it gets vague. Facts attributed to M25 below are published by M25. Facts labelled as FNDRYx computation are our own arithmetic over M25's published city-scores file — they are FNDRYx analysis of published M25 data, not M25 findings, and I have said which is which every time.
+
+---
+
+## The floor
+
+Across the full grid — 23 variables by 64 cities — **235 of 1,472 score cells are exactly 0.0**. That is 16.0% of the dataset. *(FNDRYx computation from the published scores: count of cells equal to 0.0.)*
+
+The absence is not evenly spread. Computing the share of cities scoring exactly 0.0 on each variable:
+
+| Variable | Cities at 0.0 | Share of 64 |
+|---|---|---|
+| Big Outcomes | 34 | 53% |
+| Exits | 32 | 50% |
+| Exit Propensity | 32 | 50% |
+| Big Companies | 31 | 48% |
+| Accelerators / Incubators | 27 | 42% |
+| University Ecosystem | 24 | 38% |
+| Average # VC Deals | 22 | 34% |
+| VCs | 15 | 23% |
+| Capital Invested | 2 | 3% |
+
+*(FNDRYx computation: count of cities at exactly 0.0, divided by 64.)*
+
+Half the region's tracked cities return zero on the outcome variables — exits, big outcomes, exit propensity. And the zeros concentrate monotonically by rank band:
+
+| Rank band | Cities | Mean variables at 0.0 (of 23) | Max |
+|---|---|---|---|
+| 1–10 | 10 | 0.0 | 0 |
+| 11–20 | 10 | 0.9 | 4 |
+| 21–32 | 12 | 2.2 | 5 |
+| 33–48 | 16 | 4.6 | 8 |
+| 49–64 | 16 | 7.9 | 14 |
+
+*(FNDRYx computation: per-city count of variables at 0.0, averaged within band.)*
+
+Here is the FNDRYx reading of that, offered as interpretation rather than as a finding of M25's: the instrument's resolving power decays with rank. In the top ten, every variable has something to report. In the bottom quartile, roughly a third of the measurement space returns absence, and one city returns absence on 14 of 23.
+
+Combined with the absolute-anchored scale, that means the ranking is not finely distinguishing between the lowest-scored cities. It is recording that the outcome-based variables have **nothing to report there** — which is a different statement from there being nothing there. An exit count of zero is a true fact about realized exits. It is silent on the founders currently building toward one.
+
+This is the floor. It is the honest behaviour of an outcome-based instrument in a place where outcomes have not happened yet.
+
+---
+
+## The lever
+
+The sharpest thing in the file is a variable that does not vary.
+
+**Government Programs is a state-level constant.** Every city within a state carries an identical value, and there is zero within-state variance across all 15 states in the footprint. *(FNDRYx computation: unique-value count of Government Programs grouped by state returns 1 for every state.)* All seven Indiana cities in the file carry Government Programs = 41.0.
+
+M25 attributes Indiana's decline to a structural policy change, and describes it precisely: the Indiana Economic Development Corporation board voted in June 2026 to end future investments from the $250 million Next Level Fund, winding it down and replacing it with a $15 million-per-year Indiana Innovation Capital Program. Elevate Ventures had its funding frozen in April 2025 pending review; an October 2025 forensic audit found no wrongdoing and Elevate has resumed, but less state-supported venture capital flowed to Indiana startups over the year. M25 also notes that Indiana's Venture Capital Investment tax credit is untouched — this is a direct-investment story, not a tax-credit story.
+
+M25 reports the same mechanism running the other way in four states. Iowa replaced its Angel Investor Tax Credit with a Seed Investor Tax Credit — 20% urban, 35% rural, refundable — lining up with gains for Des Moines, Ames, Iowa City, Cedar Rapids and the Quad Cities. Pennsylvania's FY26–27 budget created "Innovate in PA 2.0," a $125 million pool of insurance-premium tax credits, lifting Pittsburgh, Erie and State College. Kansas extended its angel tax credit sunset to 2031 and raised the annual cap to $8 million. Missouri passed a first-ever angel investor tax credit, which does not take effect until tax year 2027.
+
+Put the FNDRYx computation and M25's reporting side by side and the mechanism is visible end to end. One variable, carrying one value across every city in a state, changed once. Six Indiana cities posted declines, and every Indiana city tracked moved down or was flat.
+
+If a founder in Fort Wayne shipped, hired, and closed customers straight through that window, their city still reads eight places lower at the end of it. M25 attributes Indiana's decline to the policy change, but the published figures do not decompose any individual city's movement — and on a relative scale, some of it may be peers rising rather than Indiana falling. The direction is sourced. What is not in question either way is that nothing the founder did produced it.
+
+The instrument is measuring a property of the *state*, correctly. The difficulty is downstream: that property then gets read as a property of the place a founder is in, and from there as something about the founder.
+
+---
+
+## The ceiling
+
+At the other end, the scale runs out.
+
+The observed maximum in the file is 72.0. Six of the 64 cities touch it on at least one variable. Chicago sits at exactly 72.0 on **12 of the 23 variables**: Startups, Exits, Big Outcomes, Patents, Big Companies, University Ecosystem, VCs, Capital Invested, Accelerators/Incubators, Population, Airports, and Population Reach. *(FNDRYx computation from the published scores.)*
+
+On those same twelve, the next-highest city sits well below — Startups 47.6, Exits 47.0, Big Outcomes 45.3, Patents 58.2, Big Companies 53.4, University Ecosystem 50.4, VCs 42.8, Capital Invested 52.0, Accelerators/Incubators 40.9, Population 50.1, Airports 41.0, Population Reach 48.9. *(FNDRYx computation: maximum of each variable excluding Chicago.)*
+
+M25 reports Chicago's lead over #2 Minneapolis is 21.7 points, the widest it has ever been, up from roughly 20 points last year. Our own computation over the published totals returns the same figure — 60.6 minus 38.9 — which is how we confirmed the file we analysed matches the rankings as published.
+
+M25 does not document what produces the 72.0 value, and I am not going to speculate about it. What can be said is narrower and still useful: the scale's observed maximum is 72.0, and multiple leading values sit exactly at it — twelve of Chicago's, simultaneously. The published gap is what the scale can express. That is not the same claim as saying the real distance is larger, and I am not making that claim.
+
+The practical point for an allocator is the shape, not the cause. Again as FNDRYx interpretation rather than an M25 finding: the instrument is at its most precise where a Chicago-versus-Minneapolis question is easiest to answer without it, and at its least precise in the tail, where a genuine information advantage would actually live.
+
+---
+
+## What the ranking is good at
+
+It would be easy, and wrong, to read the three sections above as a list of defects. They are not. They are the boundary of a unit of observation, and M25 has been more careful about that boundary than most instruments are about theirs.
+
+The correlations bear out that the ranking is doing exactly the job it advertises. Total score tracks realized outcome volume and metro scale most closely: Startups at 0.97, Capital Invested 0.96, Exits 0.91, Big Outcomes 0.91, VCs 0.89, Population 0.87. The cost variables run the other way — Tax Climate at −0.05, Labor Costs −0.44, Cost of Living −0.75. *(FNDRYx computation: correlation of each variable with total score.)* For a ranking of startup **cities**, weighting realized activity and scale is the correct construction, not a bias to be corrected.
+
+The distribution shows the same discipline. Chicago tops the file at 60.6 and Wheeling, West Virginia anchors it at 7.4, with a median of 19.1 and a mean of 20.7; #2 through #64 spans 31.5 points, and 44 of the 64 cities fall between 12.0 and 25.0. *(FNDRYx computation.)* M25 says the margins below the top are razor thin and gives the figures from unrounded values: 0.27 points separate #4 Columbus from a tied #5 Indianapolis and Detroit, and 0.45 points separate #9 Cincinnati from #10 Madison.
+
+And M25 has already built the correction for the compression problem into the product. For the second year, cities are grouped into four peer sets — Major Regional Cities above 1.2M, College Towns, Gritty Cities between 250K and 1.2M, and Small Hubs under 250K — for the stated reason that ecosystems which will never crack the overall top ten deserve a real benchmark against similar cities. That is a publisher who understands that the top line flattens the tail, and who did something about it.
+
+M25 answers *where*, at the resolution a place-level instrument can reach. That question is worth answering, and this is the best answer the region has.
+
+Nobody answers *who*.
+
+---
+
+## A different unit of observation
+
+Here is the whole argument in two sentences. A place-level score is a fact about a place. Capital allocating against a founder needs a fact about the founder.
+
+Those are not the same object, and no amount of refinement to the first produces the second. You can add variables, re-weight categories, tighten peer sets, and extend the series — and a founder in Fort Wayne still carries a number whose movement M25 attributes to a state board vote. The gap is not precision. It is the unit.
+
+FNDRYx is the data layer of the startup ecosystem. Inside that sits the evaluation layer between founders and capital — what the data does between the two sides — and the founder's entry into it is capital readiness infrastructure. On the capital side, the thing being bought has a simpler name: **the record**.
+
+The mechanism is deliberately unglamorous. A founder answers a fixed instrument — 26 scored questions across five dimensions — scored in deterministic JavaScript, so the same inputs always produce the same result. Nothing about the score depends on who read it, on what day, or on which model was in production. That establishes a dated baseline. The baseline is the entry point, not the thing that accumulates.
+
+What accumulates is the re-measurement. Pulses run on their own cadence against the dimension scores that baseline produced — a different instrument doing a different job, which is what keeps the record from being a one-time snapshot. Founders deposit that context — owned, provenance-tracked — and never pay; capital partners subscribe to query it. The record is longitudinal by construction, and it compounds because of how it is built, not because of how long it has existed.
+
+That record sits **upstream of where private-market data begins**. PitchBook — the source M25 has used for startup and investor data since 2018 — is excellent at the layer it covers. The floor described earlier is what the edge of that layer looks like from inside a ranking: a cell reading zero because the event count is zero. That is a true measurement, and it is not the same thing as an empty city. It is an unmeasured one.
+
+This is not a better ranking. We are not building one, and if we were, it would inherit the same limit. It is a different unit of observation: the place-level instrument keeps doing what it does well, and the founder-level record answers the question it was never built to answer.
+
+If you are allocating into this region, the two are complements. Use the rankings to understand where the ecosystem infrastructure is thick and where a policy lever just moved. Use the record to understand which founder in front of you is ready, on what dimension, and in which direction they are moving.
+
+One of those tells you about a city. The other tells you about the company you are about to write a check into.
+
+---
+
+**Data: 2026 Best of the Midwest: Startup City Rankings**, by Victor Gutwein, Midwest Startups / M25, published 2026-08-11. Data cutoff 2026-06-30. Full rankings at midweststartups.com/midwestecosystem. Source post: [medium.com/midwest-startups](https://medium.com/midwest-startups/2026-best-of-the-midwest-startup-city-rankings-2d189bb49ae3). Data collection for the 2026 edition by Marco Conde.
+
+Figures attributed to M25 above are published by M25. Figures marked as FNDRYx computation are FNDRYx analysis of M25's published city-scores file, with the operation stated in each case; they are not M25 findings. M25's rankings, methodology, and underlying data remain M25's.
+
+---
+
+*If you allocate into this region and want to see what a founder-level readiness record looks like, email me directly: [kevin@fndryx.io](mailto:kevin@fndryx.io).*
+
+**Kevin Harnist** · Co-Founder & CEO · FNDRYx

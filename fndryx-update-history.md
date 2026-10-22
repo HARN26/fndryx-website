@@ -119,6 +119,20 @@
 
 _New entries added here as updates ship after migration, most recent first._
 
+### October 22, 2026 — Privacy Policy page + footer link + sitemap entry
+
+**Published the Privacy Policy at `/privacy`.**
+- New static server component `src/app/privacy/page.tsx`, converted from `fndryx-privacy-policy-v3.html` (Last Updated: October 20, 2026). Legal text is verbatim — headings, section numbers 1–14, bold terms, quotation marks, the Section 3 sharing table, and the `mailto:privacy@fndryx.io` links are unchanged from the source. The source file's `<style>` block and wrapper div were discarded; the source file was deleted from the project root and is not committed.
+- Styled with Tailwind brand tokens only (no inline styles, no new CSS): steel-900 background, `max-w-3xl` container with the same padding as `/blog/[slug]`, Syne H1/H2/H3 at 36/28/20px, DM Sans 16px body in steel-200 with bold terms in steel-100, fire-400 links with underline on hover. H1 renders the "x" in FNDRYx with the wordmark treatment (Playfair italic 400, fire-400).
+- Section 3 table sits in an `overflow-x-auto` wrapper with `min-w-[520px]`, so it scrolls horizontally on phones instead of breaking the layout.
+- Metadata: `title.absolute` "Privacy Policy | FNDRYx" (bypasses the root `%s — FNDRYx` template), description "How FNDRYx collects, uses, shares, and protects personal information.", canonical `https://fndryx.io/privacy`.
+
+**Footer link.**
+- `Footer.tsx` now carries a "Privacy Policy" `next/link` to `/privacy` beside the copyright line, using the same class string as the Journal link. It appears on every page that renders `<Footer />`, including `/blog` and `/blog/[slug]`.
+
+**Sitemap.**
+- `src/app/sitemap.ts` adds `https://fndryx.io/privacy` (apex) with `lastModified` 2026-10-20, `changeFrequency: "yearly"`, `priority: 0.3`.
+
 ### May 8, 2026 — Essay #03 published + full-bleed figure utility + cover render script
 
 **Published "Build Ready ≠ Investor Ready."**

@@ -54,9 +54,18 @@ export default function Footer() {
           </a>
         </div>
 
-        <p className="text-xs text-steel-400">
-          © 2026 FNDRYx. All rights reserved.
-        </p>
+        <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+          <p className="text-xs text-steel-400">
+            © 2026 FNDRYx. All rights reserved.
+          </p>
+
+          <Link
+            href="/privacy"
+            className="text-sm text-steel-400 underline underline-offset-4 hover:text-steel-200 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fire-400 focus-visible:ring-offset-2 focus-visible:ring-offset-steel-900"
+          >
+            Privacy Policy
+          </Link>
+        </div>
       </div>
     </footer>
   );

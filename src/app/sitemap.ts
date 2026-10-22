@@ -24,5 +24,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly" as const,
       priority: 0.6,
     })),
+    {
+      url: "https://fndryx.io/privacy",
+      lastModified: new Date("2026-10-20"),
+      changeFrequency: "yearly",
+      priority: 0.3,
+    },
   ];
 }
