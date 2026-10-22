@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import { baseOpenGraph } from "@/lib/shared-metadata";
 
 export const metadata: Metadata = {
   title: { absolute: "Privacy Policy | FNDRYx" },
@@ -8,6 +9,10 @@ export const metadata: Metadata = {
     "How FNDRYx collects, uses, shares, and protects personal information.",
   alternates: {
     canonical: "https://fndryx.io/privacy",
+  },
+  openGraph: {
+    ...baseOpenGraph,
+    url: "/privacy",
   },
 };
 

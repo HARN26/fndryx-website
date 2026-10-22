@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Syne, DM_Sans, Playfair_Display } from "next/font/google";
-import { rssAlternateTypes } from "@/lib/shared-metadata";
+import { baseOpenGraph, rssAlternateTypes } from "@/lib/shared-metadata";
 import "./globals.css";
 
 const syne = Syne({
@@ -48,14 +48,9 @@ export const metadata: Metadata = {
     "founder readiness record",
   ],
   authors: [{ name: "FNDRYx" }],
-  openGraph: {
-    type: "website",
-    siteName: "FNDRYx",
-    title: SITE_TITLE,
-    description: SITE_DESCRIPTION,
-    url: SITE_URL,
-    locale: "en_US",
-  },
+  // Site-wide fields only. og:url is set per page; og:title/description fall
+  // back to each page's own title/description, so none of them live here.
+  openGraph: baseOpenGraph,
   twitter: {
     card: "summary_large_image",
     title: SITE_TITLE,

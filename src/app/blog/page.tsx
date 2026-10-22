@@ -6,7 +6,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { getAllPosts } from "@/lib/blog";
 import { parseTitleAccents } from "@/lib/title-utils";
-import { rssAlternateTypes } from "@/lib/shared-metadata";
+import { baseOpenGraph, rssAlternateTypes } from "@/lib/shared-metadata";
 
 export const metadata: Metadata = {
   title: "Journal",
@@ -15,6 +15,10 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/blog",
     types: rssAlternateTypes,
+  },
+  openGraph: {
+    ...baseOpenGraph,
+    url: "/blog",
   },
 };
 

@@ -119,6 +119,22 @@
 
 _New entries added here as updates ship after migration, most recent first._
 
+### October 22, 2026 — Per-page og:url + shared Open Graph base; /unsubscribe/confirm noindexed
+
+**The problem.** Same shallow-merge shape as the canonical fix below. The root layout's `openGraph` carried the homepage's `url`, `title`, and `description`, so `/blog` and `/privacy` emitted `og:url` = `https://fndryx.io` and the homepage's og:title/description. Blog posts set their own `openGraph`, which replaced the layout's whole object, so they had no `og:url`, `og:site_name`, or `og:locale`.
+
+**The fix.**
+- `src/lib/shared-metadata.ts` now also exports `baseOpenGraph` (`type: "website"`, `siteName: "FNDRYx"`, `locale: "en_US"`). The root layout's `openGraph` is now just `baseOpenGraph`. The homepage `url`/`title`/`description` were removed from the layout: Next fills og:title/description from each page's own `title`/`description` when `openGraph` doesn't set them, so keeping them in the layout is what leaked the homepage copy.
+- Every page that sets `openGraph` spreads `baseOpenGraph` and sets `url` to match its canonical: `/` (`src/app/page.tsx`), `/blog`, `/blog/<slug>` (keeps `type: "article"`, `publishedTime`, `authors`, cover images), and `/privacy`.
+- **og:image kept working.** A segment's own `openGraph` replaces the parent's resolved object, root `opengraph-image` included, so `/blog` and `/privacy` initially lost og:image entirely. Fixed with one-line re-exports `src/app/blog/opengraph-image.tsx` and `src/app/privacy/opengraph-image.tsx` (`export { default, alt, size, contentType } from "../opengraph-image"`, the same pattern as `twitter-image.tsx`). Both render byte-identical PNGs to the root image.
+- `/unsubscribe/confirm`: now `robots: { index: false, follow: false }`; its canonical was removed.
+
+**Lessons / notes:**
+- Never put `images` in `baseOpenGraph`. Next applies a segment's file-based `opengraph-image` only if that segment's own `openGraph` has no `images` key, so a shared `images` would silently suppress every `opengraph-image` route, including the per-post `/blog/[slug]/opengraph-image` fallback for posts without a cover.
+- Any new segment that sets `openGraph` and has no `opengraph-image` of its own loses og:image. Add the re-export, then check the built HTML.
+- The build failed twice on Windows file locks. First, OneDrive had turned `.next/static/<buildId>` into a reparse point, so Node tried to `unlink` it as a symlink (EPERM). Deleting that one stale folder fixed it. Second, a shell's working directory was inside `.next/server/app` (EBUSY).
+- Still open: `twitter` has the same inheritance shape. `/blog` and `/privacy` still emit the homepage's `twitter:title`/`twitter:description`. Separately, `/accelerators` and `/unsubscribe/confirm` set titles that already end in "— FNDRYx" or "· FNDRYx", so the root `%s — FNDRYx` template doubles the suffix.
+
 ### October 22, 2026 — Per-page canonical tags (inherited homepage canonical removed)
 
 **The problem.** `src/app/layout.tsx` set `alternates.canonical` to `https://fndryx.io`, and Next merges metadata shallowly, so every page that didn't set its own `alternates` inherited it. `/blog`, every `/blog/[slug]` post, and the other pages all told search engines they were duplicates of the homepage.

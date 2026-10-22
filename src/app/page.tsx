@@ -7,12 +7,16 @@ import HowItWorks from "@/components/HowItWorks";
 import Audiences from "@/components/Audiences";
 import AntiClaim from "@/components/AntiClaim";
 import FounderForgeForm from "@/components/FounderForgeForm";
-import { rssAlternateTypes } from "@/lib/shared-metadata";
+import { baseOpenGraph, rssAlternateTypes } from "@/lib/shared-metadata";
 
 export const metadata: Metadata = {
   alternates: {
     canonical: "/",
     types: rssAlternateTypes,
+  },
+  openGraph: {
+    ...baseOpenGraph,
+    url: "/",
   },
 };
 
