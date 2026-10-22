@@ -6,11 +6,16 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { getAllPosts } from "@/lib/blog";
 import { parseTitleAccents } from "@/lib/title-utils";
+import { rssAlternateTypes } from "@/lib/shared-metadata";
 
 export const metadata: Metadata = {
   title: "Journal",
   description:
     "Short notes from the FNDRYx team on capital-readiness, founder signals, and capital-readiness infrastructure.",
+  alternates: {
+    canonical: "/blog",
+    types: rssAlternateTypes,
+  },
 };
 
 function formatDate(iso: string): string {

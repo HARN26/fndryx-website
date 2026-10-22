@@ -119,6 +119,22 @@
 
 _New entries added here as updates ship after migration, most recent first._
 
+### October 22, 2026 — Per-page canonical tags (inherited homepage canonical removed)
+
+**The problem.** `src/app/layout.tsx` set `alternates.canonical` to `https://fndryx.io`, and Next merges metadata shallowly, so every page that didn't set its own `alternates` inherited it. `/blog`, every `/blog/[slug]` post, and the other pages all told search engines they were duplicates of the homepage.
+
+**The fix.**
+- Root layout: `canonical` removed from `alternates`; `metadataBase` stays `https://fndryx.io`. The RSS `alternates.types` entry stays in the layout so pages that don't set `alternates` keep the auto-discovery `<link>`.
+- New `src/lib/shared-metadata.ts` exports `rssAlternateTypes`. Because a page's `alternates` replaces the layout's whole object, every page that sets a canonical spreads this in too (the shared-variable pattern from the Next 16 metadata docs).
+- Canonicals now set per page, as paths resolved against `metadataBase`: `/` (`src/app/page.tsx`, which had no metadata export before), `/blog`, `/blog/<slug>` (in `generateMetadata`), and `/unsubscribe/confirm` (canonical drops the `?t=` token). `/privacy` was already correct and is unchanged.
+- No canonical, deliberately: the 404 page; `/accelerators` and `/capital-partners`, which are `noindex` and are also redirected to `/` in `next.config.ts`, so their pages are never served at those URLs; `/raise-right`, which is a permanent redirect with no page.
+
+**Verified from the build output:** each page's canonical is its own URL, the homepage alone carries `https://fndryx.io`, and the RSS `<link>` is present on `/`, `/blog`, and every post.
+
+**Lessons / notes:**
+- Any page that sets `alternates` must spread `rssAlternateTypes` or it silently loses the RSS `<link>`. `/privacy` sets `alternates` without it and currently has no RSS `<link>`.
+- `openGraph.url` in the root layout has the same inheritance shape: `/blog` and other pages that don't override `openGraph` still emit `og:url` = `https://fndryx.io`. Not changed here.
+
 ### October 22, 2026 — Privacy Policy page + footer link + sitemap entry
 
 **Published the Privacy Policy at `/privacy`.**

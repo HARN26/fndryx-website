@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Syne, DM_Sans, Playfair_Display } from "next/font/google";
+import { rssAlternateTypes } from "@/lib/shared-metadata";
 import "./globals.css";
 
 const syne = Syne({
@@ -64,13 +65,10 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  // No canonical here: every child would inherit it. Each indexable page sets
+  // its own; the RSS entry stays so pages without `alternates` keep it.
   alternates: {
-    canonical: SITE_URL,
-    types: {
-      "application/rss+xml": [
-        { url: "https://fndryx.io/feed.xml", title: "FNDRYx Journal" },
-      ],
-    },
+    types: rssAlternateTypes,
   },
 };
 

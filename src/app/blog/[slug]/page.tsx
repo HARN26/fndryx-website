@@ -8,6 +8,7 @@ import Footer from "@/components/Footer";
 import { getAllSlugs, getPostBySlug } from "@/lib/blog";
 import { mdxComponents } from "@/components/blog/MdxComponents";
 import { parseTitleAccents, stripTitleAccents } from "@/lib/title-utils";
+import { rssAlternateTypes } from "@/lib/shared-metadata";
 
 type RouteParams = { slug: string };
 
@@ -37,6 +38,10 @@ export async function generateMetadata({
   return {
     title: plainTitle,
     description: post.frontmatter.excerpt,
+    alternates: {
+      canonical: `/blog/${slug}`,
+      types: rssAlternateTypes,
+    },
     openGraph: {
       title: plainTitle,
       description: post.frontmatter.excerpt,

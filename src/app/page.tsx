@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
@@ -6,6 +7,14 @@ import HowItWorks from "@/components/HowItWorks";
 import Audiences from "@/components/Audiences";
 import AntiClaim from "@/components/AntiClaim";
 import FounderForgeForm from "@/components/FounderForgeForm";
+import { rssAlternateTypes } from "@/lib/shared-metadata";
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+    types: rssAlternateTypes,
+  },
+};
 
 export default function Home() {
   return (

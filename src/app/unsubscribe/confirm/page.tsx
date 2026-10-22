@@ -2,9 +2,15 @@ import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import UnsubscribeForm from "@/components/UnsubscribeForm";
+import { rssAlternateTypes } from "@/lib/shared-metadata";
 
 export const metadata: Metadata = {
   title: "Unsubscribe · FNDRYx",
+  // Canonical drops the ?t= token query string.
+  alternates: {
+    canonical: "/unsubscribe/confirm",
+    types: rssAlternateTypes,
+  },
 };
 
 export default async function UnsubscribeConfirm({
