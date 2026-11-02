@@ -1,11 +1,25 @@
 import Link from "next/link";
 import Logo from "./Logo";
 
-function LinkedinIcon({ size = 20 }: { size?: number }) {
+// The plan's footer links are: How it works, Grand Rapids, Team, Journal,
+// Privacy Policy, LinkedIn. Grand Rapids (waits on Ted's OK) and Team (PR 6)
+// are added when their homepage sections exist.
+const LINKS = [
+  { href: "/#how-it-works", label: "How it works" },
+  { href: "/blog", label: "Journal" },
+  { href: "/privacy", label: "Privacy Policy" },
+];
+
+const LINKEDIN_URL = "https://www.linkedin.com/company/109594033";
+
+const linkClass =
+  "inline-flex items-center gap-2 font-body text-sm text-steel-300 transition-colors hover:text-steel-100 hover:underline underline-offset-4 rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fire-400";
+
+function LinkedinMark() {
   return (
     <svg
-      width={size}
-      height={size}
+      width={16}
+      height={16}
       viewBox="0 0 24 24"
       fill="currentColor"
       aria-hidden="true"
@@ -18,54 +32,63 @@ function LinkedinIcon({ size = 20 }: { size?: number }) {
 
 export default function Footer() {
   return (
-    <footer className="bg-steel-900 py-20">
-      <div className="flex flex-col items-center gap-10 px-6 text-center">
-        <Logo size="md" variant="dark" />
-
-        <div className="w-3/5 border-t border-steel-800" />
-
-        <p className="max-w-2xl font-body text-xs uppercase tracking-widest text-steel-400">
-          Measurement infrastructure between founders and capital.
-        </p>
-
-        <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
+    <footer className="border-t border-steel-800 bg-steel-950">
+      <div className="mx-auto grid max-w-content gap-10 px-4 py-14 md:grid-cols-12 md:px-6 md:py-16">
+        <div className="md:col-span-6">
           <Link
-            href="/blog"
-            className="text-sm text-steel-400 underline underline-offset-4 hover:text-steel-200 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fire-400 focus-visible:ring-offset-2 focus-visible:ring-offset-steel-900"
+            href="/"
+            aria-label="FNDRYx home"
+            className="inline-flex rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-fire-400"
           >
-            Journal
+            <Logo size="md" variant="dark" />
           </Link>
-
-          <a
-            href="https://fndryx.io"
-            className="text-sm text-steel-400 underline underline-offset-4 hover:text-steel-200 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fire-400 focus-visible:ring-offset-2 focus-visible:ring-offset-steel-900"
-          >
-            fndryx.io
-          </a>
-
-          <a
-            href="https://www.linkedin.com/company/109594033"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="FNDRYx on LinkedIn"
-            className="inline-flex items-center text-steel-400 transition-colors hover:text-fire-400 rounded-sm focus-visible:outline-none focus-visible:outline-2 focus-visible:outline-fire-400 focus-visible:outline-offset-2"
-          >
-            <LinkedinIcon size={20} />
-          </a>
-        </div>
-
-        <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
-          <p className="text-xs text-steel-400">
-            © 2026 FNDRYx. All rights reserved.
+          <p className="mt-4 max-w-sm font-body text-base text-steel-300">
+            The readiness record for early-stage capital.
           </p>
-
-          <Link
-            href="/privacy"
-            className="text-sm text-steel-400 underline underline-offset-4 hover:text-steel-200 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fire-400 focus-visible:ring-offset-2 focus-visible:ring-offset-steel-900"
-          >
-            Privacy Policy
-          </Link>
         </div>
+
+        <nav aria-label="Footer" className="md:col-span-3">
+          <ul className="space-y-3">
+            {LINKS.map((l) => (
+              <li key={l.href}>
+                <Link href={l.href} className={linkClass}>
+                  {l.label}
+                </Link>
+              </li>
+            ))}
+            <li>
+              <a
+                href={LINKEDIN_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={linkClass}
+              >
+                <LinkedinMark />
+                LinkedIn
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <ul className="space-y-3 md:col-span-3">
+          <li>
+            <a href="mailto:kevin@fndryx.io" className={linkClass}>
+              kevin@fndryx.io
+            </a>
+          </li>
+          <li>
+            <a href="mailto:privacy@fndryx.io" className={linkClass}>
+              privacy@fndryx.io
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div className="border-t border-steel-800">
+        <p className="mx-auto max-w-content px-4 py-6 font-body text-footnote text-steel-400 md:px-6">
+          FNDRYx is not a broker-dealer or investment adviser. © 2026 FNDRYx,
+          Inc. 727 Madison Ave, Suite 45, Covington, KY 41011.
+        </p>
       </div>
     </footer>
   );

@@ -119,6 +119,16 @@
 
 _New entries added here as updates ship after migration, most recent first._
 
+### November 2, 2026 — PR 3: foundation (tokens, type scale, button, Nav, Footer)
+
+- `globals.css`: base styles moved into `@layer base` (heading color classes now work); new `steel-950`, type scale (`text-h1` … `text-footnote`), `max-w-content`, and `section-label`, `btn-primary` and `text-link` utilities. Smooth scroll respects reduced motion.
+- `Button.tsx`: primary is now the solid fire-400 button; secondary is a text link; the unused orange outline variant is gone.
+- `Nav.tsx`: server component, solid background, no scroll listener. Desktop shows How it works and Journal; phones get "Join" plus a no-JavaScript Menu with every link (the Journal link no longer disappears on phones).
+- `Footer.tsx`: left-aligned columns with the plan's tagline, links, contact emails, disclaimer and address. The self-link to fndryx.io and the "Measurement infrastructure" line are gone.
+- Join form: submit button uses `btn-primary`; placeholders are steel-400.
+- Not yet in the nav and footer: Grand Rapids (waits on Ted), Who it's for and Team (PR 6).
+- Journal check: main content of the Journal listing and two posts compared to the pixel before and after. Privacy and the long essay are identical. The listing and the Welcome post differ in 50–80 pixels by 1–4 shades out of 255 (anti-aliasing from the page shifting with the shorter nav). Nothing visible changed. The nav and footer changed on every page, as intended. The 404 and unsubscribe buttons use the new button style.
+
 ### November 2, 2026 — PR 2: guardrails (CI, claim check, Lighthouse on previews)
 
 - New GitHub Actions workflow `CI`: lint, claim check and build on every pull request and every push to `main`.

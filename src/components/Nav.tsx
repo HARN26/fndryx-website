@@ -1,49 +1,95 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import Link from "next/link";
 import Logo from "./Logo";
 
-export default function Nav() {
-  const [scrolled, setScrolled] = useState(false);
+// Server component: a solid background instead of a scroll listener, so the
+// nav adds no JavaScript of its own.
+//
+// The plan's full nav is: How it works, Grand Rapids, Who it's for, Team,
+// Journal. Links are added here only when their section exists on the
+// homepage: Grand Rapids waits on Ted's OK (PR 5), Who it's for and Team ship
+// in PR 6.
+const NAV_LINKS = [
+  { href: "/#how-it-works", label: "How it works" },
+  { href: "/blog", label: "Journal" },
+];
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+const linkClass =
+  "font-body font-medium text-sm text-steel-300 transition-colors hover:text-steel-100 rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-fire-400";
 
+function Chevron() {
   return (
-    <header
-      className={`sticky top-0 z-50 transition-colors duration-200 ${
-        scrolled
-          ? "bg-steel-900/95 backdrop-blur-md border-b border-steel-800"
-          : "bg-transparent border-b border-transparent"
-      }`}
+    <svg
+      width="12"
+      height="12"
+      viewBox="0 0 12 12"
+      fill="none"
+      aria-hidden="true"
+      focusable="false"
+      className="group-open:rotate-180"
     >
-      <div className="mx-auto flex h-20 max-w-[1400px] items-center justify-between px-6 md:px-10">
+      <path
+        d="M2.5 4.5 6 8l3.5-3.5"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+export default function Nav() {
+  return (
+    <header className="sticky top-0 z-50 border-b border-steel-800 bg-steel-900">
+      <div className="mx-auto flex h-16 max-w-content items-center justify-between px-4 md:px-6">
         <Link
           href="/"
-          className="inline-flex items-center rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fire-400 focus-visible:ring-offset-2 focus-visible:ring-offset-steel-900"
           aria-label="FNDRYx home"
+          className="inline-flex items-center rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-fire-400"
         >
           <Logo size="sm" variant="dark" />
         </Link>
-        <div className="flex items-center gap-6">
-          <Link
-            href="/blog"
-            className="hidden md:inline-block font-body font-medium text-sm text-steel-300 hover:text-fire-400 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fire-400 focus-visible:ring-offset-2 focus-visible:ring-offset-steel-900"
-          >
-            Journal
+
+        {/* Tablet and desktop */}
+        <nav aria-label="Main" className="hidden items-center gap-8 md:flex">
+          {NAV_LINKS.map((l) => (
+            <Link key={l.href} href={l.href} className={linkClass}>
+              {l.label}
+            </Link>
+          ))}
+          <Link href="/#join" className="btn-primary px-4 py-2.5 text-sm">
+            Join the founder list
           </Link>
-          <Link
-            href="/#join"
-            className="inline-flex items-center justify-center rounded-lg font-body font-semibold text-xs uppercase tracking-wider text-white bg-[linear-gradient(135deg,#ea580c_0%,#f97316_100%)] shadow-[0_4px_14px_rgba(249,115,22,0.4)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(249,115,22,0.5)] focus:outline-none focus-visible:ring-2 focus-visible:ring-fire-400 focus-visible:ring-offset-2 focus-visible:ring-offset-steel-900 px-7 py-3.5"
-          >
-            <span className="sm:hidden">Join</span>
-            <span className="hidden sm:inline">Join the founder list</span>
+        </nav>
+
+        {/* Phones: short button plus a menu that works without JavaScript */}
+        <div className="flex items-center gap-2 md:hidden">
+          <Link href="/#join" className="btn-primary px-4 py-2 text-sm">
+            Join
           </Link>
+          <details className="group relative">
+            <summary className="flex cursor-pointer list-none items-center gap-1.5 rounded-sm px-2 py-2 font-body text-sm font-medium text-steel-300 hover:text-steel-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fire-400 [&::-webkit-details-marker]:hidden">
+              Menu
+              <Chevron />
+            </summary>
+            <nav
+              aria-label="Main"
+              className="absolute right-0 top-full mt-3 w-56 rounded-md border border-steel-700 bg-steel-900 py-2 shadow-lg shadow-black/40"
+            >
+              <ul>
+                {NAV_LINKS.map((l) => (
+                  <li key={l.href}>
+                    <Link
+                      href={l.href}
+                      className="block px-4 py-3 font-body text-base text-steel-200 hover:bg-steel-800 hover:text-steel-100 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-fire-400"
+                    >
+                      {l.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </details>
         </div>
       </div>
     </header>
