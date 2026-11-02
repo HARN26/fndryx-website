@@ -79,9 +79,9 @@ src/content/
 
 ### Components (src/components/)
 - `Logo.tsx` — Reusable styled logo. Props: `size` (sm/md/lg/xl OR responsive object `{ base, md?, lg? }`), `variant` (dark/light)
-- `Button.tsx` — Brand-spec button. Variants: primary (fire gradient + glow), secondary (steel-700), outline, ghost. **Default `type="button"`** (must opt into submit explicitly)
-- `Nav.tsx` — Sticky nav with scroll-aware backdrop, Journal link (md+ only), CTA to `/#join` labeled "Join" on phones and "Join the founder list" from `sm` up
-- `Footer.tsx` — Centered logo + tagline + Journal link + fndryx.io link + LinkedIn icon link (inline SVG, not lucide) + copyright
+- `Button.tsx` — Brand-spec button. Variants: primary (solid fire-400, steel-900 text, 6px radius, lighter on hover; the `btn-primary` utility), secondary (plain text link, underlined on hover; `text-link`), ghost. Default padding `px-6 py-3.5` unless the caller passes padding. **Default `type="button"`** (must opt into submit explicitly). Links styled as buttons use `className="btn-primary px-… py-…"` directly
+- `Nav.tsx` — Server component. Sticky, solid steel-900 background (no scroll listener). From `md` up: How it works, Journal, and a "Join the founder list" button. On phones: a short "Join" button plus a `<details>` "Menu" that works without JavaScript and holds every link. Links live in `NAV_LINKS`; Grand Rapids, Who it's for and Team are added when those sections ship
+- `Footer.tsx` — Server component on steel-950. Left-aligned columns: wordmark and "The readiness record for early-stage capital."; links (How it works, Journal, Privacy Policy, LinkedIn with inline SVG mark); contact (kevin@fndryx.io, privacy@fndryx.io). Bottom row: broker-dealer disclaimer, © 2026 FNDRYx, Inc. and the Covington address
 - `Hero.tsx` — Client component (extracted from page.tsx during Phase 5). Homepage hero with CTA scroll handler
 - `Problem.tsx` — Section with italic-orange "filters" treatment, body copy, "See the solution" link (pull quote and unsourced "vast majority" line removed Nov 2026)
 - `HowItWorks.tsx` — 3-card grid (Assess / Report / Check in). Numerals and badges removed Nov 2026
@@ -104,6 +104,21 @@ public/
 ├── favicon.ico
 └── logo.svg
 ```
+
+## Design System (Nov 2026)
+
+Defined in `src/app/globals.css`; mirrored for reference in `src/lib/design-tokens.ts`.
+
+- **Base styles are in `@layer base`.** Before Nov 2026 the heading rule sat outside any layer and overrode every heading color class (that is why "Assess" rendered white though its code said orange). Now a utility class on a heading wins.
+- **New color:** `steel-950` `#0B1222`, the second background for alternating sections and the footer.
+- **Type scale utilities:** `text-h1` clamp(2.75rem, 6vw, 5.25rem); `text-h2` clamp(1.875rem, 3.6vw, 3rem); `text-h3` 1.25rem; `text-body` 18px / 1.6; `text-label` 12px; `text-footnote` 13px. Headlines are Syne 700, left-aligned, sentence case. Syne 800 is for the wordmark only.
+- **Content width:** `max-w-content` (1200px), 12-column grid.
+- **`section-label`:** DM Sans 700, 12px, uppercase, 0.16em tracking, fire-400. Never a label that repeats its heading.
+- **`btn-primary`:** solid fire-400, steel-900 text (6.4:1 contrast), 6px radius, hover to fire-300. No gradient, glow, lift or white text.
+- **`text-link`:** secondary actions. Steel-100, underlined on hover.
+- **Placeholders:** steel-400 (steel-500 fails contrast on navy).
+- **Reduced motion:** smooth scrolling turns off when the visitor asks for reduced motion.
+- **Tilde:** Syne draws "~" as a dot. Write "About 40", never "~40".
 
 ## Design Tokens
 

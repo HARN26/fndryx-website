@@ -94,7 +94,7 @@ function getUrlRole(): Role | null {
 const getServerUrlRole = (): Role | null => null;
 
 const inputClass =
-  "w-full bg-steel-900 border border-steel-700 rounded-lg px-4 py-3 text-steel-100 text-sm placeholder:text-steel-500 focus:outline-none focus:border-fire-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fire-400 focus-visible:ring-offset-2 focus-visible:ring-offset-steel-800 transition-colors";
+  "w-full bg-steel-900 border border-steel-700 rounded-lg px-4 py-3 text-steel-100 text-sm placeholder:text-steel-400 focus:outline-none focus:border-fire-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fire-400 focus-visible:ring-offset-2 focus-visible:ring-offset-steel-800 transition-colors";
 
 const labelClass = "block text-sm font-body font-medium text-steel-200 mb-2";
 
@@ -406,7 +406,7 @@ export default function FounderForgeForm() {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full rounded-lg bg-[linear-gradient(135deg,#ea580c_0%,#f97316_100%)] py-4 font-body font-semibold text-white shadow-[0_4px_14px_rgba(249,115,22,0.4)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(249,115,22,0.5)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fire-400 focus-visible:ring-offset-2 focus-visible:ring-offset-steel-800 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0"
+                    className="btn-primary w-full py-4 text-base"
                   >
                     {isSubmitting ? "Sending..." : SUBMIT_LABEL[role]}
                   </button>
