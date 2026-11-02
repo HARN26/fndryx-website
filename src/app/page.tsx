@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
+import FactsRow from "@/components/FactsRow";
+import Gap from "@/components/Gap";
 import Problem from "@/components/Problem";
 import HowItWorks from "@/components/HowItWorks";
 import AntiClaim from "@/components/AntiClaim";
@@ -25,6 +27,8 @@ export default function Home() {
       <Nav />
       <main id="main-content" tabIndex={-1}>
         <Hero />
+        <FactsRow />
+        <Gap />
         <Problem />
         <HowItWorks />
         <AntiClaim />
