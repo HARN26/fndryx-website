@@ -87,7 +87,10 @@ src/content/
 - `Gap.tsx` — "The gap": 16% / 9% figures, the 28-state line, the US map (`public/images/home/us-map-midwest.svg`) with legend, and the sources footnote
 - `SignalTimeline.tsx` — G1 graphic, inline SVG with real text and a screen-reader description. Seven markers and speckles from `lg` up; four markers, no speckles below
 - `Problem.tsx` — "The problem" on steel-950: heading, body and the G1 signal timeline
-- `HowItWorks.tsx` — 3-card grid (Assess / Report / Check in). Numerals and badges removed Nov 2026
+- `HowItWorks.tsx` — "Three steps, then a record." Assess / Report / Check in in three open columns joined by a thin line, then the G2 record strip: 17 bars (one per 21-day check-in), height 38% to 100%, color steel-700 to fire-400 eased by t^0.8
+- `FounderReport.tsx` — "Plain about what it is. Useful about what's next." Two overlapping synthetic report images (`public/images/home/report-sample-*.png`) with an always-visible "Synthetic example, not a real founder" tag, and three numbered notes
+- `GrandRapids.tsx` — "Live now" section (id `grand-rapids`) on the full-bleed road photo with a navy fade; phones get the photo as a band above the text. Attendee note with kevin@fndryx.io. Past tense after the Summit (PR 8)
+- `SummitBar.tsx` — Slim bar above the nav on every page, linking to `/#grand-rapids`. Remove after the Summit (PR 8)
 - `AntiClaim.tsx` — "What FNDRYx Is Not" section: "not a placement service" heading plus the plain disclaimer paragraph
 - `FounderForgeForm.tsx` — Client component for the interest list ("Get on the list."). Section id `join`, with an empty `#founder-forge` anchor kept for old links. Roles: Founder / Program, university or event organizer / Investor or capital partner (values `founder` / `operator` / `capital_provider`, unchanged so `?role=` links still work). Conditional Stage / Organization type / Capital type field by role. Validates on the page first (shared rules in `src/lib/join-form.ts`), focuses the first bad field, shows only plain error messages. Submit label and success message vary by role
 - `blog/MdxComponents.tsx` — Component map for `MDXRemote` covering h2/h3, p, a (with focus ring; external link auto-handling — any href starting with `http://` or `https://` auto-applies `target="_blank"` and `rel="noopener noreferrer"`; internal links stay same-tab), strong, em, lists, blockquote (fire-400 border + italic Playfair), inline code, pre, hr, img
@@ -219,6 +222,8 @@ Vercel auto-deploys within ~1 minute.
 |---|---|---|
 | `public/images/home/hero-foundry-pour.jpg` | "Molten Metal Pouring at Milwaukee Foundry" by Quang Vuong, Pexels, https://www.pexels.com/photo/molten-metal-pouring-at-milwaukee-foundry-29442931/ . Shot Nov 16, 2024 in Milwaukee (Nikon Z 7). Chosen by Kevin Nov 2, 2026. File is 1717×2236: Pexels' 1717×2576 download with the caution tape and bucket cropped off the bottom | Pexels License: free for commercial use, no credit required. The photographer's page lists Topaz Photo AI as editing software (enhancement, not generation) |
 | `public/images/home/us-map-midwest.svg` | FNDRYx asset pack, Nov 2026 | Our own |
+| `public/images/home/midwest-road.jpg` | FNDRYx asset pack ("midwest-road-unsplash.jpg"), 2600×1727. Original Unsplash page not recorded in the pack | Unsplash License per the pack's README (checked Nov 1, 2026): free, no credit required |
+| `public/images/home/report-sample-read-this-first.png`, `report-sample-priorities.png` | FNDRYx asset pack. **Synthetic sample, not a real founder.** Keep the tag visible | Our own |
 
 ## Automated Checks (GitHub Actions)
 

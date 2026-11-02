@@ -4,9 +4,8 @@ import Image from "next/image";
 // photo bleeds off the right edge with a navy fade on its left side; below lg
 // it becomes a shorter band under the text. No second logo.
 //
-// The plan's text link is "Going to Grand Rapids?", pointing at the Grand
-// Rapids section. That section ships in PR 5, so until then the link uses the
-// plan's fallback, "How it works".
+// The text link points at the Grand Rapids section (cleared by Ted). After the
+// Summit (PR 8) it goes back to "How it works".
 
 export const HERO_IMAGE = {
   src: "/images/home/hero-foundry-pour.jpg",
@@ -36,8 +35,8 @@ export default function Hero() {
             <a href="#join" className="btn-primary px-6 py-3.5 text-base">
               Join the founder list
             </a>
-            <a href="#how-it-works" className="text-link font-body text-base font-medium">
-              How it works
+            <a href="#grand-rapids" className="text-link font-body text-base font-medium">
+              Going to Grand Rapids?
             </a>
           </div>
         </div>
