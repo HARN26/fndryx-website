@@ -119,6 +119,12 @@
 
 _New entries added here as updates ship after migration, most recent first._
 
+### November 2, 2026 — PR 6b: Midwest House logo in the Summit bar
+
+- The Summit bar now shows a one-line gray Midwest House logo in place of the words "Midwest House" (no repetition). Alt text keeps the sentence whole for screen readers.
+- The one-line logo is FNDRYx's rearrangement of Midwest House's stacked logo, approved by Kevin. Replace it with an official horizontal file if Midwest House sends one.
+- Bar text is 13px on phones so the bar stays at two lines.
+
 ### November 2, 2026 — PR 6: trust and join (who it's for, why it holds, team, join)
 
 - Counsel (Jake) cleared the three group-of-five lines; Patrick approved his bio. All ship word for word.
