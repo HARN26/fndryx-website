@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type FormEvent } from "react";
+import { useState, useSyncExternalStore, type FormEvent } from "react";
 import Link from "next/link";
 import { ChevronDown, CheckCircle2 } from "lucide-react";
 import {
@@ -16,7 +16,6 @@ import {
 } from "@/lib/join-form";
 
 type FormData = {
-  role: Role;
   fullName: string;
   email: string;
   company: string;
@@ -26,7 +25,6 @@ type FormData = {
 };
 
 const initialData: FormData = {
-  role: "founder",
   fullName: "",
   email: "",
   company: "",
@@ -68,31 +66,51 @@ const FIELD_IDS: Record<JoinField, string> = {
 
 const ERROR_ID = "ff-error";
 
+// ?role= in the URL (search or hash) pre-selects the role, e.g. /?role=operator#join.
+// Read through useSyncExternalStore so the server render and hydration agree
+// (no role from the URL on the server), without setting state inside an effect.
+function subscribeToUrl(onChange: () => void) {
+  window.addEventListener("hashchange", onChange);
+  window.addEventListener("popstate", onChange);
+  return () => {
+    window.removeEventListener("hashchange", onChange);
+    window.removeEventListener("popstate", onChange);
+  };
+}
+
+function getUrlRole(): Role | null {
+  const haystack = `${window.location.search}${window.location.hash}`;
+  const match = haystack.match(/[?&#]role=([^&#]+)/);
+  if (!match) return null;
+  let candidate: string;
+  try {
+    candidate = decodeURIComponent(match[1]);
+  } catch {
+    return null;
+  }
+  return VALID_ROLES.has(candidate) ? (candidate as Role) : null;
+}
+
+const getServerUrlRole = (): Role | null => null;
+
 const inputClass =
   "w-full bg-steel-900 border border-steel-700 rounded-lg px-4 py-3 text-steel-100 text-sm placeholder:text-steel-500 focus:outline-none focus:border-fire-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fire-400 focus-visible:ring-offset-2 focus-visible:ring-offset-steel-800 transition-colors";
 
 const labelClass = "block text-sm font-body font-medium text-steel-200 mb-2";
 
 export default function FounderForgeForm() {
+  const urlRole = useSyncExternalStore(
+    subscribeToUrl,
+    getUrlRole,
+    getServerUrlRole,
+  );
+  const [chosenRole, setChosenRole] = useState<Role | null>(null);
+  const role: Role = chosenRole ?? urlRole ?? "founder";
   const [formData, setFormData] = useState<FormData>(initialData);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submittedRole, setSubmittedRole] = useState<Role | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [errorField, setErrorField] = useState<JoinField | null>(null);
-  const didApplyUrlRole = useRef(false);
-
-  useEffect(() => {
-    if (didApplyUrlRole.current) return;
-    didApplyUrlRole.current = true;
-
-    if (typeof window === "undefined") return;
-    const haystack = `${window.location.search}${window.location.hash}`;
-    const match = haystack.match(/[?&#]role=([^&#]+)/);
-    if (!match) return;
-    const candidate = decodeURIComponent(match[1]);
-    if (!VALID_ROLES.has(candidate)) return;
-    setFormData((prev) => ({ ...prev, role: candidate as Role }));
-  }, []);
 
   const clearError = () => {
     setError(null);
@@ -104,11 +122,11 @@ export default function FounderForgeForm() {
     setFormData((prev) => ({ ...prev, [key]: value }));
   };
 
-  const changeRole = (role: Role) => {
+  const changeRole = (next: Role) => {
     clearError();
+    setChosenRole(next);
     setFormData((prev) => ({
       ...prev,
-      role,
       stage: "",
       type: "",
       operatorType: "",
@@ -131,14 +149,14 @@ export default function FounderForgeForm() {
     clearError();
 
     const payload: Record<string, string> = {
-      role: formData.role,
+      role,
       fullName: formData.fullName.trim(),
       email: formData.email.trim(),
       company: formData.company.trim(),
     };
-    if (formData.role === "founder") payload.stage = formData.stage;
-    if (formData.role === "capital_provider") payload.type = formData.type;
-    if (formData.role === "operator") payload.operatorType = formData.operatorType;
+    if (role === "founder") payload.stage = formData.stage;
+    if (role === "capital_provider") payload.type = formData.type;
+    if (role === "operator") payload.operatorType = formData.operatorType;
 
     const check = validateJoin(payload);
     if (!check.ok) {
@@ -175,7 +193,7 @@ export default function FounderForgeForm() {
         return;
       }
 
-      setSubmittedRole(formData.role);
+      setSubmittedRole(role);
       setFormData(initialData);
     } catch {
       showError(GENERIC_ERROR, null);
@@ -221,7 +239,7 @@ export default function FounderForgeForm() {
                   <div className="relative">
                     <select
                       id="ff-role"
-                      value={formData.role}
+                      value={role}
                       onChange={(e) => changeRole(e.target.value as Role)}
                       className={`${inputClass} appearance-none pr-10`}
                     >
@@ -289,7 +307,7 @@ export default function FounderForgeForm() {
                   />
                 </div>
 
-                {formData.role === "founder" && (
+                {role === "founder" && (
                   <div>
                     <label htmlFor="ff-stage" className={labelClass}>
                       Stage
@@ -320,7 +338,7 @@ export default function FounderForgeForm() {
                   </div>
                 )}
 
-                {formData.role === "operator" && (
+                {role === "operator" && (
                   <div>
                     <label htmlFor="ff-operator-type" className={labelClass}>
                       Organization type
@@ -353,7 +371,7 @@ export default function FounderForgeForm() {
                   </div>
                 )}
 
-                {formData.role === "capital_provider" && (
+                {role === "capital_provider" && (
                   <div>
                     <label htmlFor="ff-type" className={labelClass}>
                       Capital type
@@ -390,7 +408,7 @@ export default function FounderForgeForm() {
                     disabled={isSubmitting}
                     className="w-full rounded-lg bg-[linear-gradient(135deg,#ea580c_0%,#f97316_100%)] py-4 font-body font-semibold text-white shadow-[0_4px_14px_rgba(249,115,22,0.4)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(249,115,22,0.5)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fire-400 focus-visible:ring-offset-2 focus-visible:ring-offset-steel-800 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0"
                   >
-                    {isSubmitting ? "Sending..." : SUBMIT_LABEL[formData.role]}
+                    {isSubmitting ? "Sending..." : SUBMIT_LABEL[role]}
                   </button>
                   <p className="mt-4 text-center text-xs text-steel-400">
                     We use this to contact you about FNDRYx.{" "}

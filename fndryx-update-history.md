@@ -119,6 +119,14 @@
 
 _New entries added here as updates ship after migration, most recent first._
 
+### November 2, 2026 — PR 2: guardrails (CI, claim check, Lighthouse on previews)
+
+- New GitHub Actions workflow `CI`: lint, claim check and build on every pull request and every push to `main`.
+- New `scripts/claim-check.mjs` (`npm run claim-check`) enforcing the plan's claim rules on the homepage, form, emails and metadata. Journal excluded. The never-name list comes from the `CLAIM_CHECK_PRIVATE_TERMS` secret so names never appear in this public repo or its logs. Run against the pre-PR 1 code, it flags all 29 old claims.
+- New workflow `Lighthouse (preview)`: waits for each pull request's Vercel preview, runs Lighthouse (3 mobile, 1 desktop) and posts scores to the run summary. Report only.
+- Fixed the one existing lint error: the join form now reads `?role=` with `useSyncExternalStore` instead of setting state inside an effect. Same behavior for visitors; a role the visitor picks still wins.
+- See "Automated Checks" in the technical reference for secrets and how to read results.
+
 ### November 2, 2026 — PR 1: truth fixes (copy, form, emails, metadata)
 
 First of eight PRs from the Nov 2 audit and upgrade plan. Words and form behavior only, inside the current layout. Lines marked [Ted] or [Counsel] in the plan are left out until cleared.

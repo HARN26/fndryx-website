@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "claim-check": "node scripts/claim-check.mjs"
   },
   "dependencies": {
     "@fontsource/dm-sans": "^5.2.8",

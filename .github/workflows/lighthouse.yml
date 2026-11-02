@@ -1,0 +1,98 @@
+# Runs Lighthouse on the homepage of each pull request's Vercel preview.
+# Report only: scores go to the run's summary page and the full reports are
+# attached as an artifact. It does not block merging.
+name: Lighthouse (preview)
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+  deployments: read
+
+concurrency:
+  group: lighthouse-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  lighthouse:
+    name: Lighthouse on Vercel preview
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+
+      - name: Wait for the Vercel preview
+        id: preview
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          for attempt in $(seq 1 60); do
+            ids=$(gh api "repos/$REPO/deployments?sha=$SHA&per_page=20" \
+              --jq '.[] | select(.environment | startswith("Preview")) | .id')
+            for id in $ids; do
+              status=$(gh api "repos/$REPO/deployments/$id/statuses?per_page=1" \
+                --jq '.[0] | "\(.state) \(.environment_url // .target_url)"')
+              state=${status%% *}
+              url=${status#* }
+              if [ "$state" = "success" ]; then
+                echo "Preview ready: $url"
+                echo "url=${url%/}/" >> "$GITHUB_OUTPUT"
+                exit 0
+              fi
+              if [ "$state" = "failure" ] || [ "$state" = "error" ]; then
+                echo "::error::The Vercel preview failed to deploy."
+                exit 1
+              fi
+            done
+            sleep 15
+          done
+          echo "::error::No Vercel preview after 15 minutes."
+          exit 1
+
+      - name: Check the preview is reachable
+        id: reach
+        env:
+          URL: ${{ steps.preview.outputs.url }}
+          BYPASS: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}
+        run: |
+          header=()
+          if [ -n "$BYPASS" ]; then
+            header=(-H "x-vercel-protection-bypass: $BYPASS")
+            printf '{"x-vercel-protection-bypass":"%s"}' "$BYPASS" > "$RUNNER_TEMP/lh-headers.json"
+            echo "LIGHTHOUSE_HEADERS_FILE=$RUNNER_TEMP/lh-headers.json" >> "$GITHUB_ENV"
+          fi
+          # Follow redirects, then compare where we ended up. Vercel login
+          # answers 200 on a different host, so the status code alone lies.
+          read -r code final < <(curl -s -o /dev/null -L -w '%{http_code} %{url_effective}\n' "${header[@]}" "$URL")
+          want_host=$(echo "$URL" | awk -F/ '{print $3}')
+          got_host=$(echo "$final" | awk -F/ '{print $3}')
+          echo "Preview answered HTTP $code at $final"
+          if [ "$code" = "401" ] || [ "$code" = "403" ] || [ "$got_host" != "$want_host" ]; then
+            echo "ok=false" >> "$GITHUB_OUTPUT"
+            msg="The preview is behind Vercel login, so Lighthouse was skipped. Add a Protection Bypass for Automation secret in Vercel and save it in GitHub as VERCEL_AUTOMATION_BYPASS_SECRET."
+            echo "::warning::$msg"
+            echo "### Lighthouse skipped" >> "$GITHUB_STEP_SUMMARY"
+            echo "$msg" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "ok=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Run Lighthouse (3 mobile runs, 1 desktop)
+        if: steps.reach.outputs.ok == 'true'
+        run: node scripts/lighthouse-report.mjs "${{ steps.preview.outputs.url }}" lighthouse-reports
+
+      - name: Attach full reports
+        if: always() && steps.reach.outputs.ok == 'true'
+        uses: actions/upload-artifact@v6
+        with:
+          name: lighthouse-reports
+          path: lighthouse-reports/*.html
+          retention-days: 30
