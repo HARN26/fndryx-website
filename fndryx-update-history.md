@@ -119,6 +119,11 @@
 
 _New entries added here as updates ship after migration, most recent first._
 
+### November 2, 2026 — PR 5b: Midwest House logo
+
+- Kevin confirmed Midwest House cleared their logo for fndryx.io (the plan's original OK was text only).
+- One-color gray version (steel-400), 28px tall, in two places: beside "Live now" in the Grand Rapids section, and as a "Partner" mark in the footer on every page (Journal included).
+
 ### November 2, 2026 — PR 5: the product (how it works, founder report, Grand Rapids)
 
 - **How it works:** "Three steps, then a record." Assess / Report / Check in in open columns joined by a thin line, plus the G2 record strip (17 bars, a year of 21-day check-ins). The old card grid is gone.

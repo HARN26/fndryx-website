@@ -1,6 +1,8 @@
 import Image from "next/image";
 
 // Grand Rapids (plan section 6, deck slide 14). Cleared by Ted on Nov 2, 2026.
+// Midwest House logo cleared by Kevin the same day: one-color gray, small,
+// never dominant.
 // Full-bleed road photo with a navy fade on the left (desktop); on phones the
 // photo is a band above the text. No deadline is printed here: the code dates
 // live in the invitation emails and may change. Rewrite in past tense after
@@ -29,7 +31,18 @@ export default function GrandRapids() {
 
       <div className="relative mx-auto max-w-content px-4 pb-20 pt-4 md:px-6 lg:py-32">
         <div className="max-w-xl">
-          <p className="section-label">Live now</p>
+          <div className="flex items-center gap-4">
+            <p className="section-label">Live now</p>
+            <span aria-hidden="true" className="h-5 w-px bg-steel-600" />
+            <Image
+              src="/images/home/midwest-house-logo-gray.png"
+              alt="Midwest House"
+              width={480}
+              height={221}
+              sizes="80px"
+              className="h-7 w-auto"
+            />
+          </div>
           <h2
             id="gr-heading"
             className="mt-4 font-display text-h2 font-bold text-steel-100"

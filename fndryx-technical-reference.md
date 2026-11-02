@@ -223,6 +223,7 @@ Vercel auto-deploys within ~1 minute.
 | `public/images/home/hero-foundry-pour.jpg` | "Molten Metal Pouring at Milwaukee Foundry" by Quang Vuong, Pexels, https://www.pexels.com/photo/molten-metal-pouring-at-milwaukee-foundry-29442931/ . Shot Nov 16, 2024 in Milwaukee (Nikon Z 7). Chosen by Kevin Nov 2, 2026. File is 1717×2236: Pexels' 1717×2576 download with the caution tape and bucket cropped off the bottom | Pexels License: free for commercial use, no credit required. The photographer's page lists Topaz Photo AI as editing software (enhancement, not generation) |
 | `public/images/home/us-map-midwest.svg` | FNDRYx asset pack, Nov 2026 | Our own |
 | `public/images/home/midwest-road.jpg` | FNDRYx asset pack ("midwest-road-unsplash.jpg"), 2600×1727. Original Unsplash page not recorded in the pack | Unsplash License per the pack's README (checked Nov 1, 2026): free, no credit required |
+| `public/images/home/midwest-house-logo-gray.png` | Midwest House logo supplied by Kevin, Nov 2, 2026; recolored to one-color steel-400 (#94A3B8), trimmed, 480×221 | Use cleared by Kevin with Midwest House, Nov 2, 2026. Keep it small (28px tall) and never dominant. Shown in the Grand Rapids section and the footer ("Partner") |
 | `public/images/home/report-sample-read-this-first.png`, `report-sample-priorities.png` | FNDRYx asset pack. **Synthetic sample, not a real founder.** Keep the tag visible | Our own |
 
 ## Automated Checks (GitHub Actions)
