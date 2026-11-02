@@ -53,6 +53,7 @@ function founderEmail(fullName: string) {
     <p ${GREETING}>Hi ${escapeHtml(fullName)},</p>
     <p ${P}>Thanks for joining the FNDRYx founder list.</p>
     <p ${P}>FNDRYx opens through partner programs and events, and we'll email you when one fits your company. You'll take a structured readiness assessment and get a founder report built from your own answers. With your consent, you can then check in every 21 days. Founders never pay for their own assessment.</p>
+    <p ${P}>If you're attending Midwest House Summit in Grand Rapids, your personal link is in your invitation email from FNDRYx.</p>
     <p ${P}>Questions? Just reply.</p>
     ${SIGN_OFF_HTML}
   `);
@@ -61,6 +62,8 @@ function founderEmail(fullName: string) {
 Thanks for joining the FNDRYx founder list.
 
 FNDRYx opens through partner programs and events, and we'll email you when one fits your company. You'll take a structured readiness assessment and get a founder report built from your own answers. With your consent, you can then check in every 21 days. Founders never pay for their own assessment.
+
+If you're attending Midwest House Summit in Grand Rapids, your personal link is in your invitation email from FNDRYx.
 
 Questions? Just reply.
 

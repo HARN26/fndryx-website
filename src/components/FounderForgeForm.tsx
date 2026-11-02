@@ -42,7 +42,8 @@ const SUBMIT_LABEL: Record<Role, string> = {
 const SUCCESS: Record<Role, { heading: string; message: string }> = {
   founder: {
     heading: "You’re on the list.",
-    message: "We’ll email you when a program or event fits your company.",
+    message:
+      "We’ll email you when a program or event fits your company. Attending Midwest House Summit? Your personal link is in your FNDRYx invitation email.",
   },
   operator: {
     heading: "Thanks for reaching out.",

@@ -119,6 +119,14 @@
 
 _New entries added here as updates ship after migration, most recent first._
 
+### November 2, 2026 — PR 5: the product (how it works, founder report, Grand Rapids)
+
+- **How it works:** "Three steps, then a record." Assess / Report / Check in in open columns joined by a thin line, plus the G2 record strip (17 bars, a year of 21-day check-ins). The old card grid is gone.
+- **The founder report:** the two synthetic report images overlapping, an always-visible "Synthetic example, not a real founder" tag, and three numbered notes.
+- **Grand Rapids:** "Live now" section on the road photo with a navy fade, the plan's copy and the attendee note. No deadline printed.
+- **Ted-cleared items now live:** Summit bar above the nav (every page), Grand Rapids in the nav and footer, hero link "Going to Grand Rapids?", the founder thank-you line "Attending Midwest House Summit? …" and the matching paragraph in the founder confirmation email.
+- Page order now: hero, facts, the gap, the problem, how it works, the founder report, Grand Rapids, then the old What FNDRYx Is Not and the form (both rebuilt in PR 6).
+
 ### November 2, 2026 — PR 4: top of page (hero, facts row, gap, problem)
 
 - **Hero:** new H1 "The readiness record for early-stage capital." and subhead from the plan, solid "Join the founder list" button and a "How it works" text link. Server component. The foundry photo bleeds off the right from `lg` up (navy fade on its left edge) and becomes a band under the text below `lg`. No second logo, no orange wash, no min-height screen.

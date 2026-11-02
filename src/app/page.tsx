@@ -6,6 +6,8 @@ import FactsRow from "@/components/FactsRow";
 import Gap from "@/components/Gap";
 import Problem from "@/components/Problem";
 import HowItWorks from "@/components/HowItWorks";
+import FounderReport from "@/components/FounderReport";
+import GrandRapids from "@/components/GrandRapids";
 import AntiClaim from "@/components/AntiClaim";
 import FounderForgeForm from "@/components/FounderForgeForm";
 import { baseOpenGraph, rssAlternateTypes } from "@/lib/shared-metadata";
@@ -31,6 +33,8 @@ export default function Home() {
         <Gap />
         <Problem />
         <HowItWorks />
+        <FounderReport />
+        <GrandRapids />
         <AntiClaim />
         <FounderForgeForm />
       </main>
