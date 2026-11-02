@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import Logo from "./Logo";
 
@@ -45,6 +46,20 @@ export default function Footer() {
           <p className="mt-4 max-w-sm font-body text-base text-steel-300">
             The readiness record for early-stage capital.
           </p>
+          {/* Partner mark: one-color gray, small (cleared by Kevin, Nov 2, 2026) */}
+          <div className="mt-8 flex items-center gap-3">
+            <span className="font-body text-xs font-bold uppercase tracking-[0.16em] text-steel-400">
+              Partner
+            </span>
+            <Image
+              src="/images/home/midwest-house-logo-gray.png"
+              alt="Midwest House"
+              width={480}
+              height={221}
+              sizes="80px"
+              className="h-7 w-auto"
+            />
+          </div>
         </div>
 
         <nav aria-label="Footer" className="md:col-span-3">
