@@ -1,30 +1,29 @@
+import SignalTimeline from "./SignalTimeline";
+
+// The problem (plan section 3): text, then the full-width signal timeline
+// (G1), on the second background color.
 export default function Problem() {
   return (
-    <section id="problem" className="py-24 md:py-32">
-      <div className="mx-auto max-w-6xl px-6">
-        <p className="mb-4 font-display text-xs uppercase tracking-[0.2em] text-fire-400">
-          The Problem
-        </p>
-
-        <h2 className="mb-16 max-w-4xl font-display font-extrabold text-3xl md:text-5xl leading-tight text-steel-100">
-          The system doesn&apos;t assess founders. It{" "}
-          <span className="font-serif italic text-fire-400">filters</span> them.
+    <section
+      id="problem"
+      aria-labelledby="problem-heading"
+      className="bg-steel-950 py-20 md:py-28"
+    >
+      <div className="mx-auto max-w-content px-4 md:px-6">
+        <p className="section-label">The problem</p>
+        <h2
+          id="problem-heading"
+          className="mt-4 max-w-3xl font-display text-h2 font-bold text-steel-100"
+        >
+          Early-stage capital decides on a record that doesn&apos;t exist.
         </h2>
-
-        <p className="max-w-3xl text-lg leading-relaxed text-steel-300">
-          Warm introductions open gates that cold outreach cannot. The result isn&apos;t a market failure.
-          It&apos;s an <span className="text-fire-400">infrastructure failure</span>.
-          Founders don&apos;t lose the race —{" "}
-          <span className="text-fire-400">they never reach the starting line</span>.
+        <p className="mt-6 max-w-2xl font-body text-body text-steel-300">
+          Data providers see companies after they emit signal: a round, a
+          filing, a hire. A pre-seed founder emits almost none. Investors fall
+          back on networks, and founders outside them fall through.
         </p>
-
-        <div className="mt-16">
-          <a
-            href="#how-it-works"
-            className="font-display font-semibold text-xs uppercase tracking-[0.2em] text-fire-400 hover:text-fire-300 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fire-400 focus-visible:ring-offset-2 focus-visible:ring-offset-steel-900"
-          >
-            See the Solution ↓
-          </a>
+        <div className="mt-12 md:mt-16">
+          <SignalTimeline />
         </div>
       </div>
     </section>

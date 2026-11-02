@@ -119,6 +119,16 @@
 
 _New entries added here as updates ship after migration, most recent first._
 
+### November 2, 2026 — PR 4: top of page (hero, facts row, gap, problem)
+
+- **Hero:** new H1 "The readiness record for early-stage capital." and subhead from the plan, solid "Join the founder list" button and a "How it works" text link. Server component. The foundry photo bleeds off the right from `lg` up (navy fade on its left edge) and becomes a band under the text below `lg`. No second logo, no orange wash, no min-height screen.
+- **Hero photo:** Quang Vuong's Milwaukee night pour on Pexels (29442931), chosen by Kevin over the deck's unsourced pour image. Caution tape and bucket cropped off. Source and license recorded under Image sources in the technical reference.
+- **Facts row:** three facts split by hairlines. Ted cleared naming Midwest House on Nov 2; the third fact reads "Live now with the Midwest House Grand Rapids Summit" (Kevin's wording) and links to the Luma event page.
+- **The gap:** 16% / 9%, the 28-state line, the US map and legend, the sources footnote.
+- **The problem:** new heading and body on steel-950, plus the G1 signal timeline (inline SVG, seven markers on desktop, four on phones).
+- The old "filters" Problem section, its pull-quote styling and the "Here's why" link are gone.
+- Hero text link stays "How it works" until the Grand Rapids section ships in PR 5, then becomes "Going to Grand Rapids?".
+
 ### November 2, 2026 — PR 3: foundation (tokens, type scale, button, Nav, Footer)
 
 - `globals.css`: base styles moved into `@layer base` (heading color classes now work); new `steel-950`, type scale (`text-h1` … `text-footnote`), `max-w-content`, and `section-label`, `btn-primary` and `text-link` utilities. Smooth scroll respects reduced motion.

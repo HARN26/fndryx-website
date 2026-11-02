@@ -82,8 +82,11 @@ src/content/
 - `Button.tsx` — Brand-spec button. Variants: primary (solid fire-400, steel-900 text, 6px radius, lighter on hover; the `btn-primary` utility), secondary (plain text link, underlined on hover; `text-link`), ghost. Default padding `px-6 py-3.5` unless the caller passes padding. **Default `type="button"`** (must opt into submit explicitly). Links styled as buttons use `className="btn-primary px-… py-…"` directly
 - `Nav.tsx` — Server component. Sticky, solid steel-900 background (no scroll listener). From `md` up: How it works, Journal, and a "Join the founder list" button. On phones: a short "Join" button plus a `<details>` "Menu" that works without JavaScript and holds every link. Links live in `NAV_LINKS`; Grand Rapids, Who it's for and Team are added when those sections ship
 - `Footer.tsx` — Server component on steel-950. Left-aligned columns: wordmark and "The readiness record for early-stage capital."; links (How it works, Journal, Privacy Policy, LinkedIn with inline SVG mark); contact (kevin@fndryx.io, privacy@fndryx.io). Bottom row: broker-dealer disclaimer, © 2026 FNDRYx, Inc. and the Covington address
-- `Hero.tsx` — Client component (extracted from page.tsx during Phase 5). Homepage hero with CTA scroll handler
-- `Problem.tsx` — Section with italic-orange "filters" treatment, body copy, "See the solution" link (pull quote and unsourced "vast majority" line removed Nov 2026)
+- `Hero.tsx` — Server component. H1 "The readiness record for early-stage capital.", subhead, "Join the founder list" button and a text link. From `lg` up the foundry photo bleeds off the right edge with a navy fade; below `lg` it is a band under the text. Photo: `public/images/home/hero-foundry-pour.jpg` (see Image sources)
+- `FactsRow.tsx` — Three facts under the hero, split by hairlines. The third links to the Midwest House Summit event page (cleared by Ted, Nov 2, 2026)
+- `Gap.tsx` — "The gap": 16% / 9% figures, the 28-state line, the US map (`public/images/home/us-map-midwest.svg`) with legend, and the sources footnote
+- `SignalTimeline.tsx` — G1 graphic, inline SVG with real text and a screen-reader description. Seven markers and speckles from `lg` up; four markers, no speckles below
+- `Problem.tsx` — "The problem" on steel-950: heading, body and the G1 signal timeline
 - `HowItWorks.tsx` — 3-card grid (Assess / Report / Check in). Numerals and badges removed Nov 2026
 - `AntiClaim.tsx` — "What FNDRYx Is Not" section: "not a placement service" heading plus the plain disclaimer paragraph
 - `FounderForgeForm.tsx` — Client component for the interest list ("Get on the list."). Section id `join`, with an empty `#founder-forge` anchor kept for old links. Roles: Founder / Program, university or event organizer / Investor or capital partner (values `founder` / `operator` / `capital_provider`, unchanged so `?role=` links still work). Conditional Stage / Organization type / Capital type field by role. Validates on the page first (shared rules in `src/lib/join-form.ts`), focuses the first bad field, shows only plain error messages. Submit label and success message vary by role
@@ -209,6 +212,13 @@ git commit -m "description"
 git push
 ```
 Vercel auto-deploys within ~1 minute.
+
+## Image Sources
+
+| File | Source | License |
+|---|---|---|
+| `public/images/home/hero-foundry-pour.jpg` | "Molten Metal Pouring at Milwaukee Foundry" by Quang Vuong, Pexels, https://www.pexels.com/photo/molten-metal-pouring-at-milwaukee-foundry-29442931/ . Shot Nov 16, 2024 in Milwaukee (Nikon Z 7). Chosen by Kevin Nov 2, 2026. File is 1717×2236: Pexels' 1717×2576 download with the caution tape and bucket cropped off the bottom | Pexels License: free for commercial use, no credit required. The photographer's page lists Topaz Photo AI as editing software (enhancement, not generation) |
+| `public/images/home/us-map-midwest.svg` | FNDRYx asset pack, Nov 2026 | Our own |
 
 ## Automated Checks (GitHub Actions)
 
