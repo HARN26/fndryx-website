@@ -51,7 +51,9 @@ src/app/
 ├── layout.tsx                            # Root layout, font variables, global metadata, JSON-LD, RSS discovery, skip link
 ├── globals.css                           # Tailwind v4 @theme tokens + brand defaults
 ├── not-found.tsx                         # "Signal lost." 404 page (new style, Nov 2026)
-├── opengraph-image.tsx                   # Site-wide share image: wordmark + "The readiness record for early-stage capital." on navy, Milwaukee pour photo on the right (photo crop: src/lib/og/foundry-pour-og.jpg)
+├── opengraph-image.tsx                   # Site-wide share image: official wordmark SVG + "The readiness record for early-stage capital." on navy, Milwaukee pour photo on the right (src/lib/og/)
+├── apple-icon.tsx                        # 180×180 home-screen icon and structured-data logo: official wordmark SVG, fitted
+├── icon.tsx                              # 32×32 favicon: Playfair italic x (font from @fontsource)
 ├── twitter-image.tsx                     # Re-exports the OG image for Twitter cards
 ├── icon.tsx                              # 32×32 favicon (italic Playfair x on steel-900)
 ├── apple-icon.tsx                        # 180×180 Apple touch icon (full FNDRYx logo)
@@ -188,7 +190,8 @@ Self-hosted with `next/font/local` from the @fontsource packages (the same Googl
 - **DM Sans** (body) — variable font `@fontsource-variable/dm-sans` (weight axis). CSS var `--font-body`. Uses 400, 500, 600 (Journal), 700.
 - **Playfair Display** (accent) — 400 italic only, `@fontsource/playfair-display`. CSS var `--font-serif`. The wordmark "x" and Journal title accents.
 - All three are preloaded: three files, about 92KB. Not preloading caused a 0.12 layout shift when fonts swapped in, and 13 static files had cost about 215KB.
-- The static `@fontsource/syne`, `dm-sans` and `playfair-display` packages stay installed because the share images (`ImageResponse`) need .woff files.
+- The static `@fontsource/syne`, `dm-sans` and `playfair-display` packages stay installed because the share images and icons (`ImageResponse`) need .woff files. Nothing fetches fonts from Google any more.
+- **Wordmark in generated images:** use `src/lib/og/fndryx-wordmark-dark.svg` (the official asset-pack SVG with FNDRY recolored to steel-100 for dark backgrounds). Rebuilding the mark from fonts in `ImageResponse` let the x collide with the Y.
 
 ### Type Scale
 | Level | Size | Weight |

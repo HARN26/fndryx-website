@@ -121,7 +121,9 @@ _New entries added here as updates ship after migration, most recent first._
 
 ### November 2, 2026 — PR 7: finish (share image, 404, cleanup, performance, phone pass)
 
-- **Share image:** wordmark and "The readiness record for early-stage capital." on navy with the Milwaukee pour photo; "Capital-Readiness Infrastructure" is gone. The Privacy page and Twitter cards reuse it. Journal post share images untouched.
+- **Share image:** official wordmark SVG and "The readiness record for early-stage capital." on navy with the Milwaukee pour photo; "Capital-Readiness Infrastructure" is gone. The Privacy page and Twitter cards reuse it. Journal post share images untouched. (First version rebuilt the wordmark from fonts and the x collided with the Y; Kevin caught it in review.)
+- **Icons:** the 180px home-screen icon (also the structured-data logo) set FNDRY too large and was cut off at both edges; it now uses the official wordmark SVG, fitted. The icon and favicon fetched fonts from Google at build time; they now read them from @fontsource.
+- **Found, not fixed (Journal file):** on Journal post share images, a title with the FNDRYx wordmark (e.g. "Welcome to the FNDRYx Journal") wraps the x onto its own line. Lives in `src/app/blog/[slug]/opengraph-image.tsx`.
 - **404:** "Signal lost." with the plan's body and a "Back to FNDRYx" button in the new style (no more button-inside-link).
 - **Cleanup:** removed `/accelerators` and `/capital-partners` page code (redirects kept), the five starter SVGs and the default README text (new short README).
 - **Short link:** `/grand-rapids` → `/#grand-rapids` for slides and QR codes (point at `/` after Dec 3).

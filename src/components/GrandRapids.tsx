@@ -33,14 +33,14 @@ export default function GrandRapids() {
         <div className="max-w-xl">
           <div className="flex items-center gap-4">
             <p className="section-label">Live now</p>
-            <span aria-hidden="true" className="h-5 w-px bg-steel-600" />
+            <span aria-hidden="true" className="h-6 w-px bg-steel-600" />
             <Image
               src="/images/home/midwest-house-logo-gray.png"
               alt="Midwest House"
               width={480}
               height={221}
               sizes="80px"
-              className="h-7 w-auto"
+              className="h-8 w-auto"
             />
           </div>
           <h2
