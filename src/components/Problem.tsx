@@ -12,20 +12,11 @@ export default function Problem() {
         </h2>
 
         <p className="max-w-3xl text-lg leading-relaxed text-steel-300">
-          The vast majority of venture capital flows to a handful of states.
           Warm introductions open gates that cold outreach cannot. The result isn&apos;t a market failure.
           It&apos;s an <span className="text-fire-400">infrastructure failure</span>.
           Founders don&apos;t lose the race —{" "}
           <span className="text-fire-400">they never reach the starting line</span>.
         </p>
-
-        <blockquote className="mt-12 max-w-3xl rounded-r-xl border-l-[3px] border-fire-400 bg-[rgba(249,115,22,0.08)] p-8">
-          <p className="font-serif italic text-lg md:text-xl leading-relaxed text-steel-200">
-            Capital doesn&apos;t have a discovery problem. It has a signal problem.
-            The best founders aren&apos;t the best networked — they&apos;re the best
-            prepared. They just need infrastructure that sees them.
-          </p>
-        </blockquote>
 
         <div className="mt-16">
           <a

@@ -1,50 +1,20 @@
-import type { ReactNode } from "react";
-
 type Step = {
-  number: string;
   title: string;
-  body: ReactNode;
-  badge: string;
+  body: string;
 };
 
 const steps: Step[] = [
   {
-    number: "01",
     title: "Assess",
-    body: (
-      <>
-        Founders complete the Capital Readiness Assessment — twenty-six questions
-        across five dimensions in roughly fifteen minutes, producing two scores:
-        Business Readiness (BR) and Investment Readiness (IR).
-      </>
-    ),
-    badge: "Free for Founders",
+    body: "A structured readiness assessment covering financial reality, team execution, market validation, business model and funding strategy.",
   },
   {
-    number: "02",
-    title: "Profile",
-    body: (
-      <>
-        Deterministic scoring assigns a quadrant placement (Forged, Tempering,
-        Hot Iron, or Ore) and surfaces the gap between{" "}
-        <span className="text-fire-400">BR and IR</span> — itself a meaningful
-        signal. A recurring pulse keeps your readiness current.
-      </>
-    ),
-    badge: "Scored on Submission",
+    title: "Report",
+    body: "A founder report built from your own answers, reviewed by our team before it reaches you.",
   },
   {
-    number: "03",
-    title: "Surface",
-    body: (
-      <>
-        Your readiness record becomes{" "}
-        <span className="text-fire-400">visible to capital partners</span> — the
-        full picture across five dimensions, updated as you progress, not a
-        snapshot from the day you filled out a form.
-      </>
-    ),
-    badge: "Capital Access",
+    title: "Check in",
+    body: "With your consent, a short check-in every 21 days. You can stop at any time.",
   },
 ];
 
@@ -63,26 +33,15 @@ export default function HowItWorks() {
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
           {steps.map((step) => (
             <article
-              key={step.number}
-              className="relative flex min-h-[280px] flex-col rounded-2xl border border-steel-700 bg-steel-800 p-8 transition-all duration-300 hover:-translate-y-0.5 hover:border-fire-400"
+              key={step.title}
+              className="relative flex flex-col rounded-2xl border border-steel-700 bg-steel-800 p-8 transition-all duration-300 hover:-translate-y-0.5 hover:border-fire-400"
             >
-              <div
-                aria-hidden="true"
-                className="mb-6 font-display font-extrabold text-7xl leading-none text-steel-700"
-              >
-                {step.number}
-              </div>
               <h3 className="mb-3 font-display font-bold text-xl text-fire-400">
                 {step.title}
               </h3>
-              <p className="mb-6 text-base leading-relaxed text-steel-300">
+              <p className="text-base leading-relaxed text-steel-300">
                 {step.body}
               </p>
-              <div className="mt-auto">
-                <span className="inline-block rounded-md bg-fire-500/10 px-3 py-1.5 font-display font-semibold text-xs uppercase tracking-wider text-fire-400">
-                  {step.badge}
-                </span>
-              </div>
             </article>
           ))}
         </div>

@@ -22,20 +22,10 @@ export default function AntiClaim() {
         </h2>
 
         <p className="max-w-3xl text-lg leading-relaxed text-steel-200">
-          FNDRYx does not guarantee meetings, introductions, or capital. It is{" "}
-          <span className="text-fire-400">measurement infrastructure</span>{" "}
-          that gives you a defensible readout of where you stand and what
-          closes the gap. The{" "}
-          <span className="text-fire-400">Capital Readiness Assessment</span>{" "}
-          scores your readiness across{" "}
-          <span className="text-fire-400">five dimensions of capital readiness</span>
-          ; a recurring pulse keeps that score current. As your record builds,
-          it becomes{" "}
-          <span className="text-fire-400">visible to capital partners</span>{" "}
-          evaluating founders at your stage — but the introduction is theirs to
-          make, not ours to promise. And the assessment is{" "}
-          <span className="text-fire-400">free for founders</span> — structural
-          to how the evaluation layer works, not a promotion.
+          We don&apos;t guarantee meetings, introductions or capital. We
+          don&apos;t rank founders or predict outcomes. We&apos;re not a
+          broker-dealer or investment adviser, and we don&apos;t arrange
+          investments. Founders never pay for their own assessment.
         </p>
       </div>
     </section>

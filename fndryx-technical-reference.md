@@ -26,8 +26,8 @@ Next.js marketing site for FNDRYx.io — "The capital-readiness exchange" for fo
 - **Dashboard:** https://resend.com
 - **Verified domain:** fndryx.io
 - **API key env var:** `RESEND_API_KEY`
-- **Sender:** `FNDRYx <forge@fndryx.io>` with Reply-To `forge@fndryx.io`
-- Sends role-specific confirmation emails (Founder vs Capital Provider templates)
+- **Sender:** `FNDRYx <forge@fndryx.io>` with Reply-To `kevin@fndryx.io` (moved off `forge@` in Nov 2026 until it is confirmed that replies to `forge@` reach someone)
+- Sends one of three role-specific confirmation emails: Founder ("You're on the FNDRYx founder list"), Program and Capital (both "Your FNDRYx inquiry")
 
 ### Vercel (hosting)
 - **Project name:** fndryx-website-brpv
@@ -80,18 +80,19 @@ src/content/
 ### Components (src/components/)
 - `Logo.tsx` — Reusable styled logo. Props: `size` (sm/md/lg/xl OR responsive object `{ base, md?, lg? }`), `variant` (dark/light)
 - `Button.tsx` — Brand-spec button. Variants: primary (fire gradient + glow), secondary (steel-700), outline, ghost. **Default `type="button"`** (must opt into submit explicitly)
-- `Nav.tsx` — Sticky nav with scroll-aware backdrop, Journal link (md+ only), responsive CTA label
+- `Nav.tsx` — Sticky nav with scroll-aware backdrop, Journal link (md+ only), CTA to `/#join` labeled "Join" on phones and "Join the founder list" from `sm` up
 - `Footer.tsx` — Centered logo + tagline + Journal link + fndryx.io link + LinkedIn icon link (inline SVG, not lucide) + copyright
 - `Hero.tsx` — Client component (extracted from page.tsx during Phase 5). Homepage hero with CTA scroll handler
-- `Problem.tsx` — Section with italic-orange "filters" treatment, body copy, pull-quote with fire-400 left border, "See the solution" link
-- `HowItWorks.tsx` — 3-card grid (Assess / Profile / Route) with `aria-hidden` decorative numerals and badge labels
-- `Audiences.tsx` — 2-card grid (For Founders / For Capital Providers) with `aria-hidden` decorative typography backgrounds
-- `FounderForgeForm.tsx` — Client component, conditional Stage/Type fields based on role, POSTs to `/api/founder-forge`, success state with CheckCircle2 icon, `aria-live` on error and success states
+- `Problem.tsx` — Section with italic-orange "filters" treatment, body copy, "See the solution" link (pull quote and unsourced "vast majority" line removed Nov 2026)
+- `HowItWorks.tsx` — 3-card grid (Assess / Report / Check in). Numerals and badges removed Nov 2026
+- `AntiClaim.tsx` — "What FNDRYx Is Not" section: "not a placement service" heading plus the plain disclaimer paragraph
+- `FounderForgeForm.tsx` — Client component for the interest list ("Get on the list."). Section id `join`, with an empty `#founder-forge` anchor kept for old links. Roles: Founder / Program, university or event organizer / Investor or capital partner (values `founder` / `operator` / `capital_provider`, unchanged so `?role=` links still work). Conditional Stage / Organization type / Capital type field by role. Validates on the page first (shared rules in `src/lib/join-form.ts`), focuses the first bad field, shows only plain error messages. Submit label and success message vary by role
 - `blog/MdxComponents.tsx` — Component map for `MDXRemote` covering h2/h3, p, a (with focus ring; external link auto-handling — any href starting with `http://` or `https://` auto-applies `target="_blank"` and `rel="noopener noreferrer"`; internal links stay same-tab), strong, em, lists, blockquote (fire-400 border + italic Playfair), inline code, pre, hr, img
 
 ### Shared Libraries (src/lib/)
 - `design-tokens.ts` — Colors, fonts, spacing, type scales
 - `blog.ts` — MDX reading / parsing utilities
+- `join-form.ts` — Role list, Stage / Organization type / Capital type lists, `validateJoin()` and the generic error message. Used by both the join form and `/api/founder-forge`, so the page and server check the same rules
 - `title-utils.ts` — Parses and strips the orange italic accent syntax in post titles. Exports `parseTitleAccents(title)` (returns ordered segments with `accent` flags for rendering) and `stripTitleAccents(title)` (returns plain text for tab titles, RSS, OG metadata, sr-only H1, and image alt). Authors wrap accent words in single asterisks in the frontmatter `title` field — e.g., `"The Most *Inefficient* Market in America"`.
 
 ### Public Assets (public/)
@@ -198,13 +199,14 @@ Vercel auto-deploys within ~1 minute.
 
 ```
 [Browser]
-  → POST /api/founder-forge (JSON body: role, fullName, email, company, stage?, type?)
+  → validateJoin() on the page (src/lib/join-form.ts); stops here with a plain message if anything is missing
+  → POST /api/founder-forge (JSON body: role, fullName, email, company, stage? | operatorType? | type?)
        ↓
 [Vercel Serverless Function: src/app/api/founder-forge/route.ts]
-  ├─ Validate env vars (FORMSPREE_ENDPOINT, RESEND_API_KEY) → 500 if missing
-  ├─ Validate body (required fields, email format, role enum) → 400 if invalid
+  ├─ Validate env vars (FORMSPREE_ENDPOINT, RESEND_API_KEY) → 500 + generic message if missing (detail logged only)
+  ├─ validateJoin() again: required fields, email format, role, and stage / organization type / capital type against the lists → 400 + plain message and field name
   ├─ Forward to Formspree (best-effort, logs error but doesn't block)
-  └─ Send Resend email with role-specific template
+  └─ Send Resend email with role-specific template (Reply-To kevin@fndryx.io). Any failure → 500 + generic message; technical detail goes to the Vercel function log only
        ↓
 [Submitter inbox]  ← receives confirmation email
 [Kevin inbox]      ← receives Formspree notification
