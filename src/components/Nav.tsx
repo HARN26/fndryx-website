@@ -1,8 +1,9 @@
 import Link from "next/link";
 import Logo from "./Logo";
+import NavMenu from "./NavMenu";
 
-// Server component: a solid background instead of a scroll listener, so the
-// nav adds no JavaScript of its own.
+// Server component: a solid background instead of a scroll listener. The only
+// client code is NavMenu, which closes the phone menu after a tap.
 //
 // The plan's full nav is: How it works, Grand Rapids, Who it's for, Team,
 // Journal. Links are added here only when their section exists on the
@@ -62,12 +63,12 @@ export default function Nav() {
           </Link>
         </nav>
 
-        {/* Phones: short button plus a menu that works without JavaScript */}
+        {/* Phones: short button plus a menu (works without JavaScript; closes on tap with it) */}
         <div className="flex items-center gap-2 md:hidden">
           <Link href="/#join" className="btn-primary px-4 py-2 text-sm">
             Join
           </Link>
-          <details className="group relative">
+          <NavMenu>
             <summary className="flex cursor-pointer list-none items-center gap-1.5 rounded-sm px-2 py-2 font-body text-sm font-medium text-steel-300 hover:text-steel-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fire-400 [&::-webkit-details-marker]:hidden">
               Menu
               <Chevron />
@@ -89,7 +90,7 @@ export default function Nav() {
                 ))}
               </ul>
             </nav>
-          </details>
+          </NavMenu>
         </div>
       </div>
     </header>
