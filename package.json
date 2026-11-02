@@ -10,6 +10,8 @@
     "claim-check": "node scripts/claim-check.mjs"
   },
   "dependencies": {
+    "@fontsource-variable/dm-sans": "^5.3.0",
+    "@fontsource-variable/syne": "^5.3.0",
     "@fontsource/dm-sans": "^5.2.8",
     "@fontsource/playfair-display": "^5.2.8",
     "@fontsource/syne": "^5.2.7",

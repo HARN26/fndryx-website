@@ -1,72 +1,60 @@
 import { ImageResponse } from "next/og";
 import { readFile } from "node:fs/promises";
 
-export const alt = "FNDRYx — Capital-Readiness Infrastructure";
+// Site-wide share image (link previews on LinkedIn, iMessage, Slack...):
+// the wordmark and the title line on navy, with the Milwaukee pour photo on
+// the right. The Journal posts have their own share images and are untouched.
+// The wordmark is the official FNDRYx SVG (asset pack), recolored for dark
+// backgrounds: FNDRY in steel-100, x in fire-400. Rebuilding it from fonts let
+// the x collide with the Y, so don't.
+export const alt = "FNDRYx — The readiness record for early-stage capital";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-const FONT_URLS = {
-  syne: new URL(
-    "../../node_modules/@fontsource/syne/files/syne-latin-800-normal.woff",
+const FILES = {
+  syne700: new URL(
+    "../../node_modules/@fontsource/syne/files/syne-latin-700-normal.woff",
     import.meta.url,
   ),
-  playfairItalic: new URL(
-    "../../node_modules/@fontsource/playfair-display/files/playfair-display-latin-400-italic.woff",
-    import.meta.url,
-  ),
-  dmSans: new URL(
-    "../../node_modules/@fontsource/dm-sans/files/dm-sans-latin-600-normal.woff",
-    import.meta.url,
-  ),
+  wordmark: new URL("../lib/og/fndryx-wordmark-dark.svg", import.meta.url),
+  photo: new URL("../lib/og/foundry-pour-og.jpg", import.meta.url),
 } as const;
 
-async function loadFont(
-  label: string,
-  fileUrl: URL,
-): Promise<ArrayBuffer | null> {
+async function load(label: string, fileUrl: URL): Promise<Buffer | null> {
   try {
-    const buffer = await readFile(fileUrl);
-    const arrayBuffer = buffer.buffer.slice(
-      buffer.byteOffset,
-      buffer.byteOffset + buffer.byteLength,
-    ) as ArrayBuffer;
-    console.log(
-      `[opengraph-image] Loaded ${label} (${arrayBuffer.byteLength} bytes)`,
-    );
-    return arrayBuffer;
+    return await readFile(fileUrl);
   } catch (err) {
-    console.error(
-      `[opengraph-image] Failed to read ${label} from ${fileUrl}:`,
-      err,
-    );
+    console.error(`[opengraph-image] Failed to read ${label}:`, err);
     return null;
   }
 }
 
+const toArrayBuffer = (b: Buffer) =>
+  b.buffer.slice(b.byteOffset, b.byteOffset + b.byteLength) as ArrayBuffer;
+
 export default async function Image() {
-  const [syne, playfairItalic, dmSans] = await Promise.all([
-    loadFont("Syne 800", FONT_URLS.syne),
-    loadFont("Playfair Display Italic 400", FONT_URLS.playfairItalic),
-    loadFont("DM Sans 600", FONT_URLS.dmSans),
+  const [syne700, wordmark, photo] = await Promise.all([
+    load("Syne 700", FILES.syne700),
+    load("wordmark", FILES.wordmark),
+    load("photo", FILES.photo),
   ]);
 
   const fonts: {
     name: string;
     data: ArrayBuffer;
-    weight: 400 | 600 | 800;
-    style: "normal" | "italic";
+    weight: 700;
+    style: "normal";
   }[] = [];
-  if (syne)
-    fonts.push({ name: "Syne", data: syne, weight: 800, style: "normal" });
-  if (playfairItalic)
-    fonts.push({
-      name: "Playfair",
-      data: playfairItalic,
-      weight: 400,
-      style: "italic",
-    });
-  if (dmSans)
-    fonts.push({ name: "DM Sans", data: dmSans, weight: 600, style: "normal" });
+  if (syne700)
+    fonts.push({ name: "Syne", data: toArrayBuffer(syne700), weight: 700, style: "normal" });
+
+  const wordmarkSrc = wordmark
+    ? `data:image/svg+xml;base64,${wordmark.toString("base64")}`
+    : null;
+
+  const photoSrc = photo
+    ? `data:image/jpeg;base64,${photo.toString("base64")}`
+    : null;
 
   return new ImageResponse(
     (
@@ -74,70 +62,75 @@ export default async function Image() {
         style={{
           width: "100%",
           height: "100%",
-          background: "#0f172a",
           display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
+          background: "#0f172a",
           position: "relative",
         }}
       >
+        {photoSrc && (
+          <img
+            src={photoSrc}
+            alt=""
+            width={520}
+            height={630}
+            style={{ position: "absolute", top: 0, right: 0, width: 520, height: 630 }}
+          />
+        )}
+        {/* Navy fade over the photo's left edge */}
         <div
           style={{
             position: "absolute",
             top: 0,
-            left: 0,
-            right: 0,
-            height: "6px",
-            background: "#f97316",
+            right: 340,
+            width: 180,
+            height: 630,
+            background: "linear-gradient(90deg, #0f172a 0%, rgba(15,23,42,0) 100%)",
           }}
         />
         <div
           style={{
             display: "flex",
-            alignItems: "baseline",
+            flexDirection: "column",
             justifyContent: "center",
+            width: 680,
+            height: "100%",
+            paddingLeft: 80,
+            paddingRight: 40,
           }}
         >
-          <span
+          {wordmarkSrc && (
+            // The SVG has built-in side margins; -22px lines its F up with the text below.
+            <img
+              src={wordmarkSrc}
+              alt="FNDRYx"
+              width={520}
+              height={97}
+              style={{ width: 520, height: 97, marginLeft: -22 }}
+            />
+          )}
+          <div
             style={{
+              display: "flex",
+              marginTop: 36,
               fontFamily: "Syne",
-              fontWeight: 800,
-              fontSize: 160,
+              fontWeight: 700,
+              fontSize: 46,
+              lineHeight: 1.15,
               color: "#f1f5f9",
-              letterSpacing: "-0.04em",
-              lineHeight: 1,
+              letterSpacing: "-0.01em",
             }}
           >
-            FNDRY
-          </span>
-          <span
+            The readiness record for early-stage capital.
+          </div>
+          <div
             style={{
-              fontFamily: "Playfair",
-              fontStyle: "italic",
-              fontWeight: 400,
-              fontSize: 180,
-              color: "#f97316",
-              marginLeft: "-0.05em",
-              lineHeight: 1,
+              display: "flex",
+              marginTop: 40,
+              width: 72,
+              height: 4,
+              background: "#f97316",
             }}
-          >
-            x
-          </span>
-        </div>
-        <div
-          style={{
-            display: "flex",
-            marginTop: "60px",
-            fontFamily: "DM Sans",
-            fontWeight: 600,
-            fontSize: 32,
-            color: "#94a3b8",
-            letterSpacing: "0.25em",
-            textTransform: "uppercase",
-          }}
-        >
-          Capital-Readiness Infrastructure
+          />
         </div>
       </div>
     ),

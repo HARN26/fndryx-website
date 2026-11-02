@@ -25,7 +25,7 @@ export default function GrandRapids() {
         />
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-linear-to-t from-steel-900 via-transparent via-40% to-transparent lg:bg-linear-to-r lg:via-steel-900/85 lg:via-35% lg:to-transparent lg:to-75%"
+          className="absolute inset-0 bg-linear-to-t from-steel-900 via-transparent via-40% to-transparent lg:bg-linear-to-r lg:via-steel-900/90 lg:via-55% lg:to-transparent lg:to-90% xl:via-steel-900/85 xl:via-40% xl:to-80%"
         />
       </div>
 
