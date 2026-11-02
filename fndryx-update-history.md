@@ -119,6 +119,18 @@
 
 _New entries added here as updates ship after migration, most recent first._
 
+### November 2, 2026 — PR 7: finish (share image, 404, cleanup, performance, phone pass)
+
+- **Share image:** wordmark and "The readiness record for early-stage capital." on navy with the Milwaukee pour photo; "Capital-Readiness Infrastructure" is gone. The Privacy page and Twitter cards reuse it. Journal post share images untouched.
+- **404:** "Signal lost." with the plan's body and a "Back to FNDRYx" button in the new style (no more button-inside-link).
+- **Cleanup:** removed `/accelerators` and `/capital-partners` page code (redirects kept), the five starter SVGs and the default README text (new short README).
+- **Short link:** `/grand-rapids` → `/#grand-rapids` for slides and QR codes (point at `/` after Dec 3).
+- **Performance:** fonts moved to self-hosted variable files (3 files, ~92KB, down from 13 files, ~215KB) with preload kept to avoid layout shift; also ends the Google Fonts fetch at build time that once failed CI. Hero gets a wide crop for phones via an art-directed `<picture>`. Local phone Lighthouse on the homepage went from 85 to a median of 95 (93/95/97), LCP from 4.4s to about 2.9s, layout shift 0; desktop 100 on all four.
+- **Tried and dropped:** AVIF images (slow first-time encoding on the Journal's large covers, small gain); a newer browserslist target (the 14KB of "legacy JavaScript" Lighthouse flags is Next.js's built-in polyfills, which ship regardless).
+- **Phone pass:** all pages at 320, 360, 390 and 414px: no sideways scrolling, no text under 12px. Footer links got a little more height for easier tapping.
+- **Contrast:** Grand Rapids text over the road photo dropped to 2.3:1 at 1024px wide; the navy fade is deeper between 1024 and 1280px, now at least 4.8:1 everywhere.
+- **Found, not fixed (Privacy page is counsel's):** email links in the Privacy Policy rely on color alone (Lighthouse Accessibility 96 on that page, same as before). A styling-only fix is one class.
+
 ### November 2, 2026 — PR 6b: Midwest House logo in the Summit bar
 
 - The Summit bar now shows a one-line gray Midwest House logo in place of the words "Midwest House" (no repetition). Alt text keeps the sentence whole for screen readers.

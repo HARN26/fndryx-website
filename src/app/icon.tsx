@@ -1,30 +1,28 @@
 import { ImageResponse } from "next/og";
+import { readFile } from "node:fs/promises";
 
 export const size = { width: 32, height: 32 };
 export const contentType = "image/png";
 
-async function loadGoogleFont(): Promise<ArrayBuffer | null> {
-  const url =
-    "https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,400&display=swap";
+// Playfair Display italic from @fontsource (same Google Fonts file), so the
+// favicon never depends on reaching Google at build time.
+const PLAYFAIR_ITALIC = new URL(
+  "../../node_modules/@fontsource/playfair-display/files/playfair-display-latin-400-italic.woff",
+  import.meta.url,
+);
+
+async function loadFont(): Promise<ArrayBuffer | null> {
   try {
-    const css = await fetch(url, {
-      headers: {
-        "User-Agent":
-          "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.118 Safari/537.36",
-      },
-    }).then((r) => r.text());
-    const match = css.match(
-      /src:\s*url\(([^)]+)\)\s*format\(['"]?(truetype|opentype|woff)['"]?\)/,
-    );
-    if (!match) return null;
-    return await fetch(match[1]).then((r) => r.arrayBuffer());
-  } catch {
+    const b = await readFile(PLAYFAIR_ITALIC);
+    return b.buffer.slice(b.byteOffset, b.byteOffset + b.byteLength) as ArrayBuffer;
+  } catch (err) {
+    console.error("[icon] Failed to read font:", err);
     return null;
   }
 }
 
 export default async function Icon() {
-  const playfairItalic = await loadGoogleFont();
+  const playfairItalic = await loadFont();
 
   return new ImageResponse(
     (

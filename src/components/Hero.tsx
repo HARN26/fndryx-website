@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { getImageProps } from "next/image";
 
 // Hero (plan section 1): left-aligned text over navy. From lg up the foundry
 // photo bleeds off the right edge with a navy fade on its left side; below lg
@@ -11,6 +11,33 @@ export const HERO_IMAGE = {
   src: "/images/home/hero-foundry-pour.jpg",
   alt: "Three people in protective gear pour molten iron from a furnace at a night pour in Milwaukee, sparks scattering across the ground.",
 };
+
+// Two crops of the same photo: the tall original for the desktop side panel,
+// and a wide crop for the band on phones and tablets, so small screens don't
+// download a tall image only to show a strip of it.
+const common = {
+  alt: HERO_IMAGE.alt,
+  fetchPriority: "high" as const,
+  loading: "eager" as const,
+};
+const {
+  props: { srcSet: desktopSrcSet },
+} = getImageProps({
+  ...common,
+  src: HERO_IMAGE.src,
+  width: 1717,
+  height: 2236,
+  sizes: "44vw",
+});
+const {
+  props: { srcSet: bandSrcSet, ...bandProps },
+} = getImageProps({
+  ...common,
+  src: "/images/home/hero-foundry-pour-wide.jpg",
+  width: 1717,
+  height: 1060,
+  sizes: "100vw",
+});
 
 export default function Hero() {
   return (
@@ -44,15 +71,15 @@ export default function Hero() {
 
       {/* Phones and tablets: a band under the text. Desktop: bleeds off the right. */}
       <div className="relative h-64 w-full sm:h-80 lg:absolute lg:inset-y-0 lg:right-0 lg:h-auto lg:w-[44%]">
-        <Image
-          src={HERO_IMAGE.src}
-          alt={HERO_IMAGE.alt}
-          fill
-          fetchPriority="high"
-          loading="eager"
-          sizes="(min-width: 1024px) 44vw, 100vw"
-          className="object-cover object-[50%_55%]"
-        />
+        <picture>
+          <source media="(min-width: 1024px)" srcSet={desktopSrcSet} sizes="44vw" />
+          <img
+            {...bandProps}
+            srcSet={bandSrcSet}
+            alt={HERO_IMAGE.alt}
+            className="absolute inset-0 h-full w-full object-cover object-center lg:object-[50%_55%]"
+          />
+        </picture>
         {/* Navy fade: top edge on the band, left edge on desktop */}
         <div
           aria-hidden="true"

@@ -15,7 +15,7 @@ const LINKS = [
 const LINKEDIN_URL = "https://www.linkedin.com/company/109594033";
 
 const linkClass =
-  "inline-flex items-center gap-2 font-body text-sm text-steel-300 transition-colors hover:text-steel-100 hover:underline underline-offset-4 rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fire-400";
+  "inline-flex items-center gap-2 py-1 font-body text-sm text-steel-300 transition-colors hover:text-steel-100 hover:underline underline-offset-4 rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fire-400";
 
 function LinkedinMark() {
   return (
@@ -64,7 +64,7 @@ export default function Footer() {
         </div>
 
         <nav aria-label="Footer" className="md:col-span-3">
-          <ul className="space-y-3">
+          <ul className="space-y-1.5">
             {LINKS.map((l) => (
               <li key={l.href}>
                 <Link href={l.href} className={linkClass}>
@@ -86,7 +86,7 @@ export default function Footer() {
           </ul>
         </nav>
 
-        <ul className="space-y-3 md:col-span-3">
+        <ul className="space-y-1.5 md:col-span-3">
           <li>
             <a href="mailto:kevin@fndryx.io" className={linkClass}>
               kevin@fndryx.io

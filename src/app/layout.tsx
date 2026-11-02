@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Syne, DM_Sans, Playfair_Display } from "next/font/google";
+import localFont from "next/font/local";
 import {
   baseOpenGraph,
   baseTwitter,
@@ -7,25 +7,32 @@ import {
 } from "@/lib/shared-metadata";
 import "./globals.css";
 
-const syne = Syne({
-  subsets: ["latin"],
+// Fonts are self-hosted from @fontsource packages (the Google Fonts files),
+// so builds never depend on reaching Google. Syne and DM Sans are variable
+// fonts: one file each covers every weight the site uses (homepage and
+// Journal), so three small files load instead of thirteen. Paths must be
+// literal strings.
+const syne = localFont({
+  src: "../../node_modules/@fontsource-variable/syne/files/syne-latin-wght-normal.woff2",
+  weight: "400 800",
+  style: "normal",
   display: "swap",
-  weight: ["400", "500", "600", "700", "800"],
   variable: "--font-display",
 });
 
-const dmSans = DM_Sans({
-  subsets: ["latin"],
+const dmSans = localFont({
+  src: "../../node_modules/@fontsource-variable/dm-sans/files/dm-sans-latin-wght-normal.woff2",
+  weight: "100 1000",
+  style: "normal",
   display: "swap",
-  weight: ["400", "500", "600", "700"],
   variable: "--font-body",
 });
 
-const playfair = Playfair_Display({
-  subsets: ["latin"],
+const playfair = localFont({
+  src: "../../node_modules/@fontsource/playfair-display/files/playfair-display-latin-400-italic.woff2",
+  weight: "400",
+  style: "italic",
   display: "swap",
-  weight: ["400", "600"],
-  style: ["normal", "italic"],
   variable: "--font-serif",
 });
 
