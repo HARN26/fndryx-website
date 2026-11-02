@@ -15,7 +15,7 @@ export default function SummitBar() {
       <Link
         href="/#grand-rapids"
         aria-label={SENTENCE}
-        className="group mx-auto flex max-w-content items-center justify-center gap-3 px-4 py-2 font-body text-[13px] text-steel-200 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-fire-400 sm:gap-4 sm:text-sm md:px-6"
+        className="group mx-auto flex max-w-content items-center justify-center gap-2.5 px-3 py-2 font-body text-[13px] text-steel-200 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-fire-400 sm:gap-4 sm:px-4 sm:text-sm md:px-6"
       >
         <Image
           src="/images/home/midwest-house-logo-gray.png"
@@ -26,9 +26,10 @@ export default function SummitBar() {
           className="h-7 w-auto shrink-0 sm:h-8"
         />
         <span aria-hidden="true" className="h-6 w-px shrink-0 bg-steel-700" />
-        <span className="group-hover:text-steel-100 group-hover:underline underline-offset-4">
-          Now powering founder assessments for the Summit Founder Track. Grand
-          Rapids, Dec 2–3.
+        <span className="text-balance group-hover:text-steel-100 group-hover:underline underline-offset-4">
+          {/* Non-breaking spaces keep "Grand Rapids," and "Dec 2–3." together on phones. */}
+          Now powering founder assessments for the Summit Founder Track.{" "}
+          Grand{"\u00a0"}Rapids, Dec{"\u00a0"}2–3.
         </span>
       </Link>
     </div>
