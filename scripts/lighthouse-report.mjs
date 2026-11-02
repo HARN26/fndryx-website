@@ -65,13 +65,19 @@ function run(name, extraArgs) {
         .map((a) => a.title),
     ]),
   );
+  const finalUrl = lhr.finalDisplayedUrl ?? lhr.finalUrl;
+  if (new URL(finalUrl).host !== new URL(url).host) {
+    console.error(
+      `Lighthouse ended up on ${finalUrl}, not ${url}. The preview is probably behind a login, so these scores would not be FNDRYx's.`,
+    );
+    process.exit(1);
+  }
   return {
     name,
     scores,
     failing,
     cls: audit("cumulative-layout-shift"),
     lcp: audit("largest-contentful-paint"),
-    finalUrl: lhr.finalDisplayedUrl ?? lhr.finalUrl,
   };
 }
 

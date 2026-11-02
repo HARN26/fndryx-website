@@ -217,7 +217,7 @@ If any step fails, the pull request shows a red X. Read the failing step's log f
 - Waits for Vercel's preview deployment of the pull request (up to 15 minutes), then runs Lighthouse 13.5.0 on the preview homepage: 3 mobile runs and 1 desktop run (`scripts/lighthouse-report.mjs`).
 - Scores and the mobile median appear on the run's Summary page. Full HTML reports are attached as the `lighthouse-reports` artifact (kept 30 days).
 - Report only. It never blocks a merge. Score targets apply to the live site.
-- If previews are behind Vercel login, the run is skipped with a warning. Fix: Vercel → Project → Settings → Deployment Protection → Protection Bypass for Automation → create a secret, then save it in GitHub as `VERCEL_AUTOMATION_BYPASS_SECRET`.
+- **Previews are currently behind Vercel login**, so until the bypass secret below is added, the run is skipped with a warning. The check follows redirects and compares the final address, because Vercel's login page answers HTTP 200 and would otherwise be scored instead of the site. Fix: Vercel → Project → Settings → Deployment Protection → Protection Bypass for Automation → create a secret, then save it in GitHub as `VERCEL_AUTOMATION_BYPASS_SECRET`.
 
 ## Form Submission Pipeline
 
