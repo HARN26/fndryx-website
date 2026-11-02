@@ -2,7 +2,6 @@
 
 import { useState, useSyncExternalStore, type FormEvent } from "react";
 import Link from "next/link";
-import { ChevronDown, CheckCircle2 } from "lucide-react";
 import {
   CAPITAL_TYPES,
   FOUNDER_STAGES,
@@ -93,6 +92,29 @@ function getUrlRole(): Role | null {
 }
 
 const getServerUrlRole = (): Role | null => null;
+
+// Small inline chevron for the select fields (no icon library on the homepage).
+function SelectChevron() {
+  return (
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 12 12"
+      fill="none"
+      aria-hidden="true"
+      focusable="false"
+      className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-steel-400"
+    >
+      <path
+        d="M2.5 4.5 6 8l3.5-3.5"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
 
 const inputClass =
   "w-full bg-steel-900 border border-steel-700 rounded-lg px-4 py-3 text-steel-100 text-sm placeholder:text-steel-400 focus:outline-none focus:border-fire-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fire-400 focus-visible:ring-offset-2 focus-visible:ring-offset-steel-800 transition-colors";
@@ -204,34 +226,39 @@ export default function FounderForgeForm() {
   };
 
   return (
-    <section id="join" className="relative py-24 md:py-32">
+    <section
+      id="join"
+      aria-labelledby="join-heading"
+      className="relative bg-steel-900 py-20 md:py-28"
+    >
       {/* Old links point at #founder-forge; keep the anchor so they still land here. */}
       <span id="founder-forge" aria-hidden="true" className="absolute top-0" />
-      <div className="mx-auto max-w-6xl px-6">
-        <div className="mx-auto max-w-2xl rounded-2xl border border-steel-700 bg-steel-800 p-8 md:p-12">
+      {/* Join (plan section 10): the promise on the left, the form in a calm panel on the right. */}
+      <div className="mx-auto grid max-w-content gap-10 px-4 md:px-6 lg:grid-cols-12 lg:gap-10">
+        <div className="lg:col-span-5">
+          <h2
+            id="join-heading"
+            className="font-display text-h2 font-bold text-steel-100"
+          >
+            Get on the list.
+          </h2>
+          <p className="mt-6 max-w-md font-body text-body text-steel-300">
+            FNDRYx opens through partner programs and events. Tell us who you
+            are, and we&apos;ll be in touch when one fits.
+          </p>
+        </div>
+        <div className="rounded-md border border-steel-700 bg-steel-800 p-6 md:p-10 lg:col-span-7">
           {submittedRole ? (
-            <div
-              className="flex flex-col items-center text-center"
-              aria-live="polite"
-            >
-              <CheckCircle2 size={48} className="text-fire-400" />
-              <h2 className="mt-6 font-display font-extrabold text-3xl text-fire-400">
+            <div aria-live="polite">
+              <h3 className="font-display text-2xl font-bold text-steel-100">
                 {SUCCESS[submittedRole].heading}
-              </h2>
-              <p className="mt-4 max-w-md text-steel-300">
+              </h3>
+              <p className="mt-3 max-w-md font-body text-body text-steel-300">
                 {SUCCESS[submittedRole].message}
               </p>
             </div>
           ) : (
             <>
-              <h2 className="mb-6 font-display font-extrabold text-3xl md:text-4xl leading-tight text-steel-100">
-                Get on the list.
-              </h2>
-              <p className="mb-10 text-sm leading-relaxed text-steel-400">
-                FNDRYx opens through partner programs and events. Tell us who
-                you are, and we&apos;ll be in touch when one fits.
-              </p>
-
               <form onSubmit={handleSubmit} className="space-y-5" noValidate>
                 <div>
                   <label htmlFor="ff-role" className={labelClass}>
@@ -250,10 +277,7 @@ export default function FounderForgeForm() {
                         </option>
                       ))}
                     </select>
-                    <ChevronDown
-                      size={18}
-                      className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-steel-500"
-                    />
+                    <SelectChevron />
                   </div>
                 </div>
 
@@ -331,10 +355,7 @@ export default function FounderForgeForm() {
                           </option>
                         ))}
                       </select>
-                      <ChevronDown
-                        size={18}
-                        className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-steel-500"
-                      />
+                      <SelectChevron />
                     </div>
                   </div>
                 )}
@@ -364,10 +385,7 @@ export default function FounderForgeForm() {
                           </option>
                         ))}
                       </select>
-                      <ChevronDown
-                        size={18}
-                        className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-steel-500"
-                      />
+                      <SelectChevron />
                     </div>
                   </div>
                 )}
@@ -395,10 +413,7 @@ export default function FounderForgeForm() {
                           </option>
                         ))}
                       </select>
-                      <ChevronDown
-                        size={18}
-                        className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-steel-500"
-                      />
+                      <SelectChevron />
                     </div>
                   </div>
                 )}
@@ -411,7 +426,7 @@ export default function FounderForgeForm() {
                   >
                     {isSubmitting ? "Sending..." : SUBMIT_LABEL[role]}
                   </button>
-                  <p className="mt-4 text-center text-xs text-steel-400">
+                  <p className="mt-4 text-center font-body text-footnote text-steel-400">
                     We use this to contact you about FNDRYx.{" "}
                     <Link
                       href="/privacy"

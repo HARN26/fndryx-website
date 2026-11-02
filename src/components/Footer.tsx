@@ -2,11 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 import Logo from "./Logo";
 
-// The plan's footer links are: How it works, Grand Rapids, Team, Journal,
-// Privacy Policy, LinkedIn. Team is added with its section in PR 6.
+// Footer links per the plan: How it works, Grand Rapids, Team, Journal,
+// Privacy Policy, LinkedIn.
 const LINKS = [
   { href: "/#how-it-works", label: "How it works" },
   { href: "/#grand-rapids", label: "Grand Rapids" },
+  { href: "/#team", label: "Team" },
   { href: "/blog", label: "Journal" },
   { href: "/privacy", label: "Privacy Policy" },
 ];

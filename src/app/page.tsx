@@ -8,7 +8,9 @@ import Problem from "@/components/Problem";
 import HowItWorks from "@/components/HowItWorks";
 import FounderReport from "@/components/FounderReport";
 import GrandRapids from "@/components/GrandRapids";
-import AntiClaim from "@/components/AntiClaim";
+import WhoItsFor from "@/components/WhoItsFor";
+import WhyItHolds from "@/components/WhyItHolds";
+import Team from "@/components/Team";
 import FounderForgeForm from "@/components/FounderForgeForm";
 import { baseOpenGraph, rssAlternateTypes } from "@/lib/shared-metadata";
 
@@ -35,7 +37,9 @@ export default function Home() {
         <HowItWorks />
         <FounderReport />
         <GrandRapids />
-        <AntiClaim />
+        <WhoItsFor />
+        <WhyItHolds />
+        <Team />
         <FounderForgeForm />
       </main>
       <Footer />
