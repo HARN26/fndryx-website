@@ -54,9 +54,21 @@ function run(name, extraArgs) {
     CATEGORIES.map(([id]) => [id, Math.round((lhr.categories[id]?.score ?? 0) * 100)]),
   );
   const audit = (id) => lhr.audits[id]?.numericValue;
+  // Scored audits under 90, so the summary says what pulled each score down.
+  const failing = Object.fromEntries(
+    CATEGORIES.map(([id]) => [
+      id,
+      (lhr.categories[id]?.auditRefs ?? [])
+        .filter((ref) => ref.weight > 0)
+        .map((ref) => lhr.audits[ref.id])
+        .filter((a) => a && typeof a.score === "number" && a.score < 0.9)
+        .map((a) => a.title),
+    ]),
+  );
   return {
     name,
     scores,
+    failing,
     cls: audit("cumulative-layout-shift"),
     lcp: audit("largest-contentful-paint"),
     finalUrl: lhr.finalDisplayedUrl ?? lhr.finalUrl,
@@ -84,6 +96,15 @@ lines.push(
 );
 lines.push(row("**Desktop**", desktop));
 lines.push("");
+const firstMobile = mobile[0];
+for (const [label, r] of [["Mobile run 1", firstMobile], ["Desktop", desktop]]) {
+  const parts = CATEGORIES.filter(([id]) => r.failing[id].length > 0).map(
+    ([id, l]) => `- **${l}:** ${r.failing[id].join("; ")}`,
+  );
+  lines.push(`**What held scores down (${label}):**`);
+  lines.push(parts.length ? parts.join("\n") : "- Nothing below 90.");
+  lines.push("");
+}
 lines.push(
   "Report only, on a preview build. The full HTML reports are attached to this run as the `lighthouse-reports` artifact.",
 );
