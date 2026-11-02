@@ -90,7 +90,7 @@ src/content/
 - `HowItWorks.tsx` — "Three steps, then a record." Assess / Report / Check in in three open columns joined by a thin line, then the G2 record strip: 17 bars (one per 21-day check-in), height 38% to 100%, color steel-700 to fire-400 eased by t^0.8
 - `FounderReport.tsx` — "Plain about what it is. Useful about what's next." Two overlapping synthetic report images (`public/images/home/report-sample-*.png`) with an always-visible "Synthetic example, not a real founder" tag, and three numbered notes
 - `GrandRapids.tsx` — "Live now" section (id `grand-rapids`) on the full-bleed road photo with a navy fade; phones get the photo as a band above the text. Attendee note with kevin@fndryx.io. Past tense after the Summit (PR 8)
-- `SummitBar.tsx` — Slim bar above the nav on every page, linking to `/#grand-rapids`. Remove after the Summit (PR 8)
+- `SummitBar.tsx` — Slim bar above the nav on every page, linking to `/#grand-rapids`. The one-line Midwest House logo (12px tall, alt "Midwest House") replaces the words "Midwest House" in the sentence. 13px text on phones keeps it to two lines. Remove after the Summit (PR 8)
 - `WhoItsFor.tsx` — "One record, three audiences." Founders / Programs and regions / Capital partners in open columns split by hairlines. Program and capital links reload with `?role=` so the form opens on that role. Counsel-cleared group-of-five lines (Jake, Nov 2, 2026)
 - `WhyItHolds.tsx` — "Software can be copied. Time, consent, and discipline can't." Three columns with inline-SVG diagrams G3 (two rows of 17 ticks), G4 (five dots into "5+"), G5 (three stepped bars), then "What FNDRYx doesn't do". Replaces the old AntiClaim section
 - `Team.tsx` — Kevin and Patrick (bio approved by Patrick, Nov 2, 2026), square photos at 144px (`public/images/team/`), "Based in Covington, Kentucky."
@@ -227,6 +227,7 @@ Vercel auto-deploys within ~1 minute.
 | `public/images/home/midwest-road.jpg` | FNDRYx asset pack ("midwest-road-unsplash.jpg"), 2600×1727. Original Unsplash page not recorded in the pack | Unsplash License per the pack's README (checked Nov 1, 2026): free, no credit required |
 | `public/images/home/midwest-house-logo-gray.png` | Midwest House logo supplied by Kevin, Nov 2, 2026; recolored to one-color steel-400 (#94A3B8), trimmed, 480×221 | Use cleared by Kevin with Midwest House, Nov 2, 2026. Keep it small (28px tall) and never dominant. Shown in the Grand Rapids section and the footer ("Partner") |
 | `public/images/team/kevin-harnist.jpg` (280px), `patrick-tiettmeyer.jpg` (220px) | FNDRYx asset pack, cropped headshots | Our own. Shown at 144px; send larger files to reach the plan's 160px |
+| `public/images/home/midwest-house-logo-gray-horizontal.png` | One-line version made by FNDRYx (Nov 2, 2026) from Midwest House's stacked logo: the two words set side by side, gray, 515×80. **Not an official Midwest House file.** Used only in the Summit bar | Logo use cleared with Midwest House; this rearranged lockup approved by Kevin, Nov 2, 2026. Swap in an official horizontal file if Midwest House supplies one |
 | `public/images/home/report-sample-read-this-first.png`, `report-sample-priorities.png` | FNDRYx asset pack. **Synthetic sample, not a real founder.** Keep the tag visible | Our own |
 
 ## Automated Checks (GitHub Actions)
