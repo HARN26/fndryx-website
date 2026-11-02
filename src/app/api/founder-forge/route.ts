@@ -96,12 +96,12 @@ ${SIGN_OFF_TEXT}`;
 function capitalEmail(fullName: string) {
   const html = wrapHtml(`
     <p ${GREETING}>Hi ${escapeHtml(fullName)},</p>
-    <p ${P}>Thanks for your interest in FNDRYx. We're building the readiness record for early-stage founders in the middle of the country. We'll reply personally within two business days.</p>
+    <p ${P}>Thanks for your interest in FNDRYx. We're building the readiness record for early-stage founders in the middle of the country. Today, investors see aggregates only, in groups of five or more. We'll reply personally within two business days.</p>
     ${SIGN_OFF_HTML}
   `);
   const text = `Hi ${fullName},
 
-Thanks for your interest in FNDRYx. We're building the readiness record for early-stage founders in the middle of the country. We'll reply personally within two business days.
+Thanks for your interest in FNDRYx. We're building the readiness record for early-stage founders in the middle of the country. Today, investors see aggregates only, in groups of five or more. We'll reply personally within two business days.
 
 ${SIGN_OFF_TEXT}`;
   return {

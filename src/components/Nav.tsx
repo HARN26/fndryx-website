@@ -6,13 +6,14 @@ import SummitBar from "./SummitBar";
 // Server component: a solid background instead of a scroll listener. The only
 // client code is NavMenu, which closes the phone menu after a tap.
 //
-// The plan's full nav is: How it works, Grand Rapids, Who it's for, Team,
-// Journal. Links are added here only when their section exists on the
-// homepage: Who it's for and Team ship in PR 6. Remove Grand Rapids and the
-// Summit bar after the Summit (PR 8).
+// Nav per the plan: How it works, Grand Rapids, Who it's for, Team, Journal.
+// Remove Grand Rapids and the Summit bar after the Summit (PR 8). With five
+// links the inline nav starts at lg; below that, the Menu holds them.
 const NAV_LINKS = [
   { href: "/#how-it-works", label: "How it works" },
   { href: "/#grand-rapids", label: "Grand Rapids" },
+  { href: "/#who-its-for", label: "Who it’s for" },
+  { href: "/#team", label: "Team" },
   { href: "/blog", label: "Journal" },
 ];
 
@@ -55,8 +56,8 @@ export default function Nav() {
             <Logo size="sm" variant="dark" />
           </Link>
 
-          {/* Tablet and desktop */}
-          <nav aria-label="Main" className="hidden items-center gap-8 md:flex">
+          {/* Desktop */}
+          <nav aria-label="Main" className="hidden items-center gap-7 lg:flex">
             {NAV_LINKS.map((l) => (
               <Link key={l.href} href={l.href} className={linkClass}>
                 {l.label}
@@ -67,8 +68,8 @@ export default function Nav() {
             </Link>
           </nav>
 
-          {/* Phones: short button plus a menu (works without JavaScript; closes on tap with it) */}
-          <div className="flex items-center gap-2 md:hidden">
+          {/* Phones and tablets: short button plus a menu (works without JavaScript; closes on tap with it) */}
+          <div className="flex items-center gap-2 lg:hidden">
             <Link href="/#join" className="btn-primary px-4 py-2 text-sm">
               Join
             </Link>

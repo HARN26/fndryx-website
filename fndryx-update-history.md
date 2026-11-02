@@ -119,6 +119,16 @@
 
 _New entries added here as updates ship after migration, most recent first._
 
+### November 2, 2026 — PR 6: trust and join (who it's for, why it holds, team, join)
+
+- Counsel (Jake) cleared the three group-of-five lines; Patrick approved his bio. All ship word for word.
+- **Who it's for:** three open columns with links to the form; "Talk to us" and "Stay in touch" open the form on the program or investor role.
+- **Why it holds:** Time / Consent / Discipline with small inline-SVG diagrams (G3, G4, G5), then "What FNDRYx doesn't do". The old "What FNDRYx Is Not" section (`AntiClaim.tsx`) is removed.
+- **Team:** Kevin and Patrick with photos, titles and bios; "Based in Covington, Kentucky." Photos show at 144px because the source files are 280px and 220px.
+- **Join:** promise left, form panel right. Success messages are plain headings; the check-circle and chevron icons from lucide-react are replaced (lucide stays installed because the Journal uses its RSS icon).
+- **Nav:** adds Who it's for and Team. With five links, the inline nav starts at 1024px; smaller screens use the Menu. **Footer:** adds Team.
+- **Capital confirmation email:** adds the cleared sentence "Today, investors see aggregates only, in groups of five or more."
+
 ### November 2, 2026 — PR 5b: Midwest House logo
 
 - Kevin confirmed Midwest House cleared their logo for fndryx.io (the plan's original OK was text only).
