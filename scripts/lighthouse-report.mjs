@@ -112,6 +112,10 @@ for (const [label, r] of [["Mobile run 1", firstMobile], ["Desktop", desktop]]) 
   lines.push("");
 }
 lines.push(
+  "SEO on previews: Vercel tells search engines not to index preview links, so \"Page is blocked from indexing\" and \"robots.txt is not valid\" are expected here and do not apply to fndryx.io.",
+);
+lines.push("");
+lines.push(
   "Report only, on a preview build. The full HTML reports are attached to this run as the `lighthouse-reports` artifact.",
 );
 const md = lines.join("\n");
