@@ -15,6 +15,7 @@
 
 # QA pass (throwaway)
 /qa
+/lighthouse-reports
 
 # next.js
 /.next/

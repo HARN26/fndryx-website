@@ -195,6 +195,30 @@ git push
 ```
 Vercel auto-deploys within ~1 minute.
 
+## Automated Checks (GitHub Actions)
+
+Added Nov 2026 (PR 2 of the website plan). Both workflows live in `.github/workflows/`.
+
+### CI (`ci.yml`): every pull request and every push to `main`
+1. `npm run lint`
+2. `npm run claim-check` (`scripts/claim-check.mjs`)
+3. `npm run build`
+
+If any step fails, the pull request shows a red X. Read the failing step's log for the file and line.
+
+### Claim check (`scripts/claim-check.mjs`)
+- Scans the homepage, join form, API route and emails, shared Nav/Footer/Button/Logo, metadata and icons. Skips the Journal (`src/components/blog`, `src/app/blog`, `src/content`), Privacy Policy and unsubscribe files.
+- Fails on banned words and phrases (free, Forged, Tempering, Hot Iron, quadrant, BR, IR, deterministic, two scores, visible to capital, capital access, twenty-six, validated, proven, predicts, guarantee, marketplace, capital routing, placement) and on never-publish patterns (dollar amounts, 149, Raise Right, roadshow, TAM/SAM/SOM, valuation).
+- Allowed exact sentences (the "What FNDRYx doesn't do" lines, "not a placement service", and the founder revenue bands on the form) are listed in `ALLOWED` at the top of the script. Add to it only for wording Kevin approved.
+- **Never-name list is private.** The repo is public, so the names are not in the code. CI reads them from the GitHub Actions secret `CLAIM_CHECK_PRIVATE_TERMS` (one term per line) and reports matches as "private term #N", never by name. If the secret is missing, CI still passes and the log says the list wasn't checked.
+- Run locally: `npm run claim-check`. To include the private list locally, set the same variable in your shell first.
+
+### Lighthouse (`lighthouse.yml`): every pull request
+- Waits for Vercel's preview deployment of the pull request (up to 15 minutes), then runs Lighthouse 13.5.0 on the preview homepage: 3 mobile runs and 1 desktop run (`scripts/lighthouse-report.mjs`).
+- Scores and the mobile median appear on the run's Summary page. Full HTML reports are attached as the `lighthouse-reports` artifact (kept 30 days).
+- Report only. It never blocks a merge. Score targets apply to the live site.
+- If previews are behind Vercel login, the run is skipped with a warning. Fix: Vercel → Project → Settings → Deployment Protection → Protection Bypass for Automation → create a secret, then save it in GitHub as `VERCEL_AUTOMATION_BYPASS_SECRET`.
+
 ## Form Submission Pipeline
 
 ```
