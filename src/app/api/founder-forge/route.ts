@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
-
-type Role = "founder" | "capital_provider" | "operator";
+import { GENERIC_ERROR, validateJoin, type Role } from "@/lib/join-form";
 
 type SubmitBody = {
   role: Role;
@@ -13,16 +12,9 @@ type SubmitBody = {
   operatorType?: string;
 };
 
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-const VALID_OPERATOR_TYPES: ReadonlySet<string> = new Set([
-  "accelerator",
-  "incubator",
-  "venture_studio",
-  "university_program",
-  "corporate_program",
-  "other",
-]);
+const FROM = "FNDRYx <forge@fndryx.io>";
+// Replies go to Kevin until forge@fndryx.io is confirmed to reach someone.
+const REPLY_TO = "kevin@fndryx.io";
 
 const escapeHtml = (s: string) =>
   s
@@ -49,71 +41,32 @@ function wrapHtml(innerHtml: string) {
 </html>`;
 }
 
+const P = 'style="margin:0 0 20px 0;"';
+const GREETING = 'style="margin:0 0 20px 0;color:#f1f5f9;font-size:18px;"';
+const SIGNATURE = 'style="margin:0;color:#f97316;font-weight:600;"';
+const SIGN_OFF_HTML = `<p ${SIGNATURE}>Kevin Harnist and Patrick Tiettmeyer<br />FNDRYx</p>`;
+const SIGN_OFF_TEXT = `Kevin Harnist and Patrick Tiettmeyer
+FNDRYx`;
+
 function founderEmail(fullName: string) {
   const html = wrapHtml(`
-    <p style="margin:0 0 20px 0;color:#f1f5f9;font-size:18px;">Hey ${escapeHtml(fullName)},</p>
-    <p style="margin:0 0 20px 0;">Thanks for requesting access to the <strong style="color:#f1f5f9;">Capital Readiness Assessment</strong>.</p>
-    <p style="margin:0 0 20px 0;">Our team is reviewing your request. Within 48 hours, you'll receive a direct link to the assessment — twenty-six questions in roughly fifteen minutes. Deterministic scoring across five dimensions of capital readiness.</p>
-    <p style="margin:0 0 12px 0;color:#f1f5f9;font-weight:600;">What happens next:</p>
-    <ol style="margin:0 0 24px 0;padding-left:20px;">
-      <li style="margin-bottom:8px;">You complete the assessment and receive two scores: <strong style="color:#f1f5f9;">Business Readiness (BR)</strong> and <strong style="color:#f1f5f9;">Investment Readiness (IR)</strong>. The gap between them is its own signal.</li>
-      <li style="margin-bottom:8px;">A recurring pulse keeps your readiness current; your score history compounds across reassessments.</li>
-      <li style="margin-bottom:8px;">As your record builds, it becomes <strong style="color:#f1f5f9;">visible to capital partners</strong> evaluating founders at your stage — but the introduction is theirs to make, not ours to promise. FNDRYx is <strong style="color:#f1f5f9;">measurement infrastructure, not a placement service</strong>.</li>
-    </ol>
-    <p style="margin:0 0 20px 0;">Questions? Just reply to this email.</p>
-    <p style="margin:0;color:#f97316;font-weight:600;">— The FNDRYx team</p>
+    <p ${GREETING}>Hi ${escapeHtml(fullName)},</p>
+    <p ${P}>Thanks for joining the FNDRYx founder list.</p>
+    <p ${P}>FNDRYx opens through partner programs and events, and we'll email you when one fits your company. You'll take a structured readiness assessment and get a founder report built from your own answers. With your consent, you can then check in every 21 days. Founders never pay for their own assessment.</p>
+    <p ${P}>Questions? Just reply.</p>
+    ${SIGN_OFF_HTML}
   `);
-  const text = `Hey ${fullName},
+  const text = `Hi ${fullName},
 
-Thanks for requesting access to the Capital Readiness Assessment.
+Thanks for joining the FNDRYx founder list.
 
-Our team is reviewing your request. Within 48 hours, you'll receive a direct link to the assessment — twenty-six questions in roughly fifteen minutes. Deterministic scoring across five dimensions of capital readiness.
+FNDRYx opens through partner programs and events, and we'll email you when one fits your company. You'll take a structured readiness assessment and get a founder report built from your own answers. With your consent, you can then check in every 21 days. Founders never pay for their own assessment.
 
-What happens next:
-1. You complete the assessment and receive two scores: Business Readiness (BR) and Investment Readiness (IR). The gap between them is its own signal.
-2. A recurring pulse keeps your readiness current; your score history compounds across reassessments.
-3. As your record builds, it becomes visible to capital partners evaluating founders at your stage — but the introduction is theirs to make, not ours to promise. FNDRYx is measurement infrastructure, not a placement service.
+Questions? Just reply.
 
-Questions? Just reply to this email.
-
-— The FNDRYx team`;
+${SIGN_OFF_TEXT}`;
   return {
-    subject: "Your Capital Readiness Assessment access request",
-    html,
-    text,
-  };
-}
-
-function capitalEmail(fullName: string) {
-  const html = wrapHtml(`
-    <p style="margin:0 0 20px 0;color:#f1f5f9;font-size:18px;">Hey ${escapeHtml(fullName)},</p>
-    <p style="margin:0 0 20px 0;">Thanks for your interest in the <strong style="color:#f1f5f9;">FNDRYx platform</strong>.</p>
-    <p style="margin:0 0 12px 0;">Our team will reach out within 48 hours with next steps, including:</p>
-    <ul style="margin:0 0 24px 0;padding-left:20px;">
-      <li style="margin-bottom:8px;">Founder readiness records — five dimensions, deterministic scoring, with the full breakdown behind every score rather than a bare rank</li>
-      <li style="margin-bottom:8px;">How to refer founders directly into the Capital Readiness Assessment</li>
-      <li style="margin-bottom:8px;">Capital provider onboarding</li>
-    </ul>
-    <p style="margin:0 0 20px 0;">FNDRYx is the evaluation layer between founders and capital — <strong style="color:#f1f5f9;">structured signal, no black box</strong>.</p>
-    <p style="margin:0 0 20px 0;">Questions? Just reply to this email.</p>
-    <p style="margin:0;color:#f97316;font-weight:600;">— The FNDRYx team</p>
-  `);
-  const text = `Hey ${fullName},
-
-Thanks for your interest in the FNDRYx platform.
-
-Our team will reach out within 48 hours with next steps, including:
-- Founder readiness records — five dimensions, deterministic scoring, with the full breakdown behind every score rather than a bare rank
-- How to refer founders directly into the Capital Readiness Assessment
-- Capital provider onboarding
-
-FNDRYx is the evaluation layer between founders and capital — structured signal, no black box.
-
-Questions? Just reply to this email.
-
-— The FNDRYx team`;
-  return {
-    subject: "Your FNDRYx platform inquiry",
+    subject: "You're on the FNDRYx founder list",
     html,
     text,
   };
@@ -121,36 +74,35 @@ Questions? Just reply to this email.
 
 function operatorEmail(fullName: string) {
   const html = wrapHtml(`
-    <p style="margin:0 0 20px 0;color:#f1f5f9;font-size:18px;">Hey ${escapeHtml(fullName)},</p>
-    <p style="margin:0 0 20px 0;">Thanks for your inquiry about <strong style="color:#f1f5f9;">FNDRYx for accelerator and program impact measurement</strong>.</p>
-    <p style="margin:0 0 12px 0;">FNDRYx gives program operators measurement infrastructure for cohort outcomes:</p>
-    <ul style="margin:0 0 24px 0;padding-left:20px;">
-      <li style="margin-bottom:8px;">Impact Dashboard for cohort impact measurement across pre/post readiness</li>
-      <li style="margin-bottom:8px;">Pre/post assessment instrument: 22 core questions plus 6 reflection questions</li>
-      <li style="margin-bottom:8px;">Normalized cohort impact score, comparable across cohorts and programs</li>
-      <li style="margin-bottom:8px;">Multi-organization tenancy with full data isolation per program</li>
-    </ul>
-    <p style="margin:0 0 20px 0;">Our team will follow up within 48 hours to discuss pilot engagement structure, cohort size, and program length.</p>
-    <p style="margin:0 0 20px 0;">Questions? Just reply to this email.</p>
-    <p style="margin:0;color:#f97316;font-weight:600;">— The FNDRYx team</p>
+    <p ${GREETING}>Hi ${escapeHtml(fullName)},</p>
+    <p ${P}>Thanks for reaching out about FNDRYx for your program or region. We'd like to hear about your founders and what you want to learn about them. We'll reply personally within two business days.</p>
+    ${SIGN_OFF_HTML}
   `);
-  const text = `Hey ${fullName},
+  const text = `Hi ${fullName},
 
-Thanks for your inquiry about FNDRYx for accelerator and program impact measurement.
+Thanks for reaching out about FNDRYx for your program or region. We'd like to hear about your founders and what you want to learn about them. We'll reply personally within two business days.
 
-FNDRYx gives program operators measurement infrastructure for cohort outcomes:
-- Impact Dashboard for cohort impact measurement across pre/post readiness
-- Pre/post assessment instrument: 22 core questions plus 6 reflection questions
-- Normalized cohort impact score, comparable across cohorts and programs
-- Multi-organization tenancy with full data isolation per program
-
-Our team will follow up within 48 hours to discuss pilot engagement structure, cohort size, and program length.
-
-Questions? Just reply to this email.
-
-— The FNDRYx team`;
+${SIGN_OFF_TEXT}`;
   return {
-    subject: "Your FNDRYx accelerator inquiry",
+    subject: "Your FNDRYx inquiry",
+    html,
+    text,
+  };
+}
+
+function capitalEmail(fullName: string) {
+  const html = wrapHtml(`
+    <p ${GREETING}>Hi ${escapeHtml(fullName)},</p>
+    <p ${P}>Thanks for your interest in FNDRYx. We're building the readiness record for early-stage founders in the middle of the country. We'll reply personally within two business days.</p>
+    ${SIGN_OFF_HTML}
+  `);
+  const text = `Hi ${fullName},
+
+Thanks for your interest in FNDRYx. We're building the readiness record for early-stage founders in the middle of the country. We'll reply personally within two business days.
+
+${SIGN_OFF_TEXT}`;
+  return {
+    subject: "Your FNDRYx inquiry",
     html,
     text,
   };
@@ -164,61 +116,39 @@ export async function POST(request: Request) {
     console.error(
       "Missing required env vars: FORMSPREE_ENDPOINT and/or RESEND_API_KEY"
     );
-    return NextResponse.json(
-      {
-        error:
-          "Server is not configured. FORMSPREE_ENDPOINT and RESEND_API_KEY must be set.",
-      },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: GENERIC_ERROR }, { status: 500 });
   }
 
-  let body: SubmitBody;
+  let raw: Record<string, unknown>;
   try {
-    body = (await request.json()) as SubmitBody;
+    raw = (await request.json()) as Record<string, unknown>;
   } catch {
-    return NextResponse.json({ error: "Invalid JSON body." }, { status: 400 });
+    console.error("founder-forge: request body was not valid JSON");
+    return NextResponse.json({ error: GENERIC_ERROR }, { status: 400 });
+  }
+
+  const str = (v: unknown) => (typeof v === "string" ? v.trim() : v);
+  const fields = {
+    role: str(raw?.role),
+    fullName: str(raw?.fullName),
+    email: str(raw?.email),
+    company: str(raw?.company),
+    stage: str(raw?.stage),
+    type: str(raw?.type),
+    operatorType: str(raw?.operatorType),
+  };
+
+  const check = validateJoin(fields);
+  if (!check.ok) {
+    console.warn(`founder-forge: rejected submission (field: ${check.field})`);
+    return NextResponse.json(
+      { error: check.message, field: check.field },
+      { status: 400 }
+    );
   }
 
   const { role, fullName, email, company, stage, type, operatorType } =
-    body ?? {};
-
-  if (!role || !fullName || !email || !company) {
-    return NextResponse.json(
-      { error: "Missing required fields: role, fullName, email, company." },
-      { status: 400 }
-    );
-  }
-
-  if (
-    role !== "founder" &&
-    role !== "capital_provider" &&
-    role !== "operator"
-  ) {
-    return NextResponse.json({ error: "Invalid role." }, { status: 400 });
-  }
-
-  if (!EMAIL_RE.test(email)) {
-    return NextResponse.json(
-      { error: "Please provide a valid email address." },
-      { status: 400 }
-    );
-  }
-
-  if (role === "operator") {
-    if (!operatorType) {
-      return NextResponse.json(
-        { error: "Organization type is required." },
-        { status: 400 }
-      );
-    }
-    if (!VALID_OPERATOR_TYPES.has(operatorType)) {
-      return NextResponse.json(
-        { error: "Invalid organization type." },
-        { status: 400 }
-      );
-    }
-  }
+    fields as SubmitBody;
 
   try {
     const formspreePayload: Record<string, string> = {
@@ -260,9 +190,9 @@ export async function POST(request: Request) {
           : operatorEmail(fullName);
 
     const { error: sendError } = await resend.emails.send({
-      from: "FNDRYx <forge@fndryx.io>",
+      from: FROM,
       to: [email],
-      replyTo: "forge@fndryx.io",
+      replyTo: REPLY_TO,
       subject: tmpl.subject,
       html: tmpl.html,
       text: tmpl.text,
@@ -270,16 +200,12 @@ export async function POST(request: Request) {
 
     if (sendError) {
       console.error("Resend send error:", sendError);
-      return NextResponse.json(
-        { error: "We couldn't send the confirmation email. Please try again." },
-        { status: 500 }
-      );
+      return NextResponse.json({ error: GENERIC_ERROR }, { status: 500 });
     }
 
     return NextResponse.json({ success: true });
   } catch (err) {
-    const message = err instanceof Error ? err.message : "Unexpected error.";
     console.error("founder-forge route error:", err);
-    return NextResponse.json({ error: message }, { status: 500 });
+    return NextResponse.json({ error: GENERIC_ERROR }, { status: 500 });
   }
 }

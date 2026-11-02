@@ -119,6 +119,31 @@
 
 _New entries added here as updates ship after migration, most recent first._
 
+### November 2, 2026 — PR 1: truth fixes (copy, form, emails, metadata)
+
+First of eight PRs from the Nov 2 audit and upgrade plan. Words and form behavior only, inside the current layout. Lines marked [Ted] or [Counsel] in the plan are left out until cleared.
+
+**Homepage copy.**
+- Hero eyebrow is now "The readiness record for early-stage capital." Subhead is the new site description. CTA is "Join the founder list." Headline unchanged.
+- How It Works steps are now Assess / Report / Check in with the plan's copy. Ghost numerals and badges ("Free for Founders", "Scored on Submission", "Capital Access") removed.
+- For Founders card (`Audiences.tsx`) deleted, with its "Request Access" link.
+- Problem section: pull quote and the unsourced "vast majority of venture capital" sentence removed.
+- What FNDRYx Is Not: body replaced with the plain disclaimer paragraph.
+- Nav CTA reads "Join" on phones and "Join the founder list" from `sm` up, linking to `/#join`.
+
+**Form (interest list, not an access request).**
+- Heading "Get on the list." with the partner-programs line. Retired "Capital Readiness Assessment" label removed.
+- New role labels; role values unchanged. "Company" is now "Company or organization". Organization types add Event organizer and Economic development organization.
+- Shared validation in `src/lib/join-form.ts`, run on the page and again on the server, now including stage and capital type. Visitors only ever see plain messages; technical detail is logged server-side.
+- Note under the button: "We use this to contact you about FNDRYx." plus a Privacy Policy link. "Free for founders" and "48 hours" removed.
+- Role-specific success headings and messages. Section id is now `join`; an empty `founder-forge` anchor keeps old links working.
+
+**Confirmation emails.** All three replaced with the plan's text. Reply-To changed from forge@fndryx.io to kevin@fndryx.io. Sender unchanged.
+
+**Metadata.** New title and description. Keywords list deleted. JSON-LD uses the new description, names FNDRYx, Inc., adds the Covington address, and points the logo at `/apple-icon` (180px) instead of `/icon` (32px).
+
+**Left for later PRs, per the plan:** footer tagline still says "Measurement infrastructure" (PR 3, Foundation); share image still says "Capital-Readiness Infrastructure" and the 404 body is unchanged (PR 7, Finish); old `/accelerators` and `/capital-partners` page code still present behind redirects (PR 7). `npm run lint` already failed on `main` (setState in the form's URL-role effect); PR 2 fixes it when lint goes into CI.
+
 ### October 22, 2026 — Shared Twitter base + doubled title suffix fixed
 
 **Twitter metadata.**

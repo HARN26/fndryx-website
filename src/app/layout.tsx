@@ -30,9 +30,9 @@ const playfair = Playfair_Display({
 });
 
 const SITE_URL = "https://fndryx.io";
-const SITE_TITLE = "FNDRYx — Capital-Readiness Infrastructure";
+const SITE_TITLE = "FNDRYx — The readiness record for early-stage capital";
 const SITE_DESCRIPTION =
-  "FNDRYx is the evaluation layer between founders and capital. Twenty-six questions, five dimensions, deterministic scoring. Free for founders.";
+  "FNDRYx helps founders build a readiness record: a structured assessment, a founder report built from their own answers and, with consent, check-ins every 21 days.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -41,16 +41,6 @@ export const metadata: Metadata = {
     template: "%s — FNDRYx",
   },
   description: SITE_DESCRIPTION,
-  keywords: [
-    "capital readiness",
-    "venture capital",
-    "startup funding",
-    "capital readiness infrastructure",
-    "investment readiness",
-    "business readiness",
-    "startup readiness assessment",
-    "founder readiness record",
-  ],
   authors: [{ name: "FNDRYx" }],
   // Site-wide fields only. og:url is set per page; og:title/description fall
   // back to each page's own title/description, so none of them live here.
@@ -73,14 +63,24 @@ const jsonLd = {
     {
       "@type": "Organization",
       "@id": "https://fndryx.io/#organization",
-      name: "FNDRYx",
+      name: "FNDRYx, Inc.",
       url: "https://fndryx.io",
+      // /icon is 32px; Google wants a logo at least 112px wide.
       logo: {
         "@type": "ImageObject",
-        url: "https://fndryx.io/icon",
+        url: "https://fndryx.io/apple-icon",
+        width: 180,
+        height: 180,
       },
-      description:
-        "FNDRYx is the evaluation layer between founders and capital — measurement infrastructure that makes founder readiness legible to the people writing checks and running programs.",
+      description: SITE_DESCRIPTION,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "727 Madison Ave, Suite 45",
+        addressLocality: "Covington",
+        addressRegion: "KY",
+        postalCode: "41011",
+        addressCountry: "US",
+      },
       sameAs: ["https://www.linkedin.com/company/109594033"],
     },
     {
@@ -88,7 +88,7 @@ const jsonLd = {
       "@id": "https://fndryx.io/#website",
       url: "https://fndryx.io",
       name: "FNDRYx",
-      description: "Capital-readiness infrastructure — the evaluation layer between founders and capital",
+      description: SITE_DESCRIPTION,
       publisher: { "@id": "https://fndryx.io/#organization" },
       inLanguage: "en-US",
     },

@@ -4,9 +4,9 @@ import Logo from "./Logo";
 import Button from "./Button";
 
 export default function Hero() {
-  const scrollToFounderForge = () => {
+  const scrollToJoin = () => {
     document
-      .getElementById("founder-forge")
+      .getElementById("join")
       ?.scrollIntoView({ behavior: "smooth" });
   };
 
@@ -25,7 +25,7 @@ export default function Hero() {
         <Logo size={{ base: "lg", md: "xl" }} variant="dark" />
 
         <p className="mx-auto mt-6 max-w-2xl font-body text-sm uppercase tracking-widest text-steel-400">
-          Capital-readiness infrastructure — every founder signal, compounding over time.
+          The readiness record for early-stage capital.
         </p>
 
         <h1 className="mx-auto mt-12 max-w-5xl font-display font-extrabold text-3xl md:text-4xl lg:text-5xl leading-tight text-steel-100">
@@ -34,19 +34,18 @@ export default function Hero() {
         </h1>
 
         <p className="mx-auto mt-8 max-w-2xl font-body text-lg text-steel-400">
-          FNDRYx is{" "}
-          <span className="text-fire-400">the evaluation layer between founders and capital</span>{" "}
-          — turning founder signals into a{" "}
-          <span className="text-fire-400">compounding capital-readiness record</span>.
+          FNDRYx helps founders build a readiness record: a structured
+          assessment, a founder report built from their own answers and, with
+          consent, check-ins every 21 days.
         </p>
 
         <div className="mt-10">
           <Button
             variant="primary"
             className="px-10 py-4 text-base"
-            onClick={scrollToFounderForge}
+            onClick={scrollToJoin}
           >
-            Request Access
+            Join the founder list
           </Button>
         </div>
 
