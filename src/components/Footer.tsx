@@ -1,13 +1,12 @@
-import Image from "next/image";
 import Link from "next/link";
 import Logo from "./Logo";
 
-// Footer links per the plan: How it works, Grand Rapids, Team, Journal,
-// Privacy Policy, LinkedIn.
+// Footer links: How it works, Grand Rapids, Journal, Privacy Policy, LinkedIn.
+// Team is off the site for now and the Midwest House partner mark was removed
+// (Kevin, Nov 2, 2026). The wordmark and tagline were enlarged the same day.
 const LINKS = [
   { href: "/#how-it-works", label: "How it works" },
   { href: "/#grand-rapids", label: "Grand Rapids" },
-  { href: "/#team", label: "Team" },
   { href: "/blog", label: "Journal" },
   { href: "/privacy", label: "Privacy Policy" },
 ];
@@ -42,25 +41,11 @@ export default function Footer() {
             aria-label="FNDRYx home"
             className="inline-flex rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-fire-400"
           >
-            <Logo size="md" variant="dark" />
+            <Logo variant="dark" sizeClassName="text-5xl" />
           </Link>
-          <p className="mt-4 max-w-sm font-body text-base text-steel-300">
+          <p className="mt-5 max-w-md font-body text-xl text-steel-200">
             The readiness record for early-stage capital.
           </p>
-          {/* Partner mark: one-color gray, small (cleared by Kevin, Nov 2, 2026) */}
-          <div className="mt-8 flex items-center gap-3">
-            <span className="font-body text-xs font-bold uppercase tracking-[0.16em] text-steel-400">
-              Partner
-            </span>
-            <Image
-              src="/images/home/midwest-house-logo-gray.png"
-              alt="Midwest House"
-              width={480}
-              height={221}
-              sizes="80px"
-              className="h-8 w-auto"
-            />
-          </div>
         </div>
 
         <nav aria-label="Footer" className="md:col-span-3">

@@ -28,7 +28,7 @@ const ulClassName =
 const strongClassName = "font-bold text-steel-100";
 const uClassName = "underline underline-offset-4";
 const linkClassName =
-  "text-fire-400 underline-offset-4 hover:underline rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fire-400 focus-visible:ring-offset-2 focus-visible:ring-offset-steel-900";
+  "text-fire-400 underline underline-offset-4 hover:decoration-2 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fire-400 focus-visible:ring-offset-2 focus-visible:ring-offset-steel-900";
 const tableClassName =
   "w-full min-w-[520px] border-collapse text-left font-body text-base leading-relaxed";
 const thClassName =
