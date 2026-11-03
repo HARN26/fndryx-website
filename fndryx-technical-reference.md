@@ -54,7 +54,7 @@ Next.js marketing site for FNDRYx.io — "The capital-readiness exchange" for fo
 ### Pages and API routes (src/app/)
 ```
 src/app/
-├── page.tsx                              # Homepage
+├── page.tsx                              # Homepage: Hero, FactsRow, Gap, Problem, HowItWorks, WhyItHolds, GrandRapids, WhoItsFor, FounderForgeForm
 ├── layout.tsx                            # Root layout, font variables, global metadata, JSON-LD, RSS discovery, skip link
 ├── globals.css                           # Tailwind v4 @theme tokens + brand defaults
 ├── not-found.tsx                         # "Signal lost." 404 page (new style, Nov 2026)
@@ -85,23 +85,21 @@ src/content/
 ```
 
 ### Components (src/components/)
-- `Logo.tsx` — Reusable styled logo. Props: `size` (sm/md/lg/xl OR responsive object `{ base, md?, lg? }`), `variant` (dark/light)
+- `Logo.tsx` — Reusable styled logo. Props: `size` (sm/md/lg/xl OR responsive object `{ base, md?, lg? }`), `variant` (dark/light), `sizeClassName` (font-size classes that override `size`; used for the nav 32px, hero 48–72px and footer 48px wordmarks)
 - `Button.tsx` — Brand-spec button. Variants: primary (solid fire-400, steel-900 text, 6px radius, lighter on hover; the `btn-primary` utility), secondary (plain text link, underlined on hover; `text-link`), ghost. Default padding `px-6 py-3.5` unless the caller passes padding. **Default `type="button"`** (must opt into submit explicitly). Links styled as buttons use `className="btn-primary px-… py-…"` directly
-- `Nav.tsx` — Server component. Sticky, solid steel-900 background (no scroll listener). From `md` up: How it works, Journal, and a "Join the founder list" button. On phones: a short "Join" button plus a `<details>` "Menu" that works without JavaScript and holds every link. Links live in `NAV_LINKS`; Grand Rapids, Who it's for and Team are added when those sections ship
-- `Footer.tsx` — Server component on steel-950. Left-aligned columns: wordmark and "The readiness record for early-stage capital."; links (How it works, Journal, Privacy Policy, LinkedIn with inline SVG mark); contact (kevin@fndryx.io, privacy@fndryx.io). Bottom row: broker-dealer disclaimer, © 2026 FNDRYx, Inc. and the Covington address
-- `Hero.tsx` — Server component. H1 "The readiness record for early-stage capital.", subhead, "Join the founder list" button and a text link. From `lg` up the foundry photo bleeds off the right edge with a navy fade; below `lg` it is a band under the text. Art-directed `<picture>` built with `getImageProps`: the tall `hero-foundry-pour.jpg` for desktop, the wide crop `hero-foundry-pour-wide.jpg` for the phone/tablet band (the band is the phone LCP element, so it must stay light). `fetchPriority="high"`, eager
-- `FactsRow.tsx` — Three facts under the hero, split by hairlines. The third links to the Midwest House Summit event page (cleared by Ted, Nov 2, 2026)
+- `Nav.tsx` — Server component. Sticky, solid steel-900 background (no scroll listener). Wordmark 32px (28px under 380px wide). From `lg` up: How it works, Grand Rapids, Who it's for, Journal and a "Join the founder list" button. Below `lg`: a short "Join" button plus a `<details>` "Menu" that works without JavaScript and closes on tap. Links live in `NAV_LINKS`. Team removed Nov 2, 2026 (back when the advisors are added)
+- `Footer.tsx` — Server component on steel-950. Left: 48px wordmark and "The readiness record for early-stage capital." at 20px; links (How it works, Grand Rapids, Journal, Privacy Policy, LinkedIn with inline SVG mark); contact (kevin@fndryx.io, privacy@fndryx.io). Bottom row: broker-dealer disclaimer, © 2026 FNDRYx, Inc. and the Covington address. The Midwest House "Partner" mark and the Team link were removed Nov 2, 2026
+- `Hero.tsx` — Server component. Large FNDRYx wordmark (48px phones, 60px from 640px, 72px from `lg`; `role="img"`, label "FNDRYx") left-aligned above the H1 (Kevin, Nov 2, 2026), then H1 "The readiness record for early-stage capital.", subhead, "Join the founder list" button and a text link. From `lg` up the foundry photo bleeds off the right edge with a navy fade; below `lg` it is a band under the text. Art-directed `<picture>` built with `getImageProps`: the tall `hero-foundry-pour.jpg` for desktop, the wide crop `hero-foundry-pour-wide.jpg` for the phone/tablet band (the band is the phone LCP element, so it must stay light). `fetchPriority="high"`, eager
+- `FactsRow.tsx` — One line under the hero between hairlines: the stacked gray Midwest House logo (32px), a thin divider and "Live now with the Midwest House Grand Rapids Summit" linking to the event page (cleared by Ted, Nov 2, 2026). The other two facts were removed Nov 2, 2026. Past tense after the Summit (PR 8)
 - `Gap.tsx` — "The gap": 16% / 9% figures, the 28-state line, the US map (`public/images/home/us-map-midwest.svg`) with legend, and the sources footnote
 - `SignalTimeline.tsx` — G1 graphic, inline SVG with real text and a screen-reader description. Seven markers and speckles from `lg` up; four markers, no speckles below
 - `Problem.tsx` — "The problem" on steel-950: heading, body and the G1 signal timeline
 - `HowItWorks.tsx` — "Three steps, then a record." Assess / Report / Check in in three open columns joined by a thin line, then the G2 record strip: 17 bars (one per 21-day check-in), height 38% to 100%, color steel-700 to fire-400 eased by t^0.8
-- `FounderReport.tsx` — "Plain about what it is. Useful about what's next." Two overlapping synthetic report images (`public/images/home/report-sample-*.png`) with an always-visible "Synthetic example, not a real founder" tag, and three numbered notes
 - `GrandRapids.tsx` — "Live now" section (id `grand-rapids`) on the full-bleed road photo with a navy fade; phones get the photo as a band above the text. Attendee note with kevin@fndryx.io. Past tense after the Summit (PR 8)
 - `SiteAnalytics.tsx` — Client component wrapping Vercel `<Analytics />` with the privacy guard (see External Services)
-- `SummitBar.tsx` — Slim bar above the nav on every page, linking to `/#grand-rapids`. The stacked gray Midwest House logo (28px tall on phones, 32px from 640px) sits at the left with a thin divider, standing in for the words "Midwest House" so the name doesn't repeat; the link's aria-label reads the full sentence. 13px text on phones keeps it to two lines. Remove after the Summit (PR 8).
-- `WhoItsFor.tsx` — "One record, three audiences." Founders / Programs and regions / Capital partners in open columns split by hairlines. Program and capital links reload with `?role=` so the form opens on that role. Counsel-cleared group-of-five lines (Jake, Nov 2, 2026)
-- `WhyItHolds.tsx` — "Software can be copied. Time, consent, and discipline can't." Three columns with inline-SVG diagrams G3 (two rows of 17 ticks), G4 (five dots into "5+"), G5 (three stepped bars), then "What FNDRYx doesn't do". Replaces the old AntiClaim section
-- `Team.tsx` — Kevin and Patrick (bio approved by Patrick, Nov 2, 2026), square photos at 144px (`public/images/team/`), "Based in Covington, Kentucky."
+- `WhoItsFor.tsx` — "One record, three audiences." Founders / Programs and regions / Capital partners in open columns split by hairlines. Program and capital links reload with `?role=` so the form opens on that role. Counsel-cleared data lines (Jake, Nov 2, 2026), with the "groups of five" wording removed by Kevin the same day
+- `WhyItHolds.tsx` — "Software can be copied. Time, consent, and discipline can't." On steel-950, right after How it works (it took the removed founder report's place, Nov 2, 2026). Three columns with inline-SVG diagrams: G3 (two rows of 17 ticks), G4 (one founder connected only to the organizations they opted in to), G5 (three stepped bars). Consent line: "Founders decide who sees their record. Nothing with their name on it is shared until they opt in, and they can always see who's following." (matches the Privacy Policy: named sharing is opt-in, founders can see who follows them). "What FNDRYx doesn't do" was removed
+- `Team.tsx` — **Not on the site** (removed from the page Nov 2, 2026 until the two advisors are added). Kevin and Patrick (bio approved by Patrick, Nov 2, 2026), square photos at 144px (`public/images/team/`), "Based in Covington, Kentucky." To bring it back: import it in `src/app/page.tsx` and re-add the `/#team` links in Nav and Footer
 - `FounderForgeForm.tsx` — Client component for the interest list. Join layout: "Get on the list." and the promise on the left, the form in a panel on the right; no icon library (inline chevron SVG). Section id `join`, with an empty `#founder-forge` anchor kept for old links. Roles: Founder / Program, university or event organizer / Investor or capital partner (values `founder` / `operator` / `capital_provider`, unchanged so `?role=` links still work). Conditional Stage / Organization type / Capital type field by role. Validates on the page first (shared rules in `src/lib/join-form.ts`), focuses the first bad field, shows only plain error messages. Submit label and success message vary by role
 - `blog/MdxComponents.tsx` — Component map for `MDXRemote` covering h2/h3, p, a (with focus ring; external link auto-handling — any href starting with `http://` or `https://` auto-applies `target="_blank"` and `rel="noopener noreferrer"`; internal links stay same-tab), strong, em, lists, blockquote (fire-400 border + italic Playfair), inline code, pre, hr, img
 
@@ -117,7 +115,7 @@ public/
 ├── images/
 │   ├── blog/               # Journal cover images
 │   ├── campaigns/          # Founder Signal images (kept off the homepage)
-│   ├── home/               # Homepage photos, map, report samples, Midwest House logos
+│   ├── home/               # Homepage photos, map, Midwest House logo
 │   └── team/               # Headshots
 ```
 The Next.js starter SVGs (file, globe, next, vercel, window) were removed in Nov 2026.
@@ -243,9 +241,8 @@ Vercel auto-deploys within ~1 minute.
 | `public/images/home/hero-foundry-pour-wide.jpg` (1717×1060), `src/lib/og/foundry-pour-og.jpg` (520×630) | Crops of the same Pexels photo: the phone/tablet hero band and the share image's photo panel | Same Pexels License |
 | `public/images/home/us-map-midwest.svg` | FNDRYx asset pack, Nov 2026 | Our own |
 | `public/images/home/midwest-road.jpg` | FNDRYx asset pack ("midwest-road-unsplash.jpg"), 2600×1727. Original Unsplash page not recorded in the pack, and Kevin doesn't have it (Nov 2, 2026) | Unsplash License per the pack's README (checked Nov 1, 2026): free, no credit required |
-| `public/images/home/midwest-house-logo-gray.png` | Midwest House logo supplied by Kevin, Nov 2, 2026; recolored to one-color steel-400 (#94A3B8), trimmed, 480×221 | Use cleared by Kevin with Midwest House, Nov 2, 2026. Keep it small (32px tall; 28px in the Summit bar on phones) and never dominant. Shown in the Summit bar, the Grand Rapids section and the footer ("Partner"). The one-line version made for the bar in PR 6b was retired in PR 7b |
-| `public/images/team/kevin-harnist.jpg` (280px), `patrick-tiettmeyer.jpg` (220px) | FNDRYx asset pack, cropped headshots | Our own. Shown at 144px; send larger files to reach the plan's 160px |
-| `public/images/home/report-sample-read-this-first.png`, `report-sample-priorities.png` | FNDRYx asset pack. **Synthetic sample, not a real founder.** Keep the tag visible | Our own |
+| `public/images/home/midwest-house-logo-gray.png` | Midwest House logo supplied by Kevin, Nov 2, 2026; recolored to one-color steel-400 (#94A3B8), trimmed, 480×221 | Use cleared by Kevin with Midwest House, Nov 2, 2026. Keep it small (32px tall) and never dominant. Shown in the facts row under the hero and the Grand Rapids section only (removed from the Summit bar, which is gone, and the footer on Nov 2, 2026). The one-line version made in PR 6b was retired in PR 7b |
+| `public/images/team/kevin-harnist.jpg` (280px), `patrick-tiettmeyer.jpg` (220px) | FNDRYx asset pack, cropped headshots | Our own. Not shown while Team is off the site; was shown at 144px; send larger files to reach the plan's 160px |
 
 ## Automated Checks (GitHub Actions)
 

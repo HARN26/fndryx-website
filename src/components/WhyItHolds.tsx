@@ -1,7 +1,10 @@
 // Why it holds (plan section 8, deck slide 11): three columns, each with a
 // small diagram that carries information (G3 time, G4 consent, G5
-// discipline), then a short, plain list of what FNDRYx doesn't do. The
-// consent line was cleared by counsel (Jake) on Nov 2, 2026.
+// discipline). Moved up to follow "How it works" when the founder report
+// section was removed (Kevin, Nov 2, 2026). The consent column was reworked the
+// same day: it no longer mentions groups of five, and its line restates what
+// the Privacy Policy already promises (named sharing is opt-in; founders can
+// see who follows them). "What FNDRYx doesn't do" was removed.
 
 const SLATE = [0x33, 0x41, 0x55];
 const FIRE = [0xf9, 0x73, 0x16];
@@ -52,37 +55,58 @@ function TimeMark() {
   );
 }
 
-// G4: five dots merging into a block labeled "5+".
+// G4: one founder (left) with lines to four organizations (right). Only the
+// two the founder has opted in to are lit and connected; the others stay dim
+// and unconnected. A small eye on the founder marks "can see who's following".
 function ConsentMark() {
-  const ys = [14, 32, 50, 68, 86];
+  const orgs = [
+    { y: 14, on: true },
+    { y: 38, on: false },
+    { y: 62, on: true },
+    { y: 86, on: false },
+  ];
   return (
     <svg
       viewBox="0 0 300 100"
       role="img"
-      aria-label="Diagram: five individual founders merge into one combined block labeled 5 plus. Nothing is reported for groups smaller than five."
+      aria-label="Diagram: one founder connected only to the organizations they opted in to. The others stay unconnected."
       className="h-auto w-full max-w-[300px]"
     >
-      {ys.map((y) => (
-        <g key={y}>
+      {orgs.map(({ y, on }) =>
+        on ? (
           <path
-            d={`M24 ${y} C 110 ${y}, 120 50, 196 50`}
+            key={y}
+            d={`M44 50 C 120 50, 150 ${y}, 236 ${y}`}
             fill="none"
-            className="stroke-steel-600"
-            strokeWidth={1.5}
+            className="stroke-fire-400"
+            strokeWidth={2}
           />
-          <circle cx={18} cy={y} r={6} className="fill-steel-300" />
-        </g>
+        ) : (
+          <path
+            key={y}
+            d={`M44 50 C 120 50, 150 ${y}, 196 ${y}`}
+            fill="none"
+            className="stroke-steel-700"
+            strokeWidth={1.5}
+            strokeDasharray="3 5"
+          />
+        ),
+      )}
+      {orgs.map(({ y, on }) => (
+        <rect
+          key={`o${y}`}
+          x={240}
+          y={y - 9}
+          width={52}
+          height={18}
+          rx={4}
+          className={on ? "fill-fire-400" : "fill-steel-800 stroke-steel-700"}
+          strokeWidth={on ? 0 : 1}
+        />
       ))}
-      <rect x={196} y={26} width={72} height={48} rx={6} className="fill-fire-400" />
-      <text
-        x={232}
-        y={57}
-        textAnchor="middle"
-        className="fill-steel-900 font-display font-bold"
-        style={{ fontSize: 22 }}
-      >
-        5+
-      </text>
+      <circle cx={26} cy={50} r={18} className="fill-steel-200" />
+      <circle cx={26} cy={44} r={6} className="fill-steel-900" />
+      <path d="M14 61 C 16 52, 36 52, 38 61 Z" className="fill-steel-900" />
     </svg>
   );
 }
@@ -131,7 +155,7 @@ const PILLARS = [
   },
   {
     title: "Consent",
-    body: "Founders opt in. We don't report any group smaller than five founders.",
+    body: "Founders decide who sees their record. Nothing with their name on it is shared until they opt in, and they can always see who's following.",
     Mark: ConsentMark,
   },
   {
@@ -141,18 +165,12 @@ const PILLARS = [
   },
 ];
 
-const DOESNT_DO = [
-  "We don't guarantee meetings, introductions or capital.",
-  "We don't rank founders.",
-  "We're not a broker-dealer or investment adviser, and we don't arrange investments.",
-];
-
 export default function WhyItHolds() {
   return (
     <section
       id="why-it-holds"
       aria-labelledby="why-heading"
-      className="bg-steel-900 py-20 md:py-28"
+      className="bg-steel-950 py-20 md:py-28"
     >
       <div className="mx-auto max-w-content px-4 md:px-6">
         <h2
@@ -176,19 +194,6 @@ export default function WhyItHolds() {
           ))}
         </div>
 
-        <div className="mt-16 border-t border-steel-800 pt-10 md:mt-20">
-          <h3 className="font-display text-h3 font-bold text-steel-100">
-            What FNDRYx doesn&apos;t do
-          </h3>
-          <ul className="mt-4 max-w-3xl space-y-2 font-body text-body text-steel-300">
-            {DOESNT_DO.map((line) => (
-              <li key={line} className="flex gap-3">
-                <span aria-hidden="true" className="mt-[0.7em] h-1 w-3 shrink-0 bg-steel-600" />
-                {line}
-              </li>
-            ))}
-          </ul>
-        </div>
       </div>
     </section>
   );

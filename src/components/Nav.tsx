@@ -1,19 +1,18 @@
 import Link from "next/link";
 import Logo from "./Logo";
 import NavMenu from "./NavMenu";
-import SummitBar from "./SummitBar";
 
 // Server component: a solid background instead of a scroll listener. The only
 // client code is NavMenu, which closes the phone menu after a tap.
 //
-// Nav per the plan: How it works, Grand Rapids, Who it's for, Team, Journal.
-// Remove Grand Rapids and the Summit bar after the Summit (PR 8). With five
-// links the inline nav starts at lg; below that, the Menu holds them.
+// Nav: How it works, Grand Rapids, Who it's for, Journal. Team is off the site
+// until the advisors are added (Kevin, Nov 2, 2026); the Summit bar was removed
+// the same day. Remove Grand Rapids after the Summit (PR 8). The inline nav
+// starts at lg; below that, the Menu holds the links.
 const NAV_LINKS = [
   { href: "/#how-it-works", label: "How it works" },
   { href: "/#grand-rapids", label: "Grand Rapids" },
   { href: "/#who-its-for", label: "Who it’s for" },
-  { href: "/#team", label: "Team" },
   { href: "/blog", label: "Journal" },
 ];
 
@@ -45,7 +44,6 @@ function Chevron() {
 export default function Nav() {
   return (
     <>
-      <SummitBar />
       <header className="sticky top-0 z-50 border-b border-steel-800 bg-steel-900">
         <div className="mx-auto flex h-16 max-w-content items-center justify-between px-4 md:px-6">
           <Link
@@ -53,7 +51,7 @@ export default function Nav() {
             aria-label="FNDRYx home"
             className="inline-flex items-center rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-fire-400"
           >
-            <Logo size="sm" variant="dark" />
+            <Logo variant="dark" sizeClassName="text-[1.75rem] min-[380px]:text-[2rem]" />
           </Link>
 
           {/* Desktop */}

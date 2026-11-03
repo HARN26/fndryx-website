@@ -1,3 +1,4 @@
+import Logo from "./Logo";
 import { getImageProps } from "next/image";
 
 // Hero (plan section 1): left-aligned text over navy. From lg up the foundry
@@ -47,6 +48,13 @@ export default function Hero() {
     >
       <div className="relative z-10 mx-auto grid max-w-content px-4 pb-14 pt-14 md:px-6 md:pb-20 md:pt-20 lg:grid-cols-12 lg:pb-28 lg:pt-28">
         <div className="lg:col-span-7">
+          {/* Large wordmark above the headline, aligned with it (Kevin, Nov 2, 2026) */}
+          <span role="img" aria-label="FNDRYx" className="mb-6 block md:mb-8">
+            <Logo
+              variant="dark"
+              sizeClassName="text-5xl sm:text-6xl lg:text-7xl"
+            />
+          </span>
           <h1
             id="hero-heading"
             className="font-display text-h1 font-bold text-steel-100"

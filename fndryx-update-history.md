@@ -119,6 +119,19 @@
 
 _New entries added here as updates ship after migration, most recent first._
 
+### November 2, 2026 — PR 7e: Kevin's final review
+
+- **Summit bar removed** from every page, so nothing competes with the FNDRYx logo.
+- **Bigger wordmark:** nav logo 24px → 32px (28px on phones under 380px wide); new large wordmark left-aligned above the hero headline (48px phones, 72px desktop); footer wordmark 36px → 48px and its tagline 16px → 20px.
+- **Facts row:** "About 40 founders through our first version" and "v2 rebuilt under a written measurement standard" removed. Only "Live now with the Midwest House Grand Rapids Summit" remains, with the stacked gray Midwest House logo beside it.
+- **Founder report section removed** ("Synthetic example" images were cheapening the report). Its two sample images are deleted. "Software can be copied..." moved up into its place.
+- **Consent reworked:** no more "groups of five" anywhere public (the consent column, both "Who it's for" lines and the capital-partner confirmation email). New consent line: "Founders decide who sees their record. Nothing with their name on it is shared until they opt in, and they can always see who's following." New G4 diagram: one founder connected only to the organizations they opted in to. Kevin picked the line; it was tightened to "nothing with their name on it" because the Privacy Policy always shares combined, unnamed cohort results with programs. The Privacy Policy itself still states the five-founder minimum (counsel's wording, untouched).
+- **"What FNDRYx doesn't do" removed.** The broker-dealer disclaimer stays in the footer.
+- **Team section off the site** until the two advisors are added. `Team.tsx` and the headshots stay in the repo; Team links removed from the nav and footer.
+- **Footer:** Midwest House "Partner" mark removed.
+- **Privacy page:** email links now underlined (styling only; wording untouched).
+- PR 8 no longer needs to remove the Summit bar.
+
 ### November 2, 2026 — PR 7d: Journal share images fixed (Journal file, approved by Kevin)
 
 - `src/app/blog/[slug]/opengraph-image.tsx` only; Journal pages, posts and listing untouched.

@@ -34,13 +34,16 @@ function resolveSizeClasses(size: LogoSize | ResponsiveSize): string {
 export default function Logo({
   size = "md",
   variant = "dark",
+  sizeClassName,
 }: {
   size?: LogoSize | ResponsiveSize;
   variant?: LogoVariant;
+  /** Font-size classes (e.g. "text-5xl lg:text-7xl"); overrides `size`. */
+  sizeClassName?: string;
 }) {
   const fndryColor = variant === "dark" ? "text-steel-100" : "text-steel-800";
   const xColor = variant === "dark" ? "text-fire-400" : "text-fire-500";
-  const sizeClasses = resolveSizeClasses(size);
+  const sizeClasses = sizeClassName ?? resolveSizeClasses(size);
 
   return (
     <span

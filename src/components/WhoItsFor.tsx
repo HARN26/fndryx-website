@@ -1,6 +1,6 @@
 // Who it's for (plan section 7): three open columns split by hairlines, no
 // cards. The two data-promise sentences were cleared by counsel (Jake) on
-// Nov 2, 2026.
+// Nov 2, 2026; Kevin removed the "groups of five" wording the same day.
 //
 // The program and capital links reload the page with ?role= so the join form
 // opens on the right role (works without JavaScript).
@@ -13,12 +13,12 @@ const AUDIENCES = [
   },
   {
     title: "Programs and regions",
-    body: "Accelerators, universities, event organizers and economic development groups. Get a combined view of founders in your ecosystem, never reported in groups smaller than five.",
+    body: "Accelerators, universities, event organizers and economic development groups. Get a combined view of founders in your ecosystem.",
     link: { href: "?role=operator#join", label: "Talk to us" },
   },
   {
     title: "Capital partners",
-    body: "A clearer view of early-stage founders in the middle of the country. Today, investors see aggregates only, in groups of five or more.",
+    body: "A clearer view of early-stage founders in the middle of the country. Today, investors see aggregates only.",
     link: { href: "?role=capital_provider#join", label: "Stay in touch" },
   },
 ];
