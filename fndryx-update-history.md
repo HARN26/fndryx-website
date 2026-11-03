@@ -126,6 +126,13 @@ _New entries added here as updates ship after migration, most recent first._
 - **Wordmark:** "Welcome to the FNDRYx Journal" put the x on its own line. FNDRY and its x now always stay together.
 - **≠:** "Business Ready ≠ Investment Ready" showed an empty box (no bundled font has ≠). It's now drawn as a shape.
 - **Label:** "FNDRYX — JOURNAL" (sans-serif capital X) is now "FNDRY" + italic Playfair x + "— JOURNAL", per the brand rule.
+### November 2, 2026 — PR 7c: Vercel Web Analytics
+
+- **Added** Vercel Web Analytics (cookieless page views), approved by Kevin. One small component in the root layout; applies to every page, Journal included.
+- **Privacy guard:** unsubscribe pages are never counted (their links carry a personal token), and query strings and `#fragments` are stripped from every other URL before sending.
+- **Privacy Policy:** no wording change needed; the existing "Information collected automatically" and service-provider (analytics, Vercel) language covers it.
+- **Kevin's step:** enable Analytics in the Vercel dashboard (Project → Analytics → Enable). Nothing is recorded until then.
+- Road photo: Kevin confirmed he doesn't have the original Unsplash link; noted in the technical reference.
 
 ### November 2, 2026 — PR 7b: stacked Midwest House logo everywhere
 
