@@ -1,12 +1,40 @@
-import Image from "next/image";
+import Image, { getImageProps } from "next/image";
 
 // Grand Rapids (plan section 6, deck slide 14). Cleared by Ted on Nov 2, 2026.
 // Midwest House logo cleared by Kevin the same day: one-color gray, small,
 // never dominant.
-// Full-bleed road photo with a navy fade on the left (desktop); on phones the
-// photo is a band above the text. No deadline is printed here: the code dates
-// live in the invitation emails and may change. Rewrite in past tense after
-// the Summit (PR 8).
+//
+// Photo (Nov 2, 2026): The Theater at Bamboo, the Summit venue, supplied by
+// Kevin, with the event details placed on the projection screen (Grand Rapids,
+// Dec 2–3 / Midwest House Summit / Founder Track / Powered by FNDRYx). Cropped
+// to drop the stairway and the side door (Kevin).
+// From xl up the full photo fills the section with a navy fade on the left;
+// below xl a closer crop of the stage sits as a band above the text, so the
+// screen stays readable. No deadline is printed here: the code dates live in
+// the invitation emails and may change. Rewrite in past tense after the
+// Summit (PR 8); the screen text will need a past-tense version too.
+
+const ALT =
+  "The Theater at Bamboo in Grand Rapids: rows of seats face a screen that reads Grand Rapids, Dec 2–3. Midwest House Summit, Founder Track. Powered by FNDRYx.";
+
+const {
+  props: { srcSet: wideSrcSet },
+} = getImageProps({
+  alt: ALT,
+  src: "/images/home/grand-rapids-theater.jpg",
+  width: 1700,
+  height: 860,
+  sizes: "100vw",
+});
+const {
+  props: { srcSet: stageSrcSet, ...stageProps },
+} = getImageProps({
+  alt: ALT,
+  src: "/images/home/grand-rapids-theater-stage.jpg",
+  width: 800,
+  height: 475,
+  sizes: "100vw",
+});
 
 export default function GrandRapids() {
   return (
@@ -15,21 +43,24 @@ export default function GrandRapids() {
       aria-labelledby="gr-heading"
       className="relative overflow-hidden bg-steel-900"
     >
-      <div className="relative h-56 sm:h-72 lg:absolute lg:inset-0 lg:h-auto">
-        <Image
-          src="/images/home/midwest-road.jpg"
-          alt="A two-lane country road runs toward the setting sun past grain bins and power lines in the Midwest."
-          fill
-          sizes="100vw"
-          className="object-cover object-[70%_60%] lg:object-[100%_60%]"
-        />
+      <div className="relative h-56 sm:h-80 lg:h-96 xl:absolute xl:inset-0 xl:h-auto">
+        <picture>
+          <source media="(min-width: 1280px)" srcSet={wideSrcSet} sizes="100vw" />
+          <img
+            {...stageProps}
+            srcSet={stageSrcSet}
+            alt={ALT}
+            loading="lazy"
+            className="absolute inset-0 h-full w-full object-cover object-center xl:object-[100%_40%]"
+          />
+        </picture>
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-linear-to-t from-steel-900 via-transparent via-40% to-transparent lg:bg-linear-to-r lg:via-steel-900/90 lg:via-55% lg:to-transparent lg:to-90% xl:via-steel-900/85 xl:via-40% xl:to-80%"
+          className="absolute inset-0 bg-linear-to-t from-steel-900 via-transparent via-35% to-transparent xl:bg-linear-to-r xl:via-steel-900/90 xl:via-42% xl:to-transparent xl:to-62%"
         />
       </div>
 
-      <div className="relative mx-auto max-w-content px-4 pb-20 pt-4 md:px-6 lg:py-32">
+      <div className="relative mx-auto max-w-content px-4 pb-20 pt-6 md:px-6 xl:py-32">
         <div className="max-w-xl">
           <div className="flex items-center gap-4">
             <p className="section-label">Live now</p>
