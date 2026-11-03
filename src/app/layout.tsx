@@ -5,6 +5,7 @@ import {
   baseTwitter,
   rssAlternateTypes,
 } from "@/lib/shared-metadata";
+import SiteAnalytics from "@/components/SiteAnalytics";
 import "./globals.css";
 
 // Fonts are self-hosted from @fontsource packages (the Google Fonts files),
@@ -125,6 +126,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         {children}
+        <SiteAnalytics />
       </body>
     </html>
   );
