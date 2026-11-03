@@ -80,14 +80,19 @@ function splitIntoWords(segments: TitleSegment[]): WordPiece[][] {
 // None of the bundled fonts has "≠", so it's drawn as a shape instead of a
 // missing-glyph box. Sized in em so it follows the title size.
 function NotEqualSign({ size, color }: { size: number; color: string }) {
-  const w = Math.round(size * 0.62);
-  const h = Math.round(size * 0.7);
-  const t = Math.max(3, Math.round(size * 0.1));
+  const w = Math.round(size * 0.56);
+  const h = Math.round(size * 0.5);
+  const t = Math.max(3, Math.round(size * 0.09));
   return (
-    <svg width={w} height={h} viewBox={`0 0 ${w} ${h}`} style={{ marginTop: Math.round(size * 0.12) }}>
+    <svg
+      width={w}
+      height={h}
+      viewBox={`0 0 ${w} ${h}`}
+      style={{ marginTop: Math.round(size * 0.36) }}
+    >
       <rect x={0} y={h * 0.3 - t / 2} width={w} height={t} fill={color} />
-      <rect x={0} y={h * 0.62 - t / 2} width={w} height={t} fill={color} />
-      <line x1={w * 0.72} y1={0} x2={w * 0.28} y2={h} stroke={color} strokeWidth={t} />
+      <rect x={0} y={h * 0.7 - t / 2} width={w} height={t} fill={color} />
+      <line x1={w * 0.7} y1={0} x2={w * 0.3} y2={h} stroke={color} strokeWidth={t} />
     </svg>
   );
 }
@@ -219,7 +224,8 @@ export default async function PostOgImage({
                 key={i}
                 style={{
                   display: "flex",
-                  alignItems: "baseline",
+                  // The drawn ≠ is placed from the top of the line; text words sit on the baseline.
+                  alignItems: word[0].text === "≠" ? "flex-start" : "baseline",
                   marginRight: i < titleWords.length - 1 ? "0.3em" : 0,
                 }}
               >
