@@ -119,6 +119,13 @@
 
 _New entries added here as updates ship after migration, most recent first._
 
+### November 2, 2026 — PR 7d: Journal share images fixed (Journal file, approved by Kevin)
+
+- `src/app/blog/[slug]/opengraph-image.tsx` only; Journal pages, posts and listing untouched.
+- **Spaces:** words next to orange accent words lost their spaces ("BusinessReady", "TheCincinnati", "What anEfficient"). Fixed by laying titles out word by word.
+- **Wordmark:** "Welcome to the FNDRYx Journal" put the x on its own line. FNDRY and its x now always stay together.
+- **≠:** "Business Ready ≠ Investment Ready" showed an empty box (no bundled font has ≠). It's now drawn as a shape.
+- **Label:** "FNDRYX — JOURNAL" (sans-serif capital X) is now "FNDRY" + italic Playfair x + "— JOURNAL", per the brand rule.
 ### November 2, 2026 — PR 7c: Vercel Web Analytics
 
 - **Added** Vercel Web Analytics (cookieless page views), approved by Kevin. One small component in the root layout; applies to every page, Journal included.
