@@ -119,6 +119,16 @@
 
 _New entries added here as updates ship after migration, most recent first._
 
+### November 2, 2026 — PR 7f: Grand Rapids venue photo
+
+- **Road photo replaced** with a photo of The Theater at Bamboo, the Summit venue (supplied by Kevin).
+- **Event on the screen:** a FNDRYx slide is placed on the projection screen, matched to its angle: "Grand Rapids · Dec 2–3", "Midwest House Summit", "Founder Track", "Powered by FNDRYx" (top and bottom lines enlarged after Kevin's review).
+- **Cropped** to remove the stairway and the open side door (a sliver of handrail retouched out).
+- **Layout:** from 1280px the photo fills the section behind the text with a navy fade on the left (same treatment as the road photo); below that, a closer crop of the stage sits above the text so the screen stays readable on phones.
+- A first attempt (our own vector drawing of the Bamboo building, based on Midwest House's Summit graphic) was rejected by Kevin and not shipped.
+- Deleted `public/images/home/midwest-road.jpg`. The small gray Midwest House logo next to "Live now" stays (Kevin).
+- PR 8 will need a past-tense version of the screen slide.
+
 ### November 2, 2026 — PR 7e: Kevin's final review
 
 - **Summit bar removed** from every page, so nothing competes with the FNDRYx logo.
