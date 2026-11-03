@@ -119,6 +119,14 @@
 
 _New entries added here as updates ship after migration, most recent first._
 
+### November 2, 2026 — PR 7c: Vercel Web Analytics
+
+- **Added** Vercel Web Analytics (cookieless page views), approved by Kevin. One small component in the root layout; applies to every page, Journal included.
+- **Privacy guard:** unsubscribe pages are never counted (their links carry a personal token), and query strings and `#fragments` are stripped from every other URL before sending.
+- **Privacy Policy:** no wording change needed; the existing "Information collected automatically" and service-provider (analytics, Vercel) language covers it.
+- **Kevin's step:** enable Analytics in the Vercel dashboard (Project → Analytics → Enable). Nothing is recorded until then.
+- Road photo: Kevin confirmed he doesn't have the original Unsplash link; noted in the technical reference.
+
 ### November 2, 2026 — PR 7b: stacked Midwest House logo everywhere
 
 - **Summit bar:** the one-line Midwest House logo from PR 6b is replaced by the stacked gray logo, given its own space at the left of the bar with a thin divider instead of squeezed into the sentence (Kevin: "lets try not to squeeze it in"). The sentence still leaves out the words "Midwest House" so the name doesn't repeat; screen readers hear the full sentence.

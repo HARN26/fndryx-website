@@ -38,6 +38,13 @@ Next.js marketing site for FNDRYx.io — "The capital-readiness exchange" for fo
   - CNAME `www` → `3333cb27a330f94e.vercel-dns-016.com`
 - **Records to never touch at Squarespace:** Resend DKIM (`resend._domainkey`), Resend SPF (`send` TXT), Resend bounce MX (`send` MX), `_dmarc`, Google Workspace MX, Google site verification, vercel-dns-017.com CNAMEs (other Vercel apps)
 
+### Vercel Web Analytics (page views)
+- **Added:** Nov 2, 2026 (PR 7c, approved by Kevin). Package `@vercel/analytics`, mounted once in `src/app/layout.tsx` through `src/components/SiteAnalytics.tsx`.
+- **Turn on / view:** Vercel → project `fndryx-website-brpv` → Analytics. Until it's enabled there, the script is requested but nothing is recorded.
+- **No cookies.** Covered by the existing Privacy Policy wording (automatic collection of pages viewed and referrers by service providers, including analytics; Vercel is listed). No policy change needed.
+- **Privacy guard (`beforeSend`):** `/unsubscribe` pages are never sent (their URLs carry a personal token), and every other URL is sent without its query string or `#fragment`. Keep this if the component changes.
+- Records nothing in local development.
+
 ### GitHub (version control)
 - **Repo:** https://github.com/HARN26/fndryx-website
 - **Default branch:** main
@@ -90,6 +97,7 @@ src/content/
 - `HowItWorks.tsx` — "Three steps, then a record." Assess / Report / Check in in three open columns joined by a thin line, then the G2 record strip: 17 bars (one per 21-day check-in), height 38% to 100%, color steel-700 to fire-400 eased by t^0.8
 - `FounderReport.tsx` — "Plain about what it is. Useful about what's next." Two overlapping synthetic report images (`public/images/home/report-sample-*.png`) with an always-visible "Synthetic example, not a real founder" tag, and three numbered notes
 - `GrandRapids.tsx` — "Live now" section (id `grand-rapids`) on the full-bleed road photo with a navy fade; phones get the photo as a band above the text. Attendee note with kevin@fndryx.io. Past tense after the Summit (PR 8)
+- `SiteAnalytics.tsx` — Client component wrapping Vercel `<Analytics />` with the privacy guard (see External Services)
 - `SummitBar.tsx` — Slim bar above the nav on every page, linking to `/#grand-rapids`. The stacked gray Midwest House logo (28px tall on phones, 32px from 640px) sits at the left with a thin divider, standing in for the words "Midwest House" so the name doesn't repeat; the link's aria-label reads the full sentence. 13px text on phones keeps it to two lines. Remove after the Summit (PR 8).
 - `WhoItsFor.tsx` — "One record, three audiences." Founders / Programs and regions / Capital partners in open columns split by hairlines. Program and capital links reload with `?role=` so the form opens on that role. Counsel-cleared group-of-five lines (Jake, Nov 2, 2026)
 - `WhyItHolds.tsx` — "Software can be copied. Time, consent, and discipline can't." Three columns with inline-SVG diagrams G3 (two rows of 17 ticks), G4 (five dots into "5+"), G5 (three stepped bars), then "What FNDRYx doesn't do". Replaces the old AntiClaim section
@@ -234,7 +242,7 @@ Vercel auto-deploys within ~1 minute.
 | `public/images/home/hero-foundry-pour.jpg` | "Molten Metal Pouring at Milwaukee Foundry" by Quang Vuong, Pexels, https://www.pexels.com/photo/molten-metal-pouring-at-milwaukee-foundry-29442931/ . Shot Nov 16, 2024 in Milwaukee (Nikon Z 7). Chosen by Kevin Nov 2, 2026. File is 1717×2236: Pexels' 1717×2576 download with the caution tape and bucket cropped off the bottom | Pexels License: free for commercial use, no credit required. The photographer's page lists Topaz Photo AI as editing software (enhancement, not generation) |
 | `public/images/home/hero-foundry-pour-wide.jpg` (1717×1060), `src/lib/og/foundry-pour-og.jpg` (520×630) | Crops of the same Pexels photo: the phone/tablet hero band and the share image's photo panel | Same Pexels License |
 | `public/images/home/us-map-midwest.svg` | FNDRYx asset pack, Nov 2026 | Our own |
-| `public/images/home/midwest-road.jpg` | FNDRYx asset pack ("midwest-road-unsplash.jpg"), 2600×1727. Original Unsplash page not recorded in the pack | Unsplash License per the pack's README (checked Nov 1, 2026): free, no credit required |
+| `public/images/home/midwest-road.jpg` | FNDRYx asset pack ("midwest-road-unsplash.jpg"), 2600×1727. Original Unsplash page not recorded in the pack, and Kevin doesn't have it (Nov 2, 2026) | Unsplash License per the pack's README (checked Nov 1, 2026): free, no credit required |
 | `public/images/home/midwest-house-logo-gray.png` | Midwest House logo supplied by Kevin, Nov 2, 2026; recolored to one-color steel-400 (#94A3B8), trimmed, 480×221 | Use cleared by Kevin with Midwest House, Nov 2, 2026. Keep it small (32px tall; 28px in the Summit bar on phones) and never dominant. Shown in the Summit bar, the Grand Rapids section and the footer ("Partner"). The one-line version made for the bar in PR 6b was retired in PR 7b |
 | `public/images/team/kevin-harnist.jpg` (280px), `patrick-tiettmeyer.jpg` (220px) | FNDRYx asset pack, cropped headshots | Our own. Shown at 144px; send larger files to reach the plan's 160px |
 | `public/images/home/report-sample-read-this-first.png`, `report-sample-priorities.png` | FNDRYx asset pack. **Synthetic sample, not a real founder.** Keep the tag visible | Our own |
