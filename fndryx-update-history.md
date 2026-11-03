@@ -119,9 +119,18 @@
 
 _New entries added here as updates ship after migration, most recent first._
 
+### November 2, 2026 — PR 7b: stacked Midwest House logo everywhere
+
+- **Summit bar:** the one-line Midwest House logo from PR 6b is replaced by the stacked gray logo, given its own space at the left of the bar with a thin divider instead of squeezed into the sentence (Kevin: "lets try not to squeeze it in"). The sentence still leaves out the words "Midwest House" so the name doesn't repeat; screen readers hear the full sentence.
+- **Size:** the stacked logo is 32px tall in the bar (28px on phones), the Grand Rapids section and the footer, up from 28px, so it reads clearly. Still gray and smaller than the text around it.
+- **Removed:** `public/images/home/midwest-house-logo-gray-horizontal.png` (no longer used).
+- **Docs:** also cleaned up the PR 7 icon notes in the technical reference (duplicate icon lines).
+
 ### November 2, 2026 — PR 7: finish (share image, 404, cleanup, performance, phone pass)
 
-- **Share image:** wordmark and "The readiness record for early-stage capital." on navy with the Milwaukee pour photo; "Capital-Readiness Infrastructure" is gone. The Privacy page and Twitter cards reuse it. Journal post share images untouched.
+- **Share image:** official wordmark SVG and "The readiness record for early-stage capital." on navy with the Milwaukee pour photo; "Capital-Readiness Infrastructure" is gone. The Privacy page and Twitter cards reuse it. Journal post share images untouched. (First version rebuilt the wordmark from fonts and the x collided with the Y; Kevin caught it in review.)
+- **Icons:** the 180px home-screen icon (also the structured-data logo) set FNDRY too large and was cut off at both edges; it now uses the official wordmark SVG, fitted. The icon and favicon fetched fonts from Google at build time; they now read them from @fontsource.
+- **Found, not fixed (Journal file):** on Journal post share images, a title with the FNDRYx wordmark (e.g. "Welcome to the FNDRYx Journal") wraps the x onto its own line. Lives in `src/app/blog/[slug]/opengraph-image.tsx`.
 - **404:** "Signal lost." with the plan's body and a "Back to FNDRYx" button in the new style (no more button-inside-link).
 - **Cleanup:** removed `/accelerators` and `/capital-partners` page code (redirects kept), the five starter SVGs and the default README text (new short README).
 - **Short link:** `/grand-rapids` → `/#grand-rapids` for slides and QR codes (point at `/` after Dec 3).

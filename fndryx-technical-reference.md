@@ -51,10 +51,10 @@ src/app/
 ├── layout.tsx                            # Root layout, font variables, global metadata, JSON-LD, RSS discovery, skip link
 ├── globals.css                           # Tailwind v4 @theme tokens + brand defaults
 ├── not-found.tsx                         # "Signal lost." 404 page (new style, Nov 2026)
-├── opengraph-image.tsx                   # Site-wide share image: wordmark + "The readiness record for early-stage capital." on navy, Milwaukee pour photo on the right (photo crop: src/lib/og/foundry-pour-og.jpg)
+├── opengraph-image.tsx                   # Site-wide share image: official wordmark SVG + "The readiness record for early-stage capital." on navy, Milwaukee pour photo on the right (src/lib/og/)
+├── apple-icon.tsx                        # 180×180 home-screen icon and structured-data logo: official wordmark SVG, fitted
+├── icon.tsx                              # 32×32 favicon: Playfair italic x (font from @fontsource)
 ├── twitter-image.tsx                     # Re-exports the OG image for Twitter cards
-├── icon.tsx                              # 32×32 favicon (italic Playfair x on steel-900)
-├── apple-icon.tsx                        # 180×180 Apple touch icon (full FNDRYx logo)
 ├── sitemap.ts                            # Dynamic sitemap (homepage + /blog + per-post URLs)
 ├── robots.ts                             # robots.txt
 ├── api/
@@ -90,7 +90,7 @@ src/content/
 - `HowItWorks.tsx` — "Three steps, then a record." Assess / Report / Check in in three open columns joined by a thin line, then the G2 record strip: 17 bars (one per 21-day check-in), height 38% to 100%, color steel-700 to fire-400 eased by t^0.8
 - `FounderReport.tsx` — "Plain about what it is. Useful about what's next." Two overlapping synthetic report images (`public/images/home/report-sample-*.png`) with an always-visible "Synthetic example, not a real founder" tag, and three numbered notes
 - `GrandRapids.tsx` — "Live now" section (id `grand-rapids`) on the full-bleed road photo with a navy fade; phones get the photo as a band above the text. Attendee note with kevin@fndryx.io. Past tense after the Summit (PR 8)
-- `SummitBar.tsx` — Slim bar above the nav on every page, linking to `/#grand-rapids`. The one-line Midwest House logo (12px tall, alt "Midwest House") replaces the words "Midwest House" in the sentence. 13px text on phones keeps it to two lines. Remove after the Summit (PR 8)
+- `SummitBar.tsx` — Slim bar above the nav on every page, linking to `/#grand-rapids`. The stacked gray Midwest House logo (28px tall on phones, 32px from 640px) sits at the left with a thin divider, standing in for the words "Midwest House" so the name doesn't repeat; the link's aria-label reads the full sentence. 13px text on phones keeps it to two lines. Remove after the Summit (PR 8).
 - `WhoItsFor.tsx` — "One record, three audiences." Founders / Programs and regions / Capital partners in open columns split by hairlines. Program and capital links reload with `?role=` so the form opens on that role. Counsel-cleared group-of-five lines (Jake, Nov 2, 2026)
 - `WhyItHolds.tsx` — "Software can be copied. Time, consent, and discipline can't." Three columns with inline-SVG diagrams G3 (two rows of 17 ticks), G4 (five dots into "5+"), G5 (three stepped bars), then "What FNDRYx doesn't do". Replaces the old AntiClaim section
 - `Team.tsx` — Kevin and Patrick (bio approved by Patrick, Nov 2, 2026), square photos at 144px (`public/images/team/`), "Based in Covington, Kentucky."
@@ -188,7 +188,8 @@ Self-hosted with `next/font/local` from the @fontsource packages (the same Googl
 - **DM Sans** (body) — variable font `@fontsource-variable/dm-sans` (weight axis). CSS var `--font-body`. Uses 400, 500, 600 (Journal), 700.
 - **Playfair Display** (accent) — 400 italic only, `@fontsource/playfair-display`. CSS var `--font-serif`. The wordmark "x" and Journal title accents.
 - All three are preloaded: three files, about 92KB. Not preloading caused a 0.12 layout shift when fonts swapped in, and 13 static files had cost about 215KB.
-- The static `@fontsource/syne`, `dm-sans` and `playfair-display` packages stay installed because the share images (`ImageResponse`) need .woff files.
+- The static `@fontsource/syne`, `dm-sans` and `playfair-display` packages stay installed because the share images and icons (`ImageResponse`) need .woff files. Nothing fetches fonts from Google any more.
+- **Wordmark in generated images:** use `src/lib/og/fndryx-wordmark-dark.svg` (the official asset-pack SVG with FNDRY recolored to steel-100 for dark backgrounds). Rebuilding the mark from fonts in `ImageResponse` let the x collide with the Y.
 
 ### Type Scale
 | Level | Size | Weight |
@@ -234,9 +235,8 @@ Vercel auto-deploys within ~1 minute.
 | `public/images/home/hero-foundry-pour-wide.jpg` (1717×1060), `src/lib/og/foundry-pour-og.jpg` (520×630) | Crops of the same Pexels photo: the phone/tablet hero band and the share image's photo panel | Same Pexels License |
 | `public/images/home/us-map-midwest.svg` | FNDRYx asset pack, Nov 2026 | Our own |
 | `public/images/home/midwest-road.jpg` | FNDRYx asset pack ("midwest-road-unsplash.jpg"), 2600×1727. Original Unsplash page not recorded in the pack | Unsplash License per the pack's README (checked Nov 1, 2026): free, no credit required |
-| `public/images/home/midwest-house-logo-gray.png` | Midwest House logo supplied by Kevin, Nov 2, 2026; recolored to one-color steel-400 (#94A3B8), trimmed, 480×221 | Use cleared by Kevin with Midwest House, Nov 2, 2026. Keep it small (28px tall) and never dominant. Shown in the Grand Rapids section and the footer ("Partner") |
+| `public/images/home/midwest-house-logo-gray.png` | Midwest House logo supplied by Kevin, Nov 2, 2026; recolored to one-color steel-400 (#94A3B8), trimmed, 480×221 | Use cleared by Kevin with Midwest House, Nov 2, 2026. Keep it small (32px tall; 28px in the Summit bar on phones) and never dominant. Shown in the Summit bar, the Grand Rapids section and the footer ("Partner"). The one-line version made for the bar in PR 6b was retired in PR 7b |
 | `public/images/team/kevin-harnist.jpg` (280px), `patrick-tiettmeyer.jpg` (220px) | FNDRYx asset pack, cropped headshots | Our own. Shown at 144px; send larger files to reach the plan's 160px |
-| `public/images/home/midwest-house-logo-gray-horizontal.png` | One-line version made by FNDRYx (Nov 2, 2026) from Midwest House's stacked logo: the two words set side by side, gray, 515×80. **Not an official Midwest House file.** Used only in the Summit bar | Logo use cleared with Midwest House; this rearranged lockup approved by Kevin, Nov 2, 2026. Swap in an official horizontal file if Midwest House supplies one |
 | `public/images/home/report-sample-read-this-first.png`, `report-sample-priorities.png` | FNDRYx asset pack. **Synthetic sample, not a real founder.** Keep the tag visible | Our own |
 
 ## Automated Checks (GitHub Actions)
