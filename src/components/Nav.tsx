@@ -51,7 +51,7 @@ export default function Nav() {
             aria-label="FNDRYx home"
             className="inline-flex items-center rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-fire-400"
           >
-            <Logo variant="dark" sizeClassName="text-[2rem]" />
+            <Logo variant="dark" sizeClassName="text-[1.75rem] min-[380px]:text-[2rem]" />
           </Link>
 
           {/* Desktop */}
