@@ -1,6 +1,6 @@
 # fndryx.io
 
-The FNDRYx website: the homepage, the Journal and the join form.
+The FNDRYx website: the homepage and the join form. The Journal is down until the outlet launches (Nov 4, 2026); its posts stay in `src/content/blog` as drafts and `/blog` redirects to the homepage.
 
 - **Stack:** Next.js 16, React 19, Tailwind CSS v4, TypeScript. Hosted on Vercel; every push to `main` deploys, every pull request gets a preview.
 - **Run locally:** `npm install`, then `npm run dev` and open http://localhost:3000.

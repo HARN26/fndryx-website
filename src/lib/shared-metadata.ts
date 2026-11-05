@@ -18,8 +18,6 @@ export const baseTwitter = {
   card: "summary_large_image" as const,
 };
 
-export const rssAlternateTypes = {
-  "application/rss+xml": [
-    { url: "https://fndryx.io/feed.xml", title: "FNDRYx Journal" },
-  ],
-};
+// Empty while the Journal is down (Kevin, Nov 4, 2026). Restore the feed entry
+// when pieces return.
+export const rssAlternateTypes = {};
