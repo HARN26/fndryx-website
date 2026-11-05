@@ -1,13 +1,13 @@
 import Link from "next/link";
 import Logo from "./Logo";
 
-// Footer links: How it works, Grand Rapids, Journal, Privacy Policy, LinkedIn.
+// Footer links: How it works, Grand Rapids, Privacy Policy, LinkedIn. The Journal
+// is down until the outlet launches (Kevin, Nov 4, 2026).
 // Team is off the site for now and the Midwest House partner mark was removed
 // (Kevin, Nov 2, 2026). The wordmark and tagline were enlarged the same day.
 const LINKS = [
   { href: "/#how-it-works", label: "How it works" },
   { href: "/#grand-rapids", label: "Grand Rapids" },
-  { href: "/blog", label: "Journal" },
   { href: "/privacy", label: "Privacy Policy" },
 ];
 

@@ -5,7 +5,8 @@ import NavMenu from "./NavMenu";
 // Server component: a solid background instead of a scroll listener. The only
 // client code is NavMenu, which closes the phone menu after a tap.
 //
-// Nav: How it works, Grand Rapids, Who it's for, Journal. Team is off the site
+// Nav: How it works, Grand Rapids, Who it's for. The Journal is down until the
+// outlet launches (Kevin, Nov 4, 2026). Team is off the site
 // until the advisors are added (Kevin, Nov 2, 2026); the Summit bar was removed
 // the same day. Remove Grand Rapids after the Summit (PR 8). The inline nav
 // starts at lg; below that, the Menu holds the links.
@@ -13,7 +14,6 @@ const NAV_LINKS = [
   { href: "/#how-it-works", label: "How it works" },
   { href: "/#grand-rapids", label: "Grand Rapids" },
   { href: "/#who-its-for", label: "Who it’s for" },
-  { href: "/blog", label: "Journal" },
 ];
 
 const linkClass =
